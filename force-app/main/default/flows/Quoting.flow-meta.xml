@@ -6,7 +6,7 @@
         <locationX>262</locationX>
         <locationY>52</locationY>
         <defaultConnector>
-            <targetReference>auto_start</targetReference>
+            <targetReference>Auto_Quote</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>auto and maybe both</defaultConnectorLabel>
         <rules>
@@ -20,7 +20,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>test_home</targetReference>
+                <targetReference>Home_Quote</targetReference>
             </connector>
             <label>home only</label>
         </rules>
@@ -40,22 +40,6 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
-    <screens>
-        <name>auto_start</name>
-        <label>auto_start</label>
-        <locationX>427</locationX>
-        <locationY>191</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>auto_go</name>
-            <fieldText>&lt;p&gt;auto found&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <screens>
         <name>starter_screen</name>
         <label>starter screen</label>
@@ -85,24 +69,22 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <screens>
-        <name>test_home</name>
-        <label>test_home</label>
-        <locationX>271</locationX>
-        <locationY>192</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>home_found</name>
-            <fieldText>&lt;p&gt;home found&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
     <startElementReference>starter_screen</startElementReference>
     <status>Draft</status>
+    <subflows>
+        <name>Auto_Quote</name>
+        <label>Auto Quote</label>
+        <locationX>444</locationX>
+        <locationY>234</locationY>
+        <flowName>Auto_Quote</flowName>
+    </subflows>
+    <subflows>
+        <name>Home_Quote</name>
+        <label>Home Quote</label>
+        <locationX>270</locationX>
+        <locationY>230</locationY>
+        <flowName>Home_Quote</flowName>
+    </subflows>
     <variables>
         <name>quote_choice</name>
         <dataType>String</dataType>
