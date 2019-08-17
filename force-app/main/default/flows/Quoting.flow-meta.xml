@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <decisions>
+        <name>home_or_auto_or_both</name>
+        <label>home or auto or both</label>
+        <locationX>262</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>auto_start</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>auto and maybe both</defaultConnectorLabel>
+        <rules>
+            <name>home_only</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>quote_choice</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>home_start</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>test_home</targetReference>
+            </connector>
+            <label>home only</label>
+        </rules>
+    </decisions>
+    <interviewLabel>Quoting {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Quoting</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>auto_start</name>
+        <label>auto_start</label>
+        <locationX>427</locationX>
+        <locationY>191</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>auto_go</name>
+            <fieldText>&lt;p&gt;auto found&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>starter_screen</name>
+        <label>starter screen</label>
+        <locationX>148</locationX>
+        <locationY>50</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>home_or_auto_or_both</targetReference>
+        </connector>
+        <fields>
+            <name>title_starter</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Let&#39;s Get Insured&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Bundle now or later. You&#39;ll get our best price no matter what.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>starter_choice</name>
+            <extensionName>c:quote_select</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>quote_choice</assignToReference>
+                <name>starter_option</name>
+            </outputParameters>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>test_home</name>
+        <label>test_home</label>
+        <locationX>271</locationX>
+        <locationY>192</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>home_found</name>
+            <fieldText>&lt;p&gt;home found&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>starter_screen</startElementReference>
+    <status>Draft</status>
+    <variables>
+        <name>quote_choice</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>
