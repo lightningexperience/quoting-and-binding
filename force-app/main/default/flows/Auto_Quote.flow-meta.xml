@@ -16,10 +16,48 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <screens>
+        <name>Addition_Drivers_Information</name>
+        <label>Addition Drivers Information</label>
+        <locationX>333</locationX>
+        <locationY>48</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Additional_Vehicle_Details</targetReference>
+        </connector>
+        <fields>
+            <name>Additional_Driver</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Additional Driver Information&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Additional_Vehicle_Details</name>
+        <label>Additional Vehicle Details</label>
+        <locationX>585</locationX>
+        <locationY>64</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Select_Appropriate_Policy_Coverage</targetReference>
+        </connector>
+        <fields>
+            <name>Additional_Vehicle_Details_txt</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Additional Vehicle Details&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
         <name>Auto_Start</name>
         <label>Auto Start</label>
-        <locationX>152</locationX>
-        <locationY>50</locationY>
+        <locationX>297</locationX>
+        <locationY>684</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -38,6 +76,29 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <startElementReference>Auto_Start</startElementReference>
+    <screens>
+        <name>Select_Appropriate_Policy_Coverage</name>
+        <label>Select Appropriate Policy Coverage</label>
+        <locationX>867</locationX>
+        <locationY>77</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Select_Appropriate_Policy_Coverage_txt</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Select Appropriate Policy Coverage&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Addition_Drivers_Information</startElementReference>
     <status>Draft</status>
+    <variables>
+        <name>quoteId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
 </Flow>
