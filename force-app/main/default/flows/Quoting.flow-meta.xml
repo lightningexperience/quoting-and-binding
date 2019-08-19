@@ -28,8 +28,8 @@
     <decisions>
         <name>home_or_auto_or_both</name>
         <label>home or auto or both</label>
-        <locationX>327</locationX>
-        <locationY>270</locationY>
+        <locationX>777</locationX>
+        <locationY>48</locationY>
         <defaultConnector>
             <targetReference>Auto_Quote</targetReference>
         </defaultConnector>
@@ -78,6 +78,9 @@
         <locationX>607</locationX>
         <locationY>44</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>home_or_auto_or_both</targetReference>
+        </connector>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -205,15 +208,15 @@
     <subflows>
         <name>Auto_Quote</name>
         <label>Auto Quote</label>
-        <locationX>509</locationX>
-        <locationY>452</locationY>
+        <locationX>994</locationX>
+        <locationY>190</locationY>
         <flowName>Auto_Quote</flowName>
     </subflows>
     <subflows>
         <name>Home_Quote</name>
         <label>Home Quote</label>
-        <locationX>335</locationX>
-        <locationY>448</locationY>
+        <locationX>986</locationX>
+        <locationY>49</locationY>
         <flowName>Home_Quote</flowName>
     </subflows>
     <variables>
@@ -223,6 +226,13 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>primFirstName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
     <variables>
         <name>quote_choice</name>
