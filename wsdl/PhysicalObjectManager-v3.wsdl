@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                  xmlns:fault="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault"
+                  xmlns:tns="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3"
+                  xmlns:types-v3_0="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3_0"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  name="PhysicalObjectManager-v3.wsdl"
+                  targetNamespace="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3">
+   <wsdl:types>
+      <xsd:schema xmlns="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault"
+                  xmlns:btypes="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes"
+                  xmlns:wsa="http://www.w3.org/2005/08/addressing"
+                  targetNamespace="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault"
+                  elementFormDefault="qualified"
+                  attributeFormDefault="unqualified"
+                  version="1">
+         <xsd:element name="zsoaFault" type="ZSOAFault" block="#all" final="#all"/>
+         <xsd:complexType name="IllegalArgumentException">
+            <xsd:annotation>
+               <xsd:documentation>
+Signals that an illegal or inappropriate argument has
+been passed to the service.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="InvariantViolationException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IllegalStateException">
+            <xsd:annotation>
+               <xsd:documentation>
+Signals that an operation has been invoked at an illegal
+or inappropriate time.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="InvariantViolationException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="IndexOutOfBoundsException">
+            <xsd:annotation>
+               <xsd:documentation>
+Signals that an index of some sort (such as to an array,
+to a string, or to a collection) is out of range.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="InvariantViolationException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="InvalidFieldValueException">
+            <xsd:annotation>
+               <xsd:documentation>
+Signals that an attribute or element contained an
+invalid value.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="ServiceException">
+                  <xsd:sequence maxOccurs="unbounded">
+                     <xsd:element name="fieldName" type="xsd:QName"/>
+                     <xsd:element name="fieldValue" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="UnsupportedOperationException">
+            <xsd:annotation>
+               <xsd:documentation>
+Signals that an operation is not supported by the service
+implementation. This exception should not be confused with the
+'Unimplemented' exception. The 'Unimplemented' exception is
+an exception that gets thrown during the development or testing
+phases of a service implementation, but should never be thrown
+in a production environment (see service contract guide for
+further information).
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="ServiceException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="DatabaseException">
+            <xsd:annotation>
+               <xsd:documentation>
+Signals that a database error occurred. In order to maintain the
+the service encapsulation and the location transparency
+principle, a service consumer implementation should not attempt
+to parse and act upon the SQL Codes returned by this exception.
+The codes are intended for human consumption (e.g. the guy
+debugging your broken code ;-) or monitoring tools used by the
+operators.
+- The salient point here is that no business logic should ever
+rely on the those SQL codes, they may change any time without
+prior notice!
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="ResourceException">
+                  <xsd:sequence>
+                     <xsd:element name="sqlCode" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ServiceException">
+            <xsd:annotation>
+               <xsd:documentation>
+Indicates service failure due to a client error. Use
+this type as base class for exceptions that fit this
+category
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="BaseException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="InvariantViolationException">
+            <xsd:annotation>
+               <xsd:documentation>
+Indicates a programming error. Use this type as base
+class for exceptions that fit this category. Types that
+derive from this type should be defined in this
+namespace since they are usually quite generic.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="BaseException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ResourceException">
+            <xsd:annotation>
+               <xsd:documentation>
+Indicates resource failure. Use this type as base class
+for exceptions that fit this category. Types that derive
+from this type should be mostly defined in this
+namespace since they are usually quite generic.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="BaseException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="UnimplementedException" final="#all">
+            <xsd:annotation>
+               <xsd:documentation>
+Indicates that the implementation of the service
+operation is not yet complete. THIS TYPE SHOULD NOT BE
+SUBCLASSED DIRECTLY!
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:complexContent>
+               <xsd:extension base="BaseException"/>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType name="ZSOAFault">
+            <xsd:annotation>
+               <xsd:documentation>
+THIS TYPE SHOULD NOT BE SUBCLASSED DIRECTLY! Subclass
+ServiceException, InvariantViolationException or
+ResourceException instead.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="message" type="xsd:string"/>
+               <xsd:element name="serviceName" type="xsd:QName">
+                  <xsd:annotation>
+                     <xsd:documentation>This corresponds typically with the portType in a WSDL</xsd:documentation>
+                  </xsd:annotation>
+               </xsd:element>
+               <xsd:element name="operation" type="xsd:NCName"/>
+               <xsd:element name="timeStamp" type="btypes:ZuluDateTime" nillable="true"/>
+               <xsd:choice>
+                  <xsd:element name="serviceURI" type="xsd:anyURI"/>
+                  <xsd:element name="serviceEPR" type="wsa:EndpointReferenceType"/>
+               </xsd:choice>
+               <xsd:element name="exception" type="BaseException"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="BaseException" abstract="true">
+            <xsd:annotation>
+               <xsd:documentation>
+THIS TYPE SHOULD NOT BE SUBCLASSED DIRECTLY!
+The (optional) attribute 'unmarshallingHint' can be used to
+give the service consumer a hint how to unmarshall the exception.
+Typically one would use the class name of the exception in the service
+implementation. - Note, this violates the service encapsulation principle
+(the service implementation should be transparent), it is therefore
+important to understand that this attribute is only a convenience feature!
+One must ensure (by way of unit testing) that the absence of this attribute
+does not impact the service consumer in any way or form!
+Thus, the service provider should never expect a service consumer to know
+what to do with the value 'java.lang.NullpointerException' in the attribute
+'unmarshallingHint'. After all, the service consumer may be implemented in
+.NET or COBOL.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:sequence>
+               <xsd:element name="message" type="xsd:string"/>
+               <xsd:element name="stackTrace" type="xsd:string" minOccurs="0"/>
+            </xsd:sequence>
+            <xsd:attribute name="unmarshallingHint" type="xsd:string"/>
+         </xsd:complexType>
+      </xsd:schema>
+      <xsd:schema xmlns:tns="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes"
+                  targetNamespace="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes"
+                  elementFormDefault="qualified"
+                  attributeFormDefault="unqualified"
+                  version="5">
+         <xsd:simpleType name="ZuluDateTime">
+            <xsd:annotation>
+               <xsd:documentation>
+A restricted xsd:dateTime simple type that defines a
+dateTime in Zulu Time (UTC). This dateTime type should
+be used to define a dateTime with zone offset
+information (e.g. local time) in a canonical format as
+described in
+http://www.w3.org/TR/2001/REC-xmlschema-2-20010502/#dateTime-canonical-repr
+Note, the local time (zone offset) has to be converted
+to UTC (Zulu Time) prior to marshalling a Calendar
+Object in Java for example. TODO: fator this type out of
+this schema into a schema with common types.
+ZuluDateTime is probably very commonly used.
+</xsd:documentation>
+            </xsd:annotation>
+            <xsd:restriction base="xsd:dateTime">
+               <xsd:pattern value=".*[Z]"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+      </xsd:schema>
+      <xsd:schema xmlns:tns="http://www.w3.org/2005/08/addressing"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                  targetNamespace="http://www.w3.org/2005/08/addressing"
+                  elementFormDefault="qualified"
+                  attributeFormDefault="unqualified"
+                  blockDefault="#all">
+         <xs:element name="EndpointReference" type="tns:EndpointReferenceType"/>
+         <xs:element name="ReferenceParameters" type="tns:ReferenceParametersType"/>
+         <xs:element name="Metadata" type="tns:MetadataType"/>
+         <xs:element name="MessageID" type="tns:AttributedURIType"/>
+         <xs:element name="RelatesTo" type="tns:RelatesToType"/>
+         <xs:element name="ReplyTo" type="tns:EndpointReferenceType"/>
+         <xs:element name="From" type="tns:EndpointReferenceType"/>
+         <xs:element name="FaultTo" type="tns:EndpointReferenceType"/>
+         <xs:element name="To" type="tns:AttributedURIType"/>
+         <xs:element name="Action" type="tns:AttributedURIType"/>
+         <xs:element name="RetryAfter" type="tns:AttributedUnsignedLongType"/>
+         <xs:element name="ProblemHeaderQName" type="tns:AttributedQNameType"/>
+         <xs:element name="ProblemIRI" type="tns:AttributedURIType"/>
+         <xs:element name="ProblemAction" type="tns:ProblemActionType"/>
+         <xs:attribute name="IsReferenceParameter" type="xs:boolean"/>
+         <xs:simpleType name="RelationshipTypeOpenEnum">
+            <xs:union memberTypes="tns:RelationshipType xs:anyURI"/>
+         </xs:simpleType>
+         <xs:simpleType name="RelationshipType">
+            <xs:restriction base="xs:anyURI">
+               <xs:enumeration value="http://www.w3.org/2005/08/addressing/reply"/>
+            </xs:restriction>
+         </xs:simpleType>
+         <xs:simpleType name="FaultCodesOpenEnumType">
+            <xs:union memberTypes="tns:FaultCodesType xs:QName"/>
+         </xs:simpleType>
+         <xs:simpleType name="FaultCodesType">
+            <xs:restriction base="xs:QName">
+               <xs:enumeration value="tns:InvalidAddressingHeader"/>
+               <xs:enumeration value="tns:InvalidAddress"/>
+               <xs:enumeration value="tns:InvalidEPR"/>
+               <xs:enumeration value="tns:InvalidCardinality"/>
+               <xs:enumeration value="tns:MissingAddressInEPR"/>
+               <xs:enumeration value="tns:DuplicateMessageID"/>
+               <xs:enumeration value="tns:ActionMismatch"/>
+               <xs:enumeration value="tns:MessageAddressingHeaderRequired"/>
+               <xs:enumeration value="tns:DestinationUnreachable"/>
+               <xs:enumeration value="tns:ActionNotSupported"/>
+               <xs:enumeration value="tns:EndpointUnavailable"/>
+            </xs:restriction>
+         </xs:simpleType>
+         <xs:complexType name="EndpointReferenceType" mixed="false">
+            <xs:sequence>
+               <xs:element name="Address" type="tns:AttributedURIType"/>
+               <xs:element ref="tns:ReferenceParameters" minOccurs="0"/>
+               <xs:element ref="tns:Metadata" minOccurs="0"/>
+               <xs:any namespace="##other" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+         </xs:complexType>
+         <xs:complexType name="ReferenceParametersType" mixed="false">
+            <xs:sequence>
+               <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+         </xs:complexType>
+         <xs:complexType name="MetadataType" mixed="false">
+            <xs:sequence>
+               <xs:any namespace="##any" processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+         </xs:complexType>
+         <xs:complexType name="RelatesToType" mixed="false">
+            <xs:simpleContent>
+               <xs:extension base="xs:anyURI">
+                  <xs:attribute name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional"
+                                default="http://www.w3.org/2005/08/addressing/reply"/>
+                  <xs:anyAttribute namespace="##other" processContents="lax"/>
+               </xs:extension>
+            </xs:simpleContent>
+         </xs:complexType>
+         <xs:complexType name="AttributedURIType" mixed="false">
+            <xs:simpleContent>
+               <xs:extension base="xs:anyURI">
+                  <xs:anyAttribute namespace="##other" processContents="lax"/>
+               </xs:extension>
+            </xs:simpleContent>
+         </xs:complexType>
+         <xs:complexType name="AttributedUnsignedLongType" mixed="false">
+            <xs:simpleContent>
+               <xs:extension base="xs:unsignedLong">
+                  <xs:anyAttribute namespace="##other" processContents="lax"/>
+               </xs:extension>
+            </xs:simpleContent>
+         </xs:complexType>
+         <xs:complexType name="AttributedQNameType" mixed="false">
+            <xs:simpleContent>
+               <xs:extension base="xs:QName">
+                  <xs:anyAttribute namespace="##other" processContents="lax"/>
+               </xs:extension>
+            </xs:simpleContent>
+         </xs:complexType>
+         <xs:complexType name="ProblemActionType" mixed="false">
+            <xs:sequence>
+               <xs:element ref="tns:Action" minOccurs="0"/>
+               <xs:element name="SoapAction" type="xs:anyURI" minOccurs="0"/>
+            </xs:sequence>
+            <xs:anyAttribute namespace="##other" processContents="lax"/>
+         </xs:complexType>
+      </xsd:schema>
+      <xsd:schema xmlns:common="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common"
+                  attributeFormDefault="unqualified"
+                  elementFormDefault="qualified"
+                  targetNamespace="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common"
+                  version="1.0.0.0">
+         <xsd:element name="messageTypeName" type="common:MessageTypeName"/>
+         <xsd:element name="transactionState" type="common:TransactionState"/>
+         <xsd:element name="claimBusinessReference" type="common:ClaimBusinessReference"/>
+         <xsd:element name="fameReference" type="common:FameReference"/>
+         <xsd:element name="genzreference" type="common:Genzreference"/>
+         <xsd:element name="legacyReference" type="common:LegacyReference"/>
+         <xsd:element name="messageDetails" type="common:MessageDetails"/>
+         <xsd:element name="objectReference" type="common:ObjectReference"/>
+         <xsd:element name="remark" type="common:Remark"/>
+         <xsd:element name="transactionNotification" type="common:TransactionNotification"/>
+         <xsd:element name="vehicleCharacteristicsView" type="common:VehicleCharacteristicsView"/>
+         <xsd:element name="vehicleIdentifierView" type="common:VehicleIdentifierView"/>
+         <xsd:element name="vehicleImagesView" type="common:VehicleImagesView"/>
+         <xsd:element name="vehicleImageView" type="common:VehicleImageView"/>
+         <xsd:simpleType name="MessageTypeName">
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="Error"/>
+
+               <xsd:enumeration value="FAILURE"/>
+
+               <xsd:enumeration value="Information"/>
+
+               <xsd:enumeration value="Success"/>
+
+               <xsd:enumeration value="Warning"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="TransactionState">
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="E"/>
+
+               <xsd:enumeration value="P"/>
+
+               <xsd:enumeration value="S"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:complexType abstract="false" name="ClaimBusinessReference">
+            <xsd:complexContent>
+               <xsd:extension base="common:ObjectReference">
+                  <xsd:sequence>
+                     <xsd:element maxOccurs="1" minOccurs="0" name="partitionNumber" type="xsd:string"/>
+
+                     <xsd:element maxOccurs="1" minOccurs="0" name="productionOrTrainingCode" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="FameReference">
+            <xsd:complexContent>
+               <xsd:extension base="common:LegacyReference">
+                  <xsd:sequence>
+                     <xsd:element maxOccurs="1" minOccurs="0" name="customerId" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="Genzreference">
+            <xsd:complexContent>
+               <xsd:extension base="common:LegacyReference">
+                  <xsd:sequence>
+                     <xsd:element maxOccurs="1" minOccurs="0" name="agencyCode" type="xsd:string"/>
+
+                     <xsd:element maxOccurs="1" minOccurs="0" name="branchcode" type="xsd:string"/>
+
+                     <xsd:element maxOccurs="1" minOccurs="0" name="companyCode" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="LegacyReference">
+            <xsd:complexContent>
+               <xsd:extension base="common:ObjectReference">
+                  <xsd:sequence>
+                     <xsd:element maxOccurs="1" minOccurs="0" name="referenceNumber" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="MessageDetails">
+            <xsd:complexContent>
+               <xsd:extension base="common:Remark">
+                  <xsd:sequence>
+                     <xsd:element maxOccurs="1" minOccurs="0" name="lineOfBusiness" type="xsd:string"/>
+
+                     <xsd:element maxOccurs="1" minOccurs="0" name="messageRecordCount" type="xsd:string"/>
+
+                     <xsd:element maxOccurs="1" minOccurs="0" name="messageSource" type="xsd:string"/>
+                  </xsd:sequence>
+               </xsd:extension>
+            </xsd:complexContent>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="ObjectReference">
+            <xsd:annotation>
+               <xsd:documentation>see also:
+   http://zem.zurich.com/hyperlinks/IDM/ENEZCXX00339.htm</xsd:documentation>
+            </xsd:annotation>
+
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="entityId" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="idRef" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="sourceSystemId" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="Remark">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageDate" type="xsd:dateTime"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageNumber" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageReferenceID" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageReferenceName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageStatus" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageText" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageType" type="common:MessageTypeName"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="TransactionNotification">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="legalEntity" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="respTimeZone" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionDate" type="xsd:date"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionId" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionStatus"
+                            type="common:TransactionState"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionType" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="uniqueIdentifier" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="uniqueTransactionName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="remark" type="common:Remark"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="VehicleCharacteristicsView">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="antiLockBrakingSystemCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="applicationReturnCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="basePrice" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="blockedVINIndicator" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="bodyStyleCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="curbWeight" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="dayTimeRunningLightsIndicator"
+                            type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="driveTrainCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="electronicStabilityValidationCode"
+                            type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="highPerformanceIndicator" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="hLDIAlarmCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="hLDIImmoblzrCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="hLDIReturnIndicator" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="makeCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="makeName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="makeNumber" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="maxHorsePower" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="minHorsePower" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="modelCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="modelName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="modelNumber" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="modelYear" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="noHitIndicator" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="passiveRestraintCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="seriesNumber" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="sportsCarIndicator" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="styleName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="trimName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="truckGrossVehicleWeightCode"
+                            type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleClassCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleFuelCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleHeight" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleImages"
+                            type="common:VehicleImagesView"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleLength" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleSizeCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleTypeCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleWidth" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="vin" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="wheelBase" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="VehicleIdentifierView">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vin" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="VehicleImagesView">
+            <xsd:sequence>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vehicleImage"
+                            type="common:VehicleImageView"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType abstract="false" name="VehicleImageView">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="fileName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="url" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+      <xsd:schema xmlns:zsoa="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa"
+                  attributeFormDefault="unqualified"
+                  elementFormDefault="qualified"
+                  targetNamespace="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa"
+                  version="1.0.0.0">
+         <xsd:element name="errorInfo" type="zsoa:ErrorInfo"/>
+         <xsd:element name="applicationType" type="zsoa:ApplicationType"/>
+         <xsd:element name="requestHeader" type="zsoa:RequestHeader"/>
+         <xsd:element name="responseHeader" type="zsoa:ResponseHeader"/>
+         <xsd:element name="amount" type="zsoa:Amount"/>
+         <xsd:element name="binary" type="zsoa:Binary"/>
+         <xsd:element name="currencyAmount" type="zsoa:CurrencyAmount"/>
+         <xsd:simpleType name="ApplicationType">
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="Batch"/>
+
+               <xsd:enumeration value="Conversational"/>
+
+               <xsd:enumeration value="Olap"/>
+
+               <xsd:enumeration value="Oltp"/>
+
+               <xsd:enumeration value="Web"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:simpleType name="AlternateIdState">
+            <xsd:restriction base="xsd:string">
+               <xsd:enumeration value="add"/>
+
+               <xsd:enumeration value="added"/>
+
+               <xsd:enumeration value="modify"/>
+
+               <xsd:enumeration value="modified"/>
+
+               <xsd:enumeration value="delete"/>
+
+               <xsd:enumeration value="referenced"/>
+
+               <xsd:enumeration value="exists"/>
+            </xsd:restriction>
+         </xsd:simpleType>
+         <xsd:complexType name="ErrorInfo">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="errorMessageType" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="errorCode" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="errorMessageText" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="errorState" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="UUID">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="id" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="AlternateId">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="value" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="sourceLogicalId" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="attributeString" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="state" type="zsoa:AlternateIdState"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="newValue" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="RequestHeader">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="userId" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="systemDateTime" type="xsd:dateTime"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="systemName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="applicationType" type="zsoa:ApplicationType"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageReference" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="functionName" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="legalEntity" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="userLanguage" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionStartDateTime" type="xsd:dateTime"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="ResponseHeader">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="messageReference" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="code" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="context" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="description" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="externalReference" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Amount">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="theAmount" type="xsd:decimal"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="theUnit" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="Binary">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="theContentType" type="xsd:string"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="theBinData" type="xsd:hexBinary"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="theBinLength" type="xsd:integer"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="CurrencyAmount">
+            <xsd:sequence>
+               <xsd:element maxOccurs="1" minOccurs="0" name="theCurrencyAmount" type="xsd:decimal"/>
+
+               <xsd:element maxOccurs="1" minOccurs="0" name="theCurrencyCode" type="xsd:string"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+      <xsd:schema xmlns:common="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common"
+                  xmlns:zsoa="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa"
+                  attributeFormDefault="unqualified"
+                  elementFormDefault="qualified"
+                  targetNamespace="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3_0">
+         <xsd:element name="retrieveVehicleCharacteristics"
+                      type="types-v3_0:RetrieveVehicleCharacteristics"/>
+         <xsd:element name="retrieveVehicleCharacteristicsResponse"
+                      type="types-v3_0:RetrieveVehicleCharacteristicsResponse"/>
+         <xsd:complexType name="RetrieveVehicleCharacteristics">
+            <xsd:sequence maxOccurs="1" minOccurs="0">
+               <xsd:element maxOccurs="1" minOccurs="0" name="requestHeader" type="zsoa:RequestHeader"/>
+
+               <xsd:element name="effectiveDate" type="xsd:string"/>
+
+               <xsd:element name="ratingCompanyCode" type="xsd:string"/>
+
+               <xsd:element name="vehicleIdentifiers" type="common:VehicleIdentifierView"/>
+            </xsd:sequence>
+         </xsd:complexType>
+         <xsd:complexType name="RetrieveVehicleCharacteristicsResponse">
+            <xsd:sequence maxOccurs="1" minOccurs="0">
+               <xsd:element maxOccurs="1" minOccurs="0" name="responseHeader" type="zsoa:ResponseHeader"/>
+
+               <xsd:element name="transactionNotification" type="common:TransactionNotification"/>
+
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vehicleDetails"
+                            type="common:VehicleCharacteristicsView"/>
+            </xsd:sequence>
+         </xsd:complexType>
+      </xsd:schema>
+   </wsdl:types>
+   <wsdl:message name="physicalobjectmanager-v3_0.retrieveVehicleCharacteristics">
+      <wsdl:part element="types-v3_0:retrieveVehicleCharacteristics" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="physicalobjectmanager-v3_0.retrieveVehicleCharacteristicsResponse">
+      <wsdl:part element="types-v3_0:retrieveVehicleCharacteristicsResponse" name="parameters"/>
+   </wsdl:message>
+   <wsdl:message name="zSOAFault">
+      <wsdl:part element="fault:zsoaFault" name="parameters"/>
+   </wsdl:message>
+   <wsdl:portType name="PhysicalObjectManagerInterface-v3_0">
+      <wsdl:operation name="retrieveVehicleCharacteristics">
+         <wsdl:input message="tns:physicalobjectmanager-v3_0.retrieveVehicleCharacteristics"
+                     name="retrieveVehicleCharacteristics"/>
+
+         <wsdl:output message="tns:physicalobjectmanager-v3_0.retrieveVehicleCharacteristicsResponse"
+                      name="retrieveVehicleCharacteristicsResponse"/>
+
+         <wsdl:fault message="tns:zSOAFault" name="zSOAFault"/>
+      </wsdl:operation>
+   </wsdl:portType>
+   <wsdl:binding name="PhysicalObjectManager-v3_0.SOAPoHTTP"
+                 type="tns:PhysicalObjectManagerInterface-v3_0">
+      <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="retrieveVehicleCharacteristics">
+         <soap:operation soapAction="" style="document"/>
+
+         <wsdl:input name="retrieveVehicleCharacteristics">
+            <soap:body use="literal"/>
+         </wsdl:input>
+
+         <wsdl:output name="retrieveVehicleCharacteristicsResponse">
+            <soap:body use="literal"/>
+         </wsdl:output>
+
+         <wsdl:fault name="zSOAFault">
+            <soap:fault name="zSOAFault" use="literal"/>
+         </wsdl:fault>
+      </wsdl:operation>
+   </wsdl:binding>
+   <wsdl:service name="PhysicalObjectManagerService-v3_0">
+      <wsdl:port binding="tns:PhysicalObjectManager-v3_0.SOAPoHTTP"
+                 name="PhysicalObjectManager-v3_0.SOAPoHTTPEndpoint">
+         <soap:address location="http://localhost:9090/services/physicalobject/PhysicalObjectManager-v3"/>
+      </wsdl:port>
+   </wsdl:service>
+</wsdl:definitions>
