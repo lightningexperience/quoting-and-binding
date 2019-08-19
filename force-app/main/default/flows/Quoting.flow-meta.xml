@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <decisions>
+        <name>Customer_already</name>
+        <label>Customer already?</label>
+        <locationX>253</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>Create_New_Customer_Header</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>New Customer</defaultConnectorLabel>
+        <rules>
+            <name>Not_New_Customer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Existing_Customer</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Exist_Cust</targetReference>
+            </connector>
+            <label>Not New Customer</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>home_or_auto_or_both</name>
         <label>home or auto or both</label>
-        <locationX>262</locationX>
-        <locationY>52</locationY>
+        <locationX>327</locationX>
+        <locationY>270</locationY>
         <defaultConnector>
             <targetReference>Auto_Quote</targetReference>
         </defaultConnector>
@@ -25,6 +50,13 @@
             <label>home only</label>
         </rules>
     </decisions>
+    <dynamicChoiceSets>
+        <name>pContacts</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>Contact</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
     <interviewLabel>Quoting {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Quoting</label>
     <processMetadataValues>
@@ -40,16 +72,108 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordLookups>
+        <name>Get_Primary_Contact</name>
+        <label>Get Primary Contact</label>
+        <locationX>607</locationX>
+        <locationY>44</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Pick_Exist_Cust</elementReference>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <outputReference>Primary_Contact</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <screens>
+        <name>Create_New_Customer_Header</name>
+        <label>Create New Customer Header</label>
+        <locationX>467</locationX>
+        <locationY>177</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>New_Cust_Header</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Provide primary policyholder details&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Primary_Name</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Date_of_Birth</name>
+            <dataType>Date</dataType>
+            <fieldText>Date of Birth</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Primary_Address</name>
+            <extensionName>flowruntime:address</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Married</name>
+            <dataType>Boolean</dataType>
+            <fieldText>Married</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Exist_Cust</name>
+        <label>Exist Cust</label>
+        <locationX>464</locationX>
+        <locationY>44</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Get_Primary_Contact</targetReference>
+        </connector>
+        <fields>
+            <name>Title_Existing_Customer</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Select Existing Customer Record&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Pick_Exist_Cust</name>
+            <choiceReferences>pContacts</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Pick Exist Cust</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>starter_screen</name>
         <label>starter screen</label>
-        <locationX>148</locationX>
+        <locationX>142</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>home_or_auto_or_both</targetReference>
+            <targetReference>Customer_already</targetReference>
         </connector>
         <fields>
             <name>title_starter</name>
@@ -66,6 +190,13 @@
                 <name>starter_option</name>
             </outputParameters>
         </fields>
+        <fields>
+            <name>Existing_Customer</name>
+            <dataType>Boolean</dataType>
+            <fieldText>Existing Customer?</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -74,17 +205,25 @@
     <subflows>
         <name>Auto_Quote</name>
         <label>Auto Quote</label>
-        <locationX>444</locationX>
-        <locationY>234</locationY>
+        <locationX>509</locationX>
+        <locationY>452</locationY>
         <flowName>Auto_Quote</flowName>
     </subflows>
     <subflows>
         <name>Home_Quote</name>
         <label>Home Quote</label>
-        <locationX>270</locationX>
-        <locationY>230</locationY>
+        <locationX>335</locationX>
+        <locationY>448</locationY>
         <flowName>Home_Quote</flowName>
     </subflows>
+    <variables>
+        <name>Primary_Contact</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
     <variables>
         <name>quote_choice</name>
         <dataType>String</dataType>
