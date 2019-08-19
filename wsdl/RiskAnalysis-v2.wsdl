@@ -249,7 +249,7 @@ ZuluDateTime is probably very commonly used.
          <xs:element name="ProblemHeaderQName" type="tns:AttributedQNameType"/>
          <xs:element name="ProblemIRI" type="tns:AttributedURIType"/>
          <xs:element name="ProblemAction" type="tns:ProblemActionType"/>
-         <xs:attribute name="IsReferenceParameter" type="xs:boolean"/>
+         <!--<xs:attribute name="IsReferenceParameter" type="xs:boolean"/>-->
          <xs:simpleType name="RelationshipTypeOpenEnum">
             <xs:union memberTypes="tns:RelationshipType xs:anyURI"/>
          </xs:simpleType>
@@ -300,8 +300,8 @@ ZuluDateTime is probably very commonly used.
          <xs:complexType name="RelatesToType" mixed="false">
             <xs:simpleContent>
                <xs:extension base="xs:anyURI">
-                  <xs:attribute name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional"
-                                default="http://www.w3.org/2005/08/addressing/reply"/>
+             <!--     <xs:attribute name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional"
+                                default="http://www.w3.org/2005/08/addressing/reply"/> -->
                   <xs:anyAttribute namespace="##other" processContents="lax"/>
                </xs:extension>
             </xs:simpleContent>
@@ -1559,7 +1559,7 @@ ZuluDateTime is probably very commonly used.
             <xsd:sequence>
                <xsd:element maxOccurs="1" minOccurs="0" name="theContentType" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="theBinData" type="xsd:hexBinary"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="theBinData" type="xsd:string"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="theBinLength" type="xsd:integer"/>
             </xsd:sequence>

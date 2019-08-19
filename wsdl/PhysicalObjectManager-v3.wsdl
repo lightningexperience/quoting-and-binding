@@ -1,27 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                  xmlns:fault="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault"
-                  xmlns:tns="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3"
-                  xmlns:types-v3_0="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3_0"
-                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-                  name="PhysicalObjectManager-v3.wsdl"
-                  targetNamespace="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3">
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+   xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+   xmlns:fault="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault" 
+   xmlns:tns="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3" 
+   xmlns:types-v3_0="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3_0" 
+   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" name="PhysicalObjectManager-v3.wsdl" targetNamespace="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3">
    <wsdl:types>
-      <xsd:schema xmlns="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault"
-                  xmlns:btypes="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes"
-                  xmlns:wsa="http://www.w3.org/2005/08/addressing"
-                  targetNamespace="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault"
-                  elementFormDefault="qualified"
-                  attributeFormDefault="unqualified"
-                  version="1">
+      <xsd:schema xmlns="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault" 
+         xmlns:btypes="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes" 
+         xmlns:wsa="http://www.w3.org/2005/08/addressing" targetNamespace="http://schemas.zurich.com/zsoa/corporate/common/2009/11/fault" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1">
          <xsd:element name="zsoaFault" type="ZSOAFault" block="#all" final="#all"/>
          <xsd:complexType name="IllegalArgumentException">
             <xsd:annotation>
                <xsd:documentation>
 Signals that an illegal or inappropriate argument has
 been passed to the service.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="InvariantViolationException"/>
@@ -32,7 +26,7 @@ been passed to the service.
                <xsd:documentation>
 Signals that an operation has been invoked at an illegal
 or inappropriate time.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="InvariantViolationException"/>
@@ -43,7 +37,7 @@ or inappropriate time.
                <xsd:documentation>
 Signals that an index of some sort (such as to an array,
 to a string, or to a collection) is out of range.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="InvariantViolationException"/>
@@ -54,7 +48,7 @@ to a string, or to a collection) is out of range.
                <xsd:documentation>
 Signals that an attribute or element contained an
 invalid value.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="ServiceException">
@@ -75,7 +69,7 @@ an exception that gets thrown during the development or testing
 phases of a service implementation, but should never be thrown
 in a production environment (see service contract guide for
 further information).
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="ServiceException"/>
@@ -94,7 +88,7 @@ operators.
 - The salient point here is that no business logic should ever
 rely on the those SQL codes, they may change any time without
 prior notice!
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="ResourceException">
@@ -110,7 +104,7 @@ prior notice!
 Indicates service failure due to a client error. Use
 this type as base class for exceptions that fit this
 category
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="BaseException"/>
@@ -123,7 +117,7 @@ Indicates a programming error. Use this type as base
 class for exceptions that fit this category. Types that
 derive from this type should be defined in this
 namespace since they are usually quite generic.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="BaseException"/>
@@ -136,7 +130,7 @@ Indicates resource failure. Use this type as base class
 for exceptions that fit this category. Types that derive
 from this type should be mostly defined in this
 namespace since they are usually quite generic.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="BaseException"/>
@@ -148,7 +142,7 @@ namespace since they are usually quite generic.
 Indicates that the implementation of the service
 operation is not yet complete. THIS TYPE SHOULD NOT BE
 SUBCLASSED DIRECTLY!
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:complexContent>
                <xsd:extension base="BaseException"/>
@@ -160,7 +154,7 @@ SUBCLASSED DIRECTLY!
 THIS TYPE SHOULD NOT BE SUBCLASSED DIRECTLY! Subclass
 ServiceException, InvariantViolationException or
 ResourceException instead.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:sequence>
                <xsd:element name="message" type="xsd:string"/>
@@ -194,7 +188,7 @@ Thus, the service provider should never expect a service consumer to know
 what to do with the value 'java.lang.NullpointerException' in the attribute
 'unmarshallingHint'. After all, the service consumer may be implemented in
 .NET or COBOL.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:sequence>
                <xsd:element name="message" type="xsd:string"/>
@@ -203,11 +197,7 @@ what to do with the value 'java.lang.NullpointerException' in the attribute
             <xsd:attribute name="unmarshallingHint" type="xsd:string"/>
          </xsd:complexType>
       </xsd:schema>
-      <xsd:schema xmlns:tns="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes"
-                  targetNamespace="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes"
-                  elementFormDefault="qualified"
-                  attributeFormDefault="unqualified"
-                  version="5">
+      <xsd:schema xmlns:tns="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes" targetNamespace="http://schemas.zurich.com/zsoa/corporate/common/2009/11/basictypes" elementFormDefault="qualified" attributeFormDefault="unqualified" version="5">
          <xsd:simpleType name="ZuluDateTime">
             <xsd:annotation>
                <xsd:documentation>
@@ -222,19 +212,15 @@ to UTC (Zulu Time) prior to marshalling a Calendar
 Object in Java for example. TODO: fator this type out of
 this schema into a schema with common types.
 ZuluDateTime is probably very commonly used.
-</xsd:documentation>
+               </xsd:documentation>
             </xsd:annotation>
             <xsd:restriction base="xsd:dateTime">
                <xsd:pattern value=".*[Z]"/>
             </xsd:restriction>
          </xsd:simpleType>
       </xsd:schema>
-      <xsd:schema xmlns:tns="http://www.w3.org/2005/08/addressing"
-                  xmlns:xs="http://www.w3.org/2001/XMLSchema"
-                  targetNamespace="http://www.w3.org/2005/08/addressing"
-                  elementFormDefault="qualified"
-                  attributeFormDefault="unqualified"
-                  blockDefault="#all">
+      <xsd:schema xmlns:tns="http://www.w3.org/2005/08/addressing" 
+         xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.w3.org/2005/08/addressing" elementFormDefault="qualified" attributeFormDefault="unqualified" blockDefault="#all">
          <xs:element name="EndpointReference" type="tns:EndpointReferenceType"/>
          <xs:element name="ReferenceParameters" type="tns:ReferenceParametersType"/>
          <xs:element name="Metadata" type="tns:MetadataType"/>
@@ -249,7 +235,7 @@ ZuluDateTime is probably very commonly used.
          <xs:element name="ProblemHeaderQName" type="tns:AttributedQNameType"/>
          <xs:element name="ProblemIRI" type="tns:AttributedURIType"/>
          <xs:element name="ProblemAction" type="tns:ProblemActionType"/>
-         <xs:attribute name="IsReferenceParameter" type="xs:boolean"/>
+       <!--  <xs:attribute name="IsReferenceParameter" type="xs:boolean"/> -->
          <xs:simpleType name="RelationshipTypeOpenEnum">
             <xs:union memberTypes="tns:RelationshipType xs:anyURI"/>
          </xs:simpleType>
@@ -300,8 +286,7 @@ ZuluDateTime is probably very commonly used.
          <xs:complexType name="RelatesToType" mixed="false">
             <xs:simpleContent>
                <xs:extension base="xs:anyURI">
-                  <xs:attribute name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional"
-                                default="http://www.w3.org/2005/08/addressing/reply"/>
+          <!--       <xs:attribute name="RelationshipType" type="tns:RelationshipTypeOpenEnum" use="optional" default="http://www.w3.org/2005/08/addressing/reply"/> -->
                   <xs:anyAttribute namespace="##other" processContents="lax"/>
                </xs:extension>
             </xs:simpleContent>
@@ -335,11 +320,7 @@ ZuluDateTime is probably very commonly used.
             <xs:anyAttribute namespace="##other" processContents="lax"/>
          </xs:complexType>
       </xsd:schema>
-      <xsd:schema xmlns:common="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common"
-                  attributeFormDefault="unqualified"
-                  elementFormDefault="qualified"
-                  targetNamespace="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common"
-                  version="1.0.0.0">
+      <xsd:schema xmlns:common="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common" version="1.0.0.0">
          <xsd:element name="messageTypeName" type="common:MessageTypeName"/>
          <xsd:element name="transactionState" type="common:TransactionState"/>
          <xsd:element name="claimBusinessReference" type="common:ClaimBusinessReference"/>
@@ -476,8 +457,7 @@ ZuluDateTime is probably very commonly used.
 
                <xsd:element maxOccurs="1" minOccurs="0" name="transactionId" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="transactionStatus"
-                            type="common:TransactionState"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="transactionStatus" type="common:TransactionState"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="transactionType" type="xsd:string"/>
 
@@ -502,13 +482,11 @@ ZuluDateTime is probably very commonly used.
 
                <xsd:element maxOccurs="1" minOccurs="0" name="curbWeight" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="dayTimeRunningLightsIndicator"
-                            type="xsd:string"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="dayTimeRunningLightsIndicator" type="xsd:string"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="driveTrainCode" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="electronicStabilityValidationCode"
-                            type="xsd:string"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="electronicStabilityValidationCode" type="xsd:string"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="highPerformanceIndicator" type="xsd:string"/>
 
@@ -548,8 +526,7 @@ ZuluDateTime is probably very commonly used.
 
                <xsd:element maxOccurs="1" minOccurs="0" name="trimName" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="truckGrossVehicleWeightCode"
-                            type="xsd:string"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="truckGrossVehicleWeightCode" type="xsd:string"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="vehicleClassCode" type="xsd:string"/>
 
@@ -557,8 +534,7 @@ ZuluDateTime is probably very commonly used.
 
                <xsd:element maxOccurs="1" minOccurs="0" name="vehicleHeight" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleImages"
-                            type="common:VehicleImagesView"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="vehicleImages" type="common:VehicleImagesView"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="vehicleLength" type="xsd:string"/>
 
@@ -580,8 +556,7 @@ ZuluDateTime is probably very commonly used.
          </xsd:complexType>
          <xsd:complexType abstract="false" name="VehicleImagesView">
             <xsd:sequence>
-               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vehicleImage"
-                            type="common:VehicleImageView"/>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vehicleImage" type="common:VehicleImageView"/>
             </xsd:sequence>
          </xsd:complexType>
          <xsd:complexType abstract="false" name="VehicleImageView">
@@ -592,11 +567,7 @@ ZuluDateTime is probably very commonly used.
             </xsd:sequence>
          </xsd:complexType>
       </xsd:schema>
-      <xsd:schema xmlns:zsoa="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa"
-                  attributeFormDefault="unqualified"
-                  elementFormDefault="qualified"
-                  targetNamespace="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa"
-                  version="1.0.0.0">
+      <xsd:schema xmlns:zsoa="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa" version="1.0.0.0">
          <xsd:element name="errorInfo" type="zsoa:ErrorInfo"/>
          <xsd:element name="applicationType" type="zsoa:ApplicationType"/>
          <xsd:element name="requestHeader" type="zsoa:RequestHeader"/>
@@ -708,7 +679,7 @@ ZuluDateTime is probably very commonly used.
             <xsd:sequence>
                <xsd:element maxOccurs="1" minOccurs="0" name="theContentType" type="xsd:string"/>
 
-               <xsd:element maxOccurs="1" minOccurs="0" name="theBinData" type="xsd:hexBinary"/>
+               <xsd:element maxOccurs="1" minOccurs="0" name="theBinData" type="xsd:string"/>
 
                <xsd:element maxOccurs="1" minOccurs="0" name="theBinLength" type="xsd:integer"/>
             </xsd:sequence>
@@ -721,15 +692,10 @@ ZuluDateTime is probably very commonly used.
             </xsd:sequence>
          </xsd:complexType>
       </xsd:schema>
-      <xsd:schema xmlns:common="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common"
-                  xmlns:zsoa="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa"
-                  attributeFormDefault="unqualified"
-                  elementFormDefault="qualified"
-                  targetNamespace="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3_0">
-         <xsd:element name="retrieveVehicleCharacteristics"
-                      type="types-v3_0:RetrieveVehicleCharacteristics"/>
-         <xsd:element name="retrieveVehicleCharacteristicsResponse"
-                      type="types-v3_0:RetrieveVehicleCharacteristicsResponse"/>
+      <xsd:schema xmlns:common="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/common" 
+         xmlns:zsoa="http://schemas.zurich.com/zsoa/fig/physicalobject/2018/05/zsoa" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://webservices.zurich.com/zsoa/fig/physicalobject/physicalobjectmanager-v3_0">
+         <xsd:element name="retrieveVehicleCharacteristics" type="types-v3_0:RetrieveVehicleCharacteristics"/>
+         <xsd:element name="retrieveVehicleCharacteristicsResponse" type="types-v3_0:RetrieveVehicleCharacteristicsResponse"/>
          <xsd:complexType name="RetrieveVehicleCharacteristics">
             <xsd:sequence maxOccurs="1" minOccurs="0">
                <xsd:element maxOccurs="1" minOccurs="0" name="requestHeader" type="zsoa:RequestHeader"/>
@@ -747,8 +713,7 @@ ZuluDateTime is probably very commonly used.
 
                <xsd:element name="transactionNotification" type="common:TransactionNotification"/>
 
-               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vehicleDetails"
-                            type="common:VehicleCharacteristicsView"/>
+               <xsd:element maxOccurs="unbounded" minOccurs="0" name="vehicleDetails" type="common:VehicleCharacteristicsView"/>
             </xsd:sequence>
          </xsd:complexType>
       </xsd:schema>
@@ -764,17 +729,14 @@ ZuluDateTime is probably very commonly used.
    </wsdl:message>
    <wsdl:portType name="PhysicalObjectManagerInterface-v3_0">
       <wsdl:operation name="retrieveVehicleCharacteristics">
-         <wsdl:input message="tns:physicalobjectmanager-v3_0.retrieveVehicleCharacteristics"
-                     name="retrieveVehicleCharacteristics"/>
+         <wsdl:input message="tns:physicalobjectmanager-v3_0.retrieveVehicleCharacteristics" name="retrieveVehicleCharacteristics"/>
 
-         <wsdl:output message="tns:physicalobjectmanager-v3_0.retrieveVehicleCharacteristicsResponse"
-                      name="retrieveVehicleCharacteristicsResponse"/>
+         <wsdl:output message="tns:physicalobjectmanager-v3_0.retrieveVehicleCharacteristicsResponse" name="retrieveVehicleCharacteristicsResponse"/>
 
          <wsdl:fault message="tns:zSOAFault" name="zSOAFault"/>
       </wsdl:operation>
    </wsdl:portType>
-   <wsdl:binding name="PhysicalObjectManager-v3_0.SOAPoHTTP"
-                 type="tns:PhysicalObjectManagerInterface-v3_0">
+   <wsdl:binding name="PhysicalObjectManager-v3_0.SOAPoHTTP" type="tns:PhysicalObjectManagerInterface-v3_0">
       <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
 
       <wsdl:operation name="retrieveVehicleCharacteristics">
@@ -794,8 +756,7 @@ ZuluDateTime is probably very commonly used.
       </wsdl:operation>
    </wsdl:binding>
    <wsdl:service name="PhysicalObjectManagerService-v3_0">
-      <wsdl:port binding="tns:PhysicalObjectManager-v3_0.SOAPoHTTP"
-                 name="PhysicalObjectManager-v3_0.SOAPoHTTPEndpoint">
+      <wsdl:port binding="tns:PhysicalObjectManager-v3_0.SOAPoHTTP" name="PhysicalObjectManager-v3_0.SOAPoHTTPEndpoint">
          <soap:address location="http://localhost:9090/services/physicalobject/PhysicalObjectManager-v3"/>
       </wsdl:port>
    </wsdl:service>
