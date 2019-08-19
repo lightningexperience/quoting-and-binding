@@ -136,7 +136,7 @@ public class WS_RiskAnalysis {
         private String[] field_order_type_info = new String[]{'requestHeader','clientAccountNumber','customerDetails'};
     }
     public class RiskAnalysis_v2_0_SOAPoHTTPEndpoint {
-        public String endpoint_x = 'http://localhost:9090/services/underwritingmanagement/RiskAnalysis-v2';
+        public String endpoint_x = 'https://cryptic-mesa-10368.herokuapp.com/RiskAnalysis';
         public Map<String,String> inputHttpHeaders_x;
         public Map<String,String> outputHttpHeaders_x;
         public String clientCertName_x;

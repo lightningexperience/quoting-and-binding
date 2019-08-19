@@ -226,7 +226,7 @@ public class WS_PropertyRiskAnalysis {
         private String[] field_order_type_info = new String[]{'responseHeader','assessmentBreakdown','assessmentResult','enteredById','fullDwelling','insurancePolicy','insured','ownerId','propertyAddress','transactionNotificationResponse'};
     }
     public class PropertyRiskAnalysis_v4_0_SOAPoHTTPEndpoint {
-        public String endpoint_x = 'http://localhost:9090/services/underwritingmanagement/PropertyRiskAnalysis-v4';
+        public String endpoint_x = 'https://cryptic-mesa-10368.herokuapp.com/PropertyRiskAnalysis';
         public Map<String,String> inputHttpHeaders_x;
         public Map<String,String> outputHttpHeaders_x;
         public String clientCertName_x;

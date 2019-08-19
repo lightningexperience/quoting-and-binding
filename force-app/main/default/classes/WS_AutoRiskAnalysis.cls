@@ -84,7 +84,7 @@ public class WS_AutoRiskAnalysis {
         private String[] field_order_type_info = new String[]{'responseHeader','additionalDriver','cachedRiskReportIndicator','cachedRiskReportReference','currentCarrierData','declaredClaim','declaredViolation','driver','driverHistory','houseHoldNumber','piContinuousLiability','piReportedData','referenceNumber','reportedData','reportReceivedDate','transactionNotification','vehicle','vendorCurrentCarrierCount','verifiedCurrentCarrierCount'};
     }
     public class AutoRiskAnalysis_v2_0_SOAPoHTTPEndpoint {
-        public String endpoint_x = 'http://fmlpdosb0001.farmersinsurance.com:1255/services/autoriskanalysis/v2';
+        public String endpoint_x = 'https://cryptic-mesa-10368.herokuapp.com/AutoRiskAnalysis';
         public Map<String,String> inputHttpHeaders_x;
         public Map<String,String> outputHttpHeaders_x;
         public String clientCertName_x;

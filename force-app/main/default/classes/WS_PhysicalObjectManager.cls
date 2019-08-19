@@ -24,7 +24,7 @@ public class WS_PhysicalObjectManager {
         private String[] field_order_type_info = new String[]{'requestHeader','effectiveDate','ratingCompanyCode','vehicleIdentifiers'};
     }
     public class PhysicalObjectManager_v3_0_SOAPoHTTPEndpoint {
-        public String endpoint_x = 'http://localhost:9090/services/physicalobject/PhysicalObjectManager-v3';
+        public String endpoint_x = 'https://cryptic-mesa-10368.herokuapp.com/PhysicalObjectManager';
         public Map<String,String> inputHttpHeaders_x;
         public Map<String,String> outputHttpHeaders_x;
         public String clientCertName_x;
