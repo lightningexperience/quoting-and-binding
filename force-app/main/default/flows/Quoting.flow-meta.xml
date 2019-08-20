@@ -116,6 +116,31 @@
         </rules>
     </decisions>
     <decisions>
+        <name>home_also</name>
+        <label>home also</label>
+        <locationX>883</locationX>
+        <locationY>631</locationY>
+        <defaultConnector>
+            <targetReference>BizRules</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>home_too</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>quote_choice</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>homeauto_start</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Home_Quote</targetReference>
+            </connector>
+            <label>home too</label>
+        </rules>
+    </decisions>
+    <decisions>
         <name>home_or_auto_or_both</name>
         <label>home or auto or both</label>
         <locationX>880</locationX>
@@ -262,6 +287,22 @@
         <outputReference>Primary_Contact</outputReference>
         <queriedFields>Id</queriedFields>
     </recordLookups>
+    <screens>
+        <name>Conclusion_Screen</name>
+        <label>Conclusion Screen</label>
+        <locationX>317</locationX>
+        <locationY>635</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>conclusion_text</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;You&#39;re All Done!&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;You can further manage your quotes and policies from the Policy Hub app.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>Create_New_Customer_Header</name>
         <label>Create New Customer Header</label>
@@ -453,7 +494,26 @@
         <label>Auto Quote</label>
         <locationX>889</locationX>
         <locationY>502</locationY>
+        <connector>
+            <targetReference>home_also</targetReference>
+        </connector>
         <flowName>Auto_Quote</flowName>
+        <inputAssignments>
+            <name>quoteId</name>
+            <value>
+                <elementReference>vQuote.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>BizRules</name>
+        <label>BizRules</label>
+        <locationX>588</locationX>
+        <locationY>636</locationY>
+        <connector>
+            <targetReference>Quote_Billing</targetReference>
+        </connector>
+        <flowName>Quote_Business_Rules</flowName>
         <inputAssignments>
             <name>quoteId</name>
             <value>
@@ -466,7 +526,26 @@
         <label>Home Quote</label>
         <locationX>730</locationX>
         <locationY>500</locationY>
+        <connector>
+            <targetReference>BizRules</targetReference>
+        </connector>
         <flowName>Home_Quote</flowName>
+    </subflows>
+    <subflows>
+        <name>Quote_Billing</name>
+        <label>Quote Billing</label>
+        <locationX>453</locationX>
+        <locationY>635</locationY>
+        <connector>
+            <targetReference>Conclusion_Screen</targetReference>
+        </connector>
+        <flowName>Quote_Billing</flowName>
+        <inputAssignments>
+            <name>quoteId</name>
+            <value>
+                <elementReference>vQuote.Id</elementReference>
+            </value>
+        </inputAssignments>
     </subflows>
     <variables>
         <name>Primary_Contact</name>
