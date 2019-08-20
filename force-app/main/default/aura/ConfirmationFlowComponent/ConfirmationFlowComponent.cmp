@@ -1,0 +1,8 @@
+<aura:component implements="lightning:availableForFlowScreens,flexipage:availableForAllPageTypes" controller="ConfirmationController">
+    <aura:attribute name="quoteId" type="String" access="global"/>
+    <aura:attribute name="quote" type="Quote__c"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <!-- quick and dirty to get it up and running -->
+    <lightning:recordForm recordId="{!v.quote.Id}" objectApiName="Quote__c" layoutType="Compact" mode="readonly"/>
+</aura:component>

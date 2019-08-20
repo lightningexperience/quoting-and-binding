@@ -1,0 +1,3 @@
+<design:component label="Confirmation Flow Component">
+    <design:attribute name="quoteId" label="Quote ID"/>
+</design:component>

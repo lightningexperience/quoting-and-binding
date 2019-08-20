@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <interviewLabel>Confirmation Test {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Confirmation Test</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Flow</processType>
+    <screens>
+        <name>Test_Component</name>
+        <label>Test Component</label>
+        <locationX>212</locationX>
+        <locationY>66</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>confirmation</name>
+            <extensionName>c:ConfirmationFlowComponent</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>quoteId</name>
+                <value>
+                    <elementReference>quoteId</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <startElementReference>Test_Component</startElementReference>
+    <status>Draft</status>
+    <variables>
+        <name>quoteId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>a0221000002j8weAAA</stringValue>
+        </value>
+    </variables>
+</Flow>
