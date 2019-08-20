@@ -29,6 +29,16 @@ public class WS_AutoRiskAnalysis_Underwriting {
         public WS_AutoRiskAnalysis_Underwriting.ObjectReference registeringAuthorityObjectReference;
         public Date requestDate;
         public String status;
+
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+
         private String[] description_type_info = new String[]{'description','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
         private String[] endDate_type_info = new String[]{'endDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
         private String[] externalReference_type_info = new String[]{'externalReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
@@ -39,7 +49,7 @@ public class WS_AutoRiskAnalysis_Underwriting {
         private String[] requestDate_type_info = new String[]{'requestDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
         private String[] status_type_info = new String[]{'status','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace','true','false'};
-        private String[] field_order_type_info = new String[]{'description','endDate','externalReference','registrationTypeAsString','issueDate','placeOfIssue','registeringAuthorityObjectReference','requestDate','status'};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName','description','endDate','externalReference','registrationTypeAsString','issueDate','placeOfIssue','registeringAuthorityObjectReference','requestDate','status'};
     }
     public class AuthorisationType {
         public String name;
@@ -499,13 +509,51 @@ public class WS_AutoRiskAnalysis_Underwriting {
         public String violationNumber;
         public Integer violationScore;
         public WS_AutoRiskAnalysis_Underwriting.ConvictionType[] convictionTypes;
+
+        public Date lastUsedDate;
+        public Date lastVerifiedDate;
+        public String partyRegistrationTypeName;
+
+        public String description;
+        public Date endDate;
+        public String externalReference;
+        public String registrationTypeAsString;
+        public Date issueDate;
+        public String placeOfIssue;
+        public WS_AutoRiskAnalysis_Underwriting.ObjectReference registeringAuthorityObjectReference;
+        public Date requestDate;
+        public String status;
+
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+
+        private String[] description_type_info = new String[]{'description','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] endDate_type_info = new String[]{'endDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] externalReference_type_info = new String[]{'externalReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] registrationTypeAsString_type_info = new String[]{'registrationTypeAsString','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] issueDate_type_info = new String[]{'issueDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] placeOfIssue_type_info = new String[]{'placeOfIssue','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] registeringAuthorityObjectReference_type_info = new String[]{'registeringAuthorityObjectReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] requestDate_type_info = new String[]{'requestDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] status_type_info = new String[]{'status','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        
+        private String[] lastUsedDate_type_info = new String[]{'lastUsedDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] lastVerifiedDate_type_info = new String[]{'lastVerifiedDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] partyRegistrationTypeName_type_info = new String[]{'partyRegistrationTypeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        
         private String[] convictionDescription_type_info = new String[]{'convictionDescription','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','-1','false'};
         private String[] violationDate_type_info = new String[]{'violationDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] violationNumber_type_info = new String[]{'violationNumber','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] violationScore_type_info = new String[]{'violationScore','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] convictionTypes_type_info = new String[]{'convictionTypes','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','-1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party','true','false'};
-        private String[] field_order_type_info = new String[]{'convictionDescription','violationDate','violationNumber','violationScore','convictionTypes'};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName','description','endDate','externalReference','registrationTypeAsString','issueDate','placeOfIssue','registeringAuthorityObjectReference','requestDate','status','lastUsedDate','lastVerifiedDate','partyRegistrationTypeName','convictionDescription','violationDate','violationNumber','violationScore','convictionTypes'};
     }
     public class GeneralActivity {
         public String frequency;
@@ -645,6 +693,38 @@ public class WS_AutoRiskAnalysis_Underwriting {
         public String streetMatchLevel;
         public String streetName;
         public WS_AutoRiskAnalysis_Underwriting.PostalAddressStreetDetail postalAddressDetail;
+        public String contactPointType;
+        public String externalReference;
+        public String status;
+        public String contactPointAsString;
+        public String contactPointConfirmation;
+        public String contactSourceCode;
+        public String contactSourceDesc;
+        public String description;
+        public Boolean isPreferredIndicator;
+        public Boolean optIn;
+        public String sequenceNumber;
+        public String statusAsString;
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] contactPointType_type_info = new String[]{'contactPointType','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] externalReference_type_info = new String[]{'externalReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] status_type_info = new String[]{'status','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] contactPointAsString_type_info = new String[]{'contactPointAsString','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] contactPointConfirmation_type_info = new String[]{'contactPointConfirmation','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] contactSourceCode_type_info = new String[]{'contactSourceCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] contactSourceDesc_type_info = new String[]{'contactSourceDesc','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] description_type_info = new String[]{'description','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] isPreferredIndicator_type_info = new String[]{'isPreferredIndicator','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] optIn_type_info = new String[]{'optIn','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] sequenceNumber_type_info = new String[]{'sequenceNumber','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] statusAsString_type_info = new String[]{'statusAsString','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] boxNumber_type_info = new String[]{'boxNumber','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] buildingName_type_info = new String[]{'buildingName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] city_type_info = new String[]{'city','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
@@ -675,7 +755,7 @@ public class WS_AutoRiskAnalysis_Underwriting {
         private String[] streetName_type_info = new String[]{'streetName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] postalAddressDetail_type_info = new String[]{'postalAddressDetail','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party','true','false'};
-        private String[] field_order_type_info = new String[]{'boxNumber','buildingName','city','confidenceLevel','country','countryCode','dynamicProperties','floorNumber','houseNumber','mailabilityScore','matchLevel','multimatchCount','postalCode','postalCodeExtension','region','street','subregion','unitNumber','cityMatchLevel','countryMatchLevel','geoPath','latitude','longitude','postalBarcode','postalCodeMatchLevel','stateMatchLevel','streetMatchLevel','streetName','postalAddressDetail'};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName','contactPointType','externalReference','status','contactPointAsString','contactPointConfirmation','contactSourceCode','contactSourceDesc','description','isPreferredIndicator','optIn','sequenceNumber','statusAsString','boxNumber','buildingName','city','confidenceLevel','country','countryCode','dynamicProperties','floorNumber','houseNumber','mailabilityScore','matchLevel','multimatchCount','postalCode','postalCodeExtension','region','street','subregion','unitNumber','cityMatchLevel','countryMatchLevel','geoPath','latitude','longitude','postalBarcode','postalCodeMatchLevel','stateMatchLevel','streetMatchLevel','streetName','postalAddressDetail'};
     }
     public class BasicViolationView {
         public WS_AutoRiskAnalysis_Underwriting.Conviction conviction;
@@ -852,6 +932,22 @@ public class WS_AutoRiskAnalysis_Underwriting {
         public String organisationName;
         public WS_AutoRiskAnalysis_Underwriting.PartyName partyName;
         public Decimal weight;
+        public String externalReference;
+        public WS_AutoRiskAnalysis_Underwriting.PartyRegistration[] partyRegistrations;
+        public String primeRole;
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        public String description;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] description_type_info = new String[]{'description','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] externalReference_type_info = new String[]{'externalReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
+        private String[] partyRegistrations_type_info = new String[]{'partyRegistrations','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','-1','false'};
+        private String[] primeRole_type_info = new String[]{'primeRole','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] birthDate_type_info = new String[]{'birthDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] deathDate_type_info = new String[]{'deathDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] gender_type_info = new String[]{'gender','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
@@ -873,7 +969,7 @@ public class WS_AutoRiskAnalysis_Underwriting {
         private String[] partyName_type_info = new String[]{'partyName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] weight_type_info = new String[]{'weight','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party','true','false'};
-        private String[] field_order_type_info = new String[]{'birthDate','deathDate','gender','maritalStatus','age','birthName','defaultName','eyeColor','gender1','hairColor','heightInFeet','heightInInches','isDeceased','nationalRegistration','occupations','organisationDesc','organisationFEINNumber','organisationName','partyName','weight'};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName','description','externalReference','partyRegistrations','primeRole','birthDate','deathDate','gender','maritalStatus','age','birthName','defaultName','eyeColor','gender1','hairColor','heightInFeet','heightInInches','isDeceased','nationalRegistration','occupations','organisationDesc','organisationFEINNumber','organisationName','partyName','weight'};
     }
     public class RolePlayer {
         public DateTime systemCreationDateTime;
@@ -978,6 +1074,14 @@ public class WS_AutoRiskAnalysis_Underwriting {
         public Boolean optIn;
         public String sequenceNumber;
         public String statusAsString;
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
         private String[] contactPointType_type_info = new String[]{'contactPointType','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] externalReference_type_info = new String[]{'externalReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] status_type_info = new String[]{'status','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
@@ -991,7 +1095,7 @@ public class WS_AutoRiskAnalysis_Underwriting {
         private String[] sequenceNumber_type_info = new String[]{'sequenceNumber','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] statusAsString_type_info = new String[]{'statusAsString','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party','true','false'};
-        private String[] field_order_type_info = new String[]{'contactPointType','externalReference','status','contactPointAsString','contactPointConfirmation','contactSourceCode','contactSourceDesc','description','isPreferredIndicator','optIn','sequenceNumber','statusAsString'};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName','contactPointType','externalReference','status','contactPointAsString','contactPointConfirmation','contactSourceCode','contactSourceDesc','description','isPreferredIndicator','optIn','sequenceNumber','statusAsString'};
     }
     public class NationalRegistrationType {
         public String name;
@@ -1114,11 +1218,41 @@ public class WS_AutoRiskAnalysis_Underwriting {
         public Date lastUsedDate;
         public Date lastVerifiedDate;
         public String partyRegistrationTypeName;
+
+        public String description;
+        public Date endDate;
+        public String externalReference;
+        public String registrationTypeAsString;
+        public Date issueDate;
+        public String placeOfIssue;
+        public WS_AutoRiskAnalysis_Underwriting.ObjectReference registeringAuthorityObjectReference;
+        public Date requestDate;
+        public String status;
+
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+
+        private String[] description_type_info = new String[]{'description','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] endDate_type_info = new String[]{'endDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] externalReference_type_info = new String[]{'externalReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] registrationTypeAsString_type_info = new String[]{'registrationTypeAsString','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] issueDate_type_info = new String[]{'issueDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] placeOfIssue_type_info = new String[]{'placeOfIssue','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] registeringAuthorityObjectReference_type_info = new String[]{'registeringAuthorityObjectReference','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] requestDate_type_info = new String[]{'requestDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        private String[] status_type_info = new String[]{'status','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/activityconditionplace',null,'0','1','false'};
+        
         private String[] lastUsedDate_type_info = new String[]{'lastUsedDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] lastVerifiedDate_type_info = new String[]{'lastVerifiedDate','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] partyRegistrationTypeName_type_info = new String[]{'partyRegistrationTypeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/party','true','false'};
-        private String[] field_order_type_info = new String[]{'lastUsedDate','lastVerifiedDate','partyRegistrationTypeName'};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName','description','endDate','externalReference','registrationTypeAsString','issueDate','placeOfIssue','registeringAuthorityObjectReference','requestDate','status','lastUsedDate','lastVerifiedDate','partyRegistrationTypeName'};
     }
     public class BasicVehicleCoverageView {
         public String coverageAmount;
@@ -2447,8 +2581,16 @@ public class WS_AutoRiskAnalysis_Underwriting {
         private String[] field_order_type_info = new String[]{'booleanValue','dateValue','decimalValue','numberValue'};
     }
     public class DependentObject {
+        public DateTime systemCreationDateTime;
+        public DateTime systemUpdateDateTime;
+        public String typeCode;
+        public String typeName;
+        private String[] systemCreationDateTime_type_info = new String[]{'systemCreationDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] systemUpdateDateTime_type_info = new String[]{'systemUpdateDateTime','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeCode_type_info = new String[]{'typeCode','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
+        private String[] typeName_type_info = new String[]{'typeName','http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common',null,'0','1','false'};
         private String[] apex_schema_type_info = new String[]{'http://schemas.zurich.com/zsoa/fig/underwritingmanagement/2018/05/common','true','false'};
-        private String[] field_order_type_info = new String[]{};
+        private String[] field_order_type_info = new String[]{'systemCreationDateTime','systemUpdateDateTime','typeCode','typeName'};
     }
     public class Key {
         public String id;

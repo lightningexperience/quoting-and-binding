@@ -167,6 +167,7 @@ public class WS_RiskAnalysis {
             response_x = response_map_x.get('response_x');
             return response_x;
         }
+        
         public WS_RiskAnalysis.RetrieveCreditScoreResponse retrieveCreditScore(WS_RiskAnalysis_Underwriting.RequestHeader requestHeader,String activityType,WS_RiskAnalysis_Underwriting.Key[] additionalModelCodes,Boolean checkForPriorErrorRecord,WS_RiskAnalysis_Underwriting.BasicCreditApplicantView coApplicant,String country,String creditRequestDateAsString,WS_RiskAnalysis_Underwriting.ObjectReference[] creditScoreModelReference,String creditScoreSourceName,String creditVendorCustomerNumber,String creditVendorSecurityCode,String customerCreditRecordReference,Boolean customerOptInIndicator,String globalCreditRecordReference,String inquiryType,String language,String modelTypeCode,Integer numberOfMthsToCountInquiries,Integer numberOfStaleDays,String permissiblePurposeCode,WS_RiskAnalysis_Underwriting.BasicCreditApplicantView primaryApplicant,WS_RiskAnalysis_Underwriting.PartyCreditScore[] priorCreditScoreModel,String productType,String requestIndicator,String requestorLineOfBusiness,String requestType,String routingIndicator,String stateCode,String targetCreditVendorName,String transactionType,String underwritingCompanyName,String version) {
             WS_RiskAnalysis.RetrieveCreditScore request_x = new WS_RiskAnalysis.RetrieveCreditScore();
             request_x.requestHeader = requestHeader;
