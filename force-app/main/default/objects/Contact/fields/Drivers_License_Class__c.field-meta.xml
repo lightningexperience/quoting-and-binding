@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Drivers_License_Class__c</fullName>
+    <externalId>false</externalId>
+    <label>Drivers License Class</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Class A</fullName>
+                <default>false</default>
+                <label>Class A</label>
+            </value>
+            <value>
+                <fullName>Class B</fullName>
+                <default>false</default>
+                <label>Class B</label>
+            </value>
+            <value>
+                <fullName>Class C</fullName>
+                <default>false</default>
+                <label>Class C</label>
+            </value>
+            <value>
+                <fullName>Class CDL</fullName>
+                <default>false</default>
+                <label>Class CDL</label>
+            </value>
+            <value>
+                <fullName>Class DE</fullName>
+                <default>false</default>
+                <label>Class DE</label>
+            </value>
+            <value>
+                <fullName>Class MJ</fullName>
+                <default>false</default>
+                <label>Class MJ</label>
+            </value>
+            <value>
+                <fullName>Class DJ</fullName>
+                <default>false</default>
+                <label>Class DJ</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

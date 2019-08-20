@@ -1,10 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <assignments>
+        <name>Assign_Contact_Record</name>
+        <label>Assign Contact Record</label>
+        <locationX>604</locationX>
+        <locationY>177</locationY>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.FirstName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primFirstName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.LastName</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primLastName</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.Birthdate</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Date_of_Birth</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.MailingCity</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primCity</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.MailingCountry</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primCountry</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.MailingPostalCode</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primPostalCode</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.MailingStreet</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primStreet</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.MailingState</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primState</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.Gender__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Gender</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.Marital_Status__c</assignToReference>
+            <operator>Assign</operator>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.HomePhone</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primPhone</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>Primary_Contact.Email</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>primEmail</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Primary_Contact</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <name>Customer_already</name>
+        <label>Customer already?</label>
+        <locationX>253</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>Create_New_Customer_Header</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>New Customer</defaultConnectorLabel>
+        <rules>
+            <name>Not_New_Customer</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>Existing_Customer</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Exist_Cust</targetReference>
+            </connector>
+            <label>Not New Customer</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>home_also</name>
+        <label>home also</label>
+        <locationX>883</locationX>
+        <locationY>631</locationY>
+        <defaultConnector>
+            <targetReference>BizRules</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>home_too</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>quote_choice</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>homeauto_start</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Home_Quote</targetReference>
+            </connector>
+            <label>home too</label>
+        </rules>
+    </decisions>
     <decisions>
         <name>home_or_auto_or_both</name>
         <label>home or auto or both</label>
-        <locationX>262</locationX>
-        <locationY>52</locationY>
+        <locationX>880</locationX>
+        <locationY>324</locationY>
         <defaultConnector>
             <targetReference>Auto_Quote</targetReference>
         </defaultConnector>
@@ -25,6 +165,37 @@
             <label>home only</label>
         </rules>
     </decisions>
+    <dynamicChoiceSets>
+        <name>pContacts</name>
+        <dataType>String</dataType>
+        <displayField>Name</displayField>
+        <object>Contact</object>
+        <valueField>Id</valueField>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>pGender</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Gender__c</picklistField>
+        <picklistObject>Contact</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>pLicenseClass</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Drivers_License_Class__c</picklistField>
+        <picklistObject>Contact</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>pMaritalStatus</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Marital_Status__c</picklistField>
+        <picklistObject>Contact</picklistObject>
+    </dynamicChoiceSets>
     <interviewLabel>Quoting {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Quoting</label>
     <processMetadataValues>
@@ -40,16 +211,256 @@
         </value>
     </processMetadataValues>
     <processType>Flow</processType>
+    <recordCreates>
+        <name>Create_Primary_Contact</name>
+        <label>Create Primary Contact</label>
+        <locationX>605</locationX>
+        <locationY>309</locationY>
+        <connector>
+            <targetReference>Initialize_Quote</targetReference>
+        </connector>
+        <inputReference>Primary_Contact</inputReference>
+    </recordCreates>
+    <recordCreates>
+        <name>Initialize_Quote</name>
+        <label>Initialize Quote</label>
+        <locationX>769</locationX>
+        <locationY>181</locationY>
+        <assignRecordIdToReference>vQuote.Id</assignRecordIdToReference>
+        <connector>
+            <targetReference>Primary_Contact_Junction_Create</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Status__c</field>
+            <value>
+                <stringValue>Draft</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Quote__c</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Primary_Contact_Junction_Create</name>
+        <label>Primary Contact Junction Create</label>
+        <locationX>888</locationX>
+        <locationY>181</locationY>
+        <assignRecordIdToReference>vPrimJunction.Id</assignRecordIdToReference>
+        <connector>
+            <targetReference>home_or_auto_or_both</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Contact__c</field>
+            <value>
+                <elementReference>Primary_Contact.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Quote__c</field>
+            <value>
+                <elementReference>vQuote.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Role__c</field>
+            <value>
+                <stringValue>Primary Policy Holder</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Contact_Quote_Junction__c</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Primary_Contact</name>
+        <label>Get Primary Contact</label>
+        <locationX>606</locationX>
+        <locationY>44</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Initialize_Quote</targetReference>
+        </connector>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Pick_Exist_Cust</elementReference>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <outputReference>Primary_Contact</outputReference>
+        <queriedFields>Id</queriedFields>
+    </recordLookups>
+    <screens>
+        <name>Conclusion_Screen</name>
+        <label>Conclusion Screen</label>
+        <locationX>317</locationX>
+        <locationY>635</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>conclusion_text</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;You&#39;re All Done!&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;You can further manage your quotes and policies from the Policy Hub app.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Create_New_Customer_Header</name>
+        <label>Create New Customer Header</label>
+        <locationX>468</locationX>
+        <locationY>177</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Assign_Contact_Record</targetReference>
+        </connector>
+        <fields>
+            <name>New_Cust_Header</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Provide primary policyholder details&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Primary_Name</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>disabled</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Email_Address</name>
+            <extensionName>flowruntime:email</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Email Address</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>primEmail</assignToReference>
+                <name>value</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>Prim_Phone</name>
+            <extensionName>flowruntime:phone</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>primPhone</assignToReference>
+                <name>value</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>Date_of_Birth</name>
+            <dataType>Date</dataType>
+            <fieldText>Date of Birth</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Primary_Address</name>
+            <extensionName>flowruntime:address</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>primCity</assignToReference>
+                <name>city</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>primCountry</assignToReference>
+                <name>country</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>primPostalCode</assignToReference>
+                <name>postalCode</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>primState</assignToReference>
+                <name>province</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>primStreet</assignToReference>
+                <name>street</name>
+            </outputParameters>
+        </fields>
+        <fields>
+            <name>Drivers_License_Type</name>
+            <choiceReferences>pLicenseClass</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Driver&#39;s License Type</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Driver_s_License_Number</name>
+            <dataType>String</dataType>
+            <fieldText>Driver&#39;s License Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Gender</name>
+            <choiceReferences>pGender</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Gender</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Marital_Status</name>
+            <choiceReferences>pMaritalStatus</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Marital Status</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Exist_Cust</name>
+        <label>Exist Cust</label>
+        <locationX>469</locationX>
+        <locationY>44</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Get_Primary_Contact</targetReference>
+        </connector>
+        <fields>
+            <name>Title_Existing_Customer</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Select Existing Customer Record&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>Pick_Exist_Cust</name>
+            <choiceReferences>pContacts</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Pick Exist Cust</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <screens>
         <name>starter_screen</name>
         <label>starter screen</label>
-        <locationX>148</locationX>
+        <locationX>142</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>home_or_auto_or_both</targetReference>
+            <targetReference>Customer_already</targetReference>
         </connector>
         <fields>
             <name>title_starter</name>
@@ -66,6 +477,13 @@
                 <name>starter_option</name>
             </outputParameters>
         </fields>
+        <fields>
+            <name>Existing_Customer</name>
+            <dataType>Boolean</dataType>
+            <fieldText>Existing Customer?</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -74,22 +492,153 @@
     <subflows>
         <name>Auto_Quote</name>
         <label>Auto Quote</label>
-        <locationX>444</locationX>
-        <locationY>234</locationY>
+        <locationX>889</locationX>
+        <locationY>502</locationY>
+        <connector>
+            <targetReference>home_also</targetReference>
+        </connector>
         <flowName>Auto_Quote</flowName>
+        <inputAssignments>
+            <name>quoteId</name>
+            <value>
+                <elementReference>vQuote.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <subflows>
+        <name>BizRules</name>
+        <label>BizRules</label>
+        <locationX>588</locationX>
+        <locationY>636</locationY>
+        <connector>
+            <targetReference>Quote_Billing</targetReference>
+        </connector>
+        <flowName>Quote_Business_Rules</flowName>
+        <inputAssignments>
+            <name>quoteId</name>
+            <value>
+                <elementReference>vQuote.Id</elementReference>
+            </value>
+        </inputAssignments>
     </subflows>
     <subflows>
         <name>Home_Quote</name>
         <label>Home Quote</label>
-        <locationX>270</locationX>
-        <locationY>230</locationY>
+        <locationX>730</locationX>
+        <locationY>500</locationY>
+        <connector>
+            <targetReference>BizRules</targetReference>
+        </connector>
         <flowName>Home_Quote</flowName>
     </subflows>
+    <subflows>
+        <name>Quote_Billing</name>
+        <label>Quote Billing</label>
+        <locationX>453</locationX>
+        <locationY>635</locationY>
+        <connector>
+            <targetReference>Conclusion_Screen</targetReference>
+        </connector>
+        <flowName>Quote_Billing</flowName>
+        <inputAssignments>
+            <name>quoteId</name>
+            <value>
+                <elementReference>vQuote.Id</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>Primary_Contact</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact</objectType>
+    </variables>
+    <variables>
+        <name>primCity</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primCountry</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primEmail</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primFirstName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primLastName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primPhone</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primPostalCode</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primState</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>primStreet</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>quote_choice</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>vPrimJunction</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Contact_Quote_Junction__c</objectType>
+    </variables>
+    <variables>
+        <name>vQuote</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Quote__c</objectType>
     </variables>
 </Flow>
