@@ -3,12 +3,12 @@
     <decisions>
         <name>More_Driver_Decision</name>
         <label>More Driver Decision?</label>
-        <locationX>885</locationX>
-        <locationY>333</locationY>
+        <locationX>340</locationX>
+        <locationY>46</locationY>
         <defaultConnector>
             <targetReference>Addition_Drivers_Information</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <defaultConnectorLabel>More Drivers</defaultConnectorLabel>
         <rules>
             <name>No_More_Drivers</name>
             <conditionLogic>and</conditionLogic>
@@ -28,12 +28,12 @@
     <decisions>
         <name>More_Vehicles</name>
         <label>More Vehicles?</label>
-        <locationX>1610</locationX>
-        <locationY>744</locationY>
+        <locationX>678</locationX>
+        <locationY>114</locationY>
         <defaultConnector>
             <targetReference>Additional_Vehicle_Details</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <defaultConnectorLabel>More Vehicles</defaultConnectorLabel>
         <rules>
             <name>No_More_Vehicle</name>
             <conditionLogic>and</conditionLogic>
@@ -116,8 +116,8 @@
     <recordCreates>
         <name>Create_Addition_Driver_Records</name>
         <label>Create Addition Driver Records</label>
-        <locationX>400</locationX>
-        <locationY>403</locationY>
+        <locationX>151</locationX>
+        <locationY>197</locationY>
         <assignRecordIdToReference>varAdditionalContactId</assignRecordIdToReference>
         <connector>
             <targetReference>Junction_Record_Creation</targetReference>
@@ -169,8 +169,8 @@
     <recordCreates>
         <name>Create_Vehicle_Record</name>
         <label>Create Vehicle Record</label>
-        <locationX>1467</locationX>
-        <locationY>243</locationY>
+        <locationX>535</locationX>
+        <locationY>203</locationY>
         <assignRecordIdToReference>varVehicleId</assignRecordIdToReference>
         <connector>
             <targetReference>More_Vehicles</targetReference>
@@ -234,8 +234,8 @@
     <recordCreates>
         <name>Junction_Record_Creation</name>
         <label>Junction Record Creation</label>
-        <locationX>627</locationX>
-        <locationY>419</locationY>
+        <locationX>348</locationX>
+        <locationY>198</locationY>
         <assignRecordIdToReference>varJunctionId</assignRecordIdToReference>
         <connector>
             <targetReference>More_Driver_Decision</targetReference>
@@ -263,8 +263,8 @@
     <recordUpdates>
         <name>Update_Quote</name>
         <label>Update Quote</label>
-        <locationX>1961</locationX>
-        <locationY>234</locationY>
+        <locationX>687</locationX>
+        <locationY>430</locationY>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -283,8 +283,8 @@
     <screens>
         <name>Addition_Drivers_Information</name>
         <label>Addition Drivers Information</label>
-        <locationX>335</locationX>
-        <locationY>51</locationY>
+        <locationX>151</locationX>
+        <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -373,8 +373,8 @@
     <screens>
         <name>Additional_Vehicle_Details</name>
         <label>Additional Vehicle Details</label>
-        <locationX>1189</locationX>
-        <locationY>236</locationY>
+        <locationX>535</locationX>
+        <locationY>45</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -457,33 +457,10 @@
         <showHeader>true</showHeader>
     </screens>
     <screens>
-        <name>Auto_Start</name>
-        <label>Auto Start</label>
-        <locationX>298</locationX>
-        <locationY>683</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>Auto_Title</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 36px;&quot;&gt;What are you driving? &lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot;font-size: 14px;&quot;&gt;You&#39;ll need to be the registered owner of at least one of the vehicles on your policy.&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>When_did_you_lease_or_buy_it</name>
-            <dataType>Date</dataType>
-            <fieldText>When did you lease or buy it?</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
         <name>Select_Appropriate_Policy_Coverage</name>
         <label>Select Appropriate Policy Coverage</label>
-        <locationX>1687</locationX>
-        <locationY>235</locationY>
+        <locationX>686</locationX>
+        <locationY>302</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>

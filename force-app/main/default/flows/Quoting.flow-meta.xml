@@ -300,6 +300,18 @@
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;You&#39;re All Done!&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;You can further manage your quotes and policies from the Policy Hub app.&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
+        <fields>
+            <name>Review_Summary</name>
+            <extensionName>c:ConfirmationFlowComponent</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>quoteId</name>
+                <value>
+                    <elementReference>vQuote.Id</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
@@ -330,6 +342,14 @@
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>primFirstName</assignToReference>
+                <name>firstName</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>primLastName</assignToReference>
+                <name>lastName</name>
+            </outputParameters>
         </fields>
         <fields>
             <name>Email_Address</name>
