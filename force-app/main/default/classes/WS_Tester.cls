@@ -23,6 +23,8 @@ public with sharing class WS_Tester {
         requestHeader.systemDateTime = DateTime.now();
         requestHeader.transactionStartDateTime = DateTime.now();
         requestHeader.userId = 'A05234N00';
+        requestHeader.legalEntity = '583503TST';
+        requestHeader.functionName = 'LHPI';
         //agentReference, loggedOnUserId, and locationId are not in WSDL but are present in sample XML
         String agentReference = 'AGENT001';
         String businessEntityId = '30';
@@ -43,6 +45,67 @@ public with sharing class WS_Tester {
         driver1.person.personName.firstName = 'ELLIOT';
         driver1.person.personName.lastName = 'SMITH';
         driver1.person.personName.middleName = 'F';
+        driver1.person.basicPostalAddress = new List<WS_AutoRiskAnalysis_Underwriting.BasicPostalAddressView>();
+        WS_AutoRiskAnalysis_Underwriting.BasicPostalAddressView driver1Address = new WS_AutoRiskAnalysis_Underwriting.BasicPostalAddressView();
+        driver1Address.postalAddress = new WS_AutoRiskAnalysis_Underwriting.PostalAddress();
+        driver1Address.postalAddress.externalReference = 'PCA201';
+        driver1Address.postalAddress.typeName = 'residence';
+        driver1Address.postalAddress.city = 'ARCADIA';
+        driver1Address.postalAddress.houseNumber = '2662';
+        driver1Address.postalAddress.postalCode = '34266';
+        driver1Address.postalAddress.postalCodeExtension = '8229';
+        driver1Address.postalAddress.region = 'FL';
+        driver1Address.postalAddress.postalAddressDetail = new WS_AutoRiskAnalysis_Underwriting.PostalAddressStreetDetail();
+        driver1Address.postalAddress.postalAddressDetail.addressLine1 = '2662 NW PINE CREEK AVE';
+        driver1.person.basicPostalAddress.add(driver1Address);
+        driver.add(driver1);
+        WS_AutoRiskAnalysis_Underwriting.BasicDriverSummaryView[] driverHistory;
+        String eCMSAccountNumber;
+        String forceToDMV;
+        String lineOfBusiness = 'Auto';
+        Integer maxNumberofAccidentRequested;
+        Integer maxNumberofViolationRequested;
+        String numberOfStaleDays = '100';
+        String quoteTransactionType;
+        String targetApplicationVersion;
+        String transactionName;
+        String underwriterCompany = 'LNCP001';
+        WS_AutoRiskAnalysis_Underwriting.BasicVehicleSummary[] vehicle;
+        WS_AutoRiskAnalysis.RetrieveRiskReportsResponse resp = ws.retrieveRiskReports(requestHeader, agentReference, businessEntityId, checkForPriorErrorRecord, customerOptInIndicator, driver, driverHistory, eCMSAccountNumber, forceToDMV, lineOfBusiness, maxNumberofAccidentRequested, maxNumberofViolationRequested, numberOfStaleDays, quoteTransactionType, targetApplicationVersion, transactionName, underwriterCompany, vehicle);
+        return (JSON.serializePretty(resp));
+    }
+
+    @RemoteAction  
+    public static String testAutoRiskAnalysis2() {
+        //MVR Request
+        WS_AutoRiskAnalysis.AutoRiskAnalysis_v2_0_SOAPoHTTPEndpoint ws = new WS_AutoRiskAnalysis.AutoRiskAnalysis_v2_0_SOAPoHTTPEndpoint();
+        WS_AutoRiskAnalysis_Underwriting.RequestHeader requestHeader = new WS_AutoRiskAnalysis_Underwriting.RequestHeader();
+        requestHeader.messageReference = '613708264-7b77825b-396d-4640-a800-bbac8cc3ff6e';
+        requestHeader.systemName = 'GWPC';
+        requestHeader.systemDateTime = DateTime.now();
+        requestHeader.transactionStartDateTime = DateTime.now();
+        requestHeader.userId = 'A05537N00';
+        requestHeader.legalEntity = '583503RSK';
+        requestHeader.functionName = 'MVR';
+        //agentReference, loggedOnUserId, and locationId are not in WSDL but are present in sample XML
+        String agentReference = 'TestAgent001';
+        String businessEntityId = '5200';
+        Boolean checkForPriorErrorRecord = false;
+        Boolean customerOptInIndicator = true;
+        WS_AutoRiskAnalysis_Underwriting.BasicDriverSummaryView[] driver = new List<WS_AutoRiskAnalysis_Underwriting.BasicDriverSummaryView>();
+        WS_AutoRiskAnalysis_Underwriting.BasicDriverSummaryView driver1 = new WS_AutoRiskAnalysis_Underwriting.BasicDriverSummaryView();
+        driver1.externalReference = 'pc1040';
+        driver1.licenseNumber = '13676952';
+        driver1.licenseState = 'FL';
+        driver1.licenseType = 'personal';
+        driver1.person = new WS_AutoRiskAnalysis_Underwriting.BasicPersonSummary();
+        driver1.person.birthDateAsString = '08/10/1966';
+        driver1.person.person = new WS_AutoRiskAnalysis_Underwriting.Person();
+        driver1.person.person.externalReference = 'PC201';
+        driver1.person.personName = new WS_AutoRiskAnalysis_Underwriting.PersonName();
+        driver1.person.personName.firstName = 'SHAWN';
+        driver1.person.personName.lastName = 'BROWN';
+        driver1.person.personName.middleName = 'BRIDG';
         driver1.person.basicPostalAddress = new List<WS_AutoRiskAnalysis_Underwriting.BasicPostalAddressView>();
         WS_AutoRiskAnalysis_Underwriting.BasicPostalAddressView driver1Address = new WS_AutoRiskAnalysis_Underwriting.BasicPostalAddressView();
         driver1Address.postalAddress = new WS_AutoRiskAnalysis_Underwriting.PostalAddress();
@@ -109,9 +172,24 @@ public with sharing class WS_Tester {
     }
 
     @RemoteAction  
+    public static String testPropertyRiskAnalysis2() {
+        //RetrievePropertyValue Request
+        WS_PropertyRiskAnalysis.PropertyRiskAnalysis_v4_0_SOAPoHTTPEndpoint ws = new WS_PropertyRiskAnalysis.PropertyRiskAnalysis_v4_0_SOAPoHTTPEndpoint();
+        WS_PropertyRiskAnalysis_Underwriting.RequestHeader requestHeader = new WS_PropertyRiskAnalysis_Underwriting.RequestHeader();
+        requestHeader.messageReference = '613708264-7b77825b-396d-4640-a800-bbac8cc3ff6e';
+        requestHeader.systemName = 'GWPC';
+        requestHeader.systemDateTime = DateTime.newInstanceGmt(2019,4,11,10,00,43).addHours(7);
+        requestHeader.transactionStartDateTime = DateTime.newInstanceGmt(2019,4,15,10,00,43).addHours(7);
+        //agentReference, loggedOnUserId, and locationId are not in WSDL but are present in sample XML
+        String userId = '880250fig';
+        String valuationID = 'A1M3-ZT21';
+        WS_PropertyRiskAnalysis.RetrievePropertyValueResponse resp = ws.retrievePropertyValue(requestHeader, userId, valuationID);
+        return (JSON.serializePretty(resp));
+    }
+
+    @RemoteAction  
     public static String testPhysicalObjectManager() {
         //RetrieveVehicleCharacteristics Request
-
         WS_PhysicalObjectManager.PhysicalObjectManager_v3_0_SOAPoHTTPEndpoint ws = new WS_PhysicalObjectManager.PhysicalObjectManager_v3_0_SOAPoHTTPEndpoint();
         WS_PhysicalObjectManager_POSchema.RequestHeader requestHeader;
         String effectiveDate = '11-01-1991';

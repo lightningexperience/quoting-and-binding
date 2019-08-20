@@ -1,9 +1,11 @@
 <apex:page controller="WS_Tester">
     <apex:slds/>
     <div class="slds-button-group" role="group">
-        <button class="slds-button slds-button_neutral" onclick="testAutoRiskAnalysis()">AutoRiskAnalysis</button>
+        <button class="slds-button slds-button_neutral" onclick="testAutoRiskAnalysis()">AutoRiskAnalysis-LHPI</button>
+        <button class="slds-button slds-button_neutral" onclick="testAutoRiskAnalysis2()">AutoRiskAnalysis-MVR</button>
         <button class="slds-button slds-button_neutral" onclick="testPhysicalObjectManager()">PhysicalObjectManager</button>
-        <button class="slds-button slds-button_neutral" onclick="testPropertyRiskAnalysis()">PropertyRiskAnalysis</button>
+        <button class="slds-button slds-button_neutral" onclick="testPropertyRiskAnalysis()">PropertyRiskAnalysis-Evaluate</button>
+        <button class="slds-button slds-button_neutral" onclick="testPropertyRiskAnalysis2()">PropertyRiskAnalysis-Retrieve</button>
         <button class="slds-button slds-button_neutral" onclick="testRiskAnalysis()">RiskAnalysis</button>
     </div>
 
@@ -79,9 +81,47 @@
             );
         }
 
+        function testAutoRiskAnalysis2() {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.WS_Tester.testAutoRiskAnalysis2}', 
+                function(result, event){
+                    if (event.status) {
+                        document.getElementById('jsonResponse').innerHTML = result;
+                        getLastRequest();
+                        
+                    } else if (event.type === 'exception') {
+                        document.getElementById("responseErrors").innerHTML = 
+                            event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                    } else {
+                        document.getElementById("responseErrors").innerHTML = event.message;
+                    }
+                }, 
+                {escape: true}
+            );
+        }
+
         function testPropertyRiskAnalysis() {
             Visualforce.remoting.Manager.invokeAction(
                 '{!$RemoteAction.WS_Tester.testPropertyRiskAnalysis}', 
+                function(result, event){
+                    if (event.status) {
+                        document.getElementById('jsonResponse').innerHTML = result;
+                        getLastRequest();
+                        
+                    } else if (event.type === 'exception') {
+                        document.getElementById("responseErrors").innerHTML = 
+                            event.message + "<br/>\n<pre>" + event.where + "</pre>";
+                    } else {
+                        document.getElementById("responseErrors").innerHTML = event.message;
+                    }
+                }, 
+                {escape: true}
+            );
+        }
+
+        function testPropertyRiskAnalysis2() {
+            Visualforce.remoting.Manager.invokeAction(
+                '{!$RemoteAction.WS_Tester.testPropertyRiskAnalysis2}', 
                 function(result, event){
                     if (event.status) {
                         document.getElementById('jsonResponse').innerHTML = result;
