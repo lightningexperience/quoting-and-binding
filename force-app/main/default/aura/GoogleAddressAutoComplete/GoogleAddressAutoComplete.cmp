@@ -1,4 +1,4 @@
-<aura:component description="GoogleMapsLanguageAutoComplete" implements="forceCommunity:availableForAllPageTypes,lightning:actionOverride"  access="global"  controller="POC_RegionTreeController">
+<aura:component description="GoogleMapsLanguageAutoComplete" implements="forceCommunity:availableForAllPageTypes,lightning:actionOverride,lightning:availableForFlowScreens"  access="global"  controller="POC_RegionTreeController">
     
     <aura:attribute name="options" type="List" />
     <aura:attribute name="selectedValue" type="String" default="en"/>       
@@ -10,6 +10,14 @@
      <aura:attribute name="myselePlaceID" type="String" default=""/> 
     <aura:attribute name="Selecteddataset" type="String" default=""/>
     <aura:attribute name="PropId" type="String" default=""/>
+    
+    <aura:attribute name="streetNumber" type="String"/>
+    <aura:attribute name="street" type="String"/>
+    <aura:attribute name="city" type="String"/>
+    <aura:attribute name="state" type="String"/>
+    <aura:attribute name="postal" type="String"/>
+    <aura:attribute name="country" type="String"/>
+    
     <!-- To load the picklist values 
     <aura:handler name="init" value="{!this}" action="{!c.loadOptions}" />
     Language Pick list Start 

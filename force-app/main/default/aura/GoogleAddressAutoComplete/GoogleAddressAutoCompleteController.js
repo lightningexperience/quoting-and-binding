@@ -37,7 +37,35 @@
                 var results = JSON.parse(response.getReturnValue());
                 var addressComponents = results.result.address_components;
                 var formattedAddress = results.result.formatted_address;
+                addressComponents.forEach(function(e) {
+                    if (e.types.includes("street_number")) {
+                        console.log(e.long_name);
+                        component.set("v.streetNumber",e.long_name);
+                    }
+                    if (e.types.includes("route")) {
+                        console.log(e.long_name);
+                        component.set("v.street",e.long_name);
+                    }
+                    if (e.types.includes("locality")) {
+                        console.log(e.long_name);
+                        component.set("v.city",e.long_name);
+                    }
+                    if (e.types.includes("administrative_area_level_1")) {
+                        console.log(e.long_name);
+                        component.set("v.state",e.long_name);
+                    }
+                    if (e.types.includes("country")) {
+                        console.log(e.short_name);
+                        component.set("v.country",e.short_name);
+                    }
+                    if (e.types.includes("postal_code")) {
+                        console.log(e.long_name);
+                        component.set("v.postal",e.long_name);
+                    }
+                })
                 component.set("v.searchKey",formattedAddress);
+                var a = component.get('c.keyPressController');
+        		$A.enqueueAction(a);
                 console.log(addressComponents);
             } else {
                 console.error(response.getError());
