@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Ownership_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Ownership Type</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>I own and live in it</fullName>
+                <default>false</default>
+                <label>I own and live in it</label>
+            </value>
+            <value>
+                <fullName>I rent it from someone else</fullName>
+                <default>false</default>
+                <label>I rent it from someone else</label>
+            </value>
+            <value>
+                <fullName>I own, don&#39;t live in it and rent it out</fullName>
+                <default>false</default>
+                <label>I own, don&#39;t live in it and rent it out</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

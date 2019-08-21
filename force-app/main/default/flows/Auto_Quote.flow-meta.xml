@@ -3,8 +3,8 @@
     <decisions>
         <name>More_Driver_Decision</name>
         <label>More Driver Decision?</label>
-        <locationX>340</locationX>
-        <locationY>46</locationY>
+        <locationX>319</locationX>
+        <locationY>224</locationY>
         <defaultConnector>
             <targetReference>Addition_Drivers_Information</targetReference>
         </defaultConnector>
@@ -28,8 +28,8 @@
     <decisions>
         <name>More_Vehicles</name>
         <label>More Vehicles?</label>
-        <locationX>678</locationX>
-        <locationY>114</locationY>
+        <locationX>599</locationX>
+        <locationY>55</locationY>
         <defaultConnector>
             <targetReference>Additional_Vehicle_Details</targetReference>
         </defaultConnector>
@@ -48,6 +48,31 @@
                 <targetReference>Select_Appropriate_Policy_Coverage</targetReference>
             </connector>
             <label>No More Vehicle</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Start_with_Additional_Driver</name>
+        <label>Start with Additional Driver</label>
+        <locationX>145</locationX>
+        <locationY>52</locationY>
+        <defaultConnector>
+            <targetReference>Additional_Vehicle_Details</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <rules>
+            <name>Additional_Driver_Required</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>addl_driver_choice</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Addition_Drivers_Information</targetReference>
+            </connector>
+            <label>Additional Driver Required</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -116,8 +141,8 @@
     <recordCreates>
         <name>Create_Addition_Driver_Records</name>
         <label>Create Addition Driver Records</label>
-        <locationX>151</locationX>
-        <locationY>197</locationY>
+        <locationX>154</locationX>
+        <locationY>349</locationY>
         <assignRecordIdToReference>varAdditionalContactId</assignRecordIdToReference>
         <connector>
             <targetReference>Junction_Record_Creation</targetReference>
@@ -126,6 +151,12 @@
             <field>Drivers_License_Class__c</field>
             <value>
                 <elementReference>License_Type</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Drivers_License_Number__c</field>
+            <value>
+                <elementReference>Driver_s_License_Number</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -169,8 +200,8 @@
     <recordCreates>
         <name>Create_Vehicle_Record</name>
         <label>Create Vehicle Record</label>
-        <locationX>535</locationX>
-        <locationY>203</locationY>
+        <locationX>492</locationX>
+        <locationY>153</locationY>
         <assignRecordIdToReference>varVehicleId</assignRecordIdToReference>
         <connector>
             <targetReference>More_Vehicles</targetReference>
@@ -234,8 +265,8 @@
     <recordCreates>
         <name>Junction_Record_Creation</name>
         <label>Junction Record Creation</label>
-        <locationX>348</locationX>
-        <locationY>198</locationY>
+        <locationX>329</locationX>
+        <locationY>348</locationY>
         <assignRecordIdToReference>varJunctionId</assignRecordIdToReference>
         <connector>
             <targetReference>More_Driver_Decision</targetReference>
@@ -263,8 +294,8 @@
     <recordUpdates>
         <name>Update_Quote</name>
         <label>Update Quote</label>
-        <locationX>687</locationX>
-        <locationY>430</locationY>
+        <locationX>606</locationX>
+        <locationY>392</locationY>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -283,8 +314,8 @@
     <screens>
         <name>Addition_Drivers_Information</name>
         <label>Addition Drivers Information</label>
-        <locationX>151</locationX>
-        <locationY>50</locationY>
+        <locationX>154</locationX>
+        <locationY>222</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -293,7 +324,7 @@
         </connector>
         <fields>
             <name>Additional_Driver</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Additional Driver Information&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Additional Driver Information&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -356,9 +387,20 @@
             <name>License_Type</name>
             <choiceReferences>pLicenseType</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>License Type</fieldText>
+            <fieldText>Driver&#39;s License Type</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Driver_s_License_Number</name>
+            <dataType>String</dataType>
+            <fieldText>Driver&#39;s License Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Please provide a valid driver&#39;s license format&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Driver_s_License_Number},&quot;[A-Za-z]{1}\\d{7}&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>chkMoreDrivers</name>
@@ -372,9 +414,9 @@
     </screens>
     <screens>
         <name>Additional_Vehicle_Details</name>
-        <label>Additional Vehicle Details</label>
-        <locationX>535</locationX>
-        <locationY>45</locationY>
+        <label>Vehicle Details</label>
+        <locationX>373</locationX>
+        <locationY>51</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -383,7 +425,7 @@
         </connector>
         <fields>
             <name>Additional_Vehicle_Details_txt</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Additional Vehicle Details&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Vehicle Details&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -445,6 +487,10 @@
             <fieldText>Vehicle Identification Number</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;Please provide a valid VIN number&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!VIN}, &quot;^[A-HJ-NPR-Za-hj-npr-z\\d]{8}[\\dX][A-HJ-NPR-Za-hj-npr-z\\d]{2}\\d{6}$&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>chkMoreVehicles</name>
@@ -459,8 +505,8 @@
     <screens>
         <name>Select_Appropriate_Policy_Coverage</name>
         <label>Select Appropriate Policy Coverage</label>
-        <locationX>686</locationX>
-        <locationY>302</locationY>
+        <locationX>606</locationX>
+        <locationY>260</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -469,7 +515,7 @@
         </connector>
         <fields>
             <name>Select_Appropriate_Policy_Coverage_txt</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b&gt;Select Appropriate Policy Coverage&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Select Appropriate Policy Coverage&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -483,8 +529,15 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <startElementReference>Addition_Drivers_Information</startElementReference>
+    <startElementReference>Start_with_Additional_Driver</startElementReference>
     <status>Draft</status>
+    <variables>
+        <name>addl_driver_choice</name>
+        <dataType>Boolean</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>quoteId</name>
         <dataType>String</dataType>
