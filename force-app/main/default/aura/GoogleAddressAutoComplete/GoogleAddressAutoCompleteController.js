@@ -18,6 +18,7 @@
         prpAct2.set("v.errors", null);
         var searchKey = component.get("v.searchKey");
         var Language = component.get("v.selectedValue");
+        component.set("v.showDropdown", true);
         helper.openListbox(component, searchKey);
         helper.displayOptionsLocation(component, searchKey,Language);
     },
@@ -63,9 +64,10 @@
                         component.set("v.postal",e.long_name);
                     }
                 })
+                component.set("v.showDropdown", false);
                 component.set("v.searchKey",formattedAddress);
-                var a = component.get('c.keyPressController');
-        		$A.enqueueAction(a);
+                //var a = component.get('c.keyPressController');
+        		//$A.enqueueAction(a);
                 console.log(addressComponents);
             } else {
                 console.error(response.getError());
