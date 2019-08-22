@@ -1,0 +1,8 @@
+<design:component>
+    <design:attribute name="streetNumber" label="Street Number"/>
+	<design:attribute name="street" label="Street"/>
+    <design:attribute name="city" label="City"/>
+    <design:attribute name="state" label="State"/>
+    <design:attribute name="postal" label="Postal Code"/>
+    <design:attribute name="country" label="Country"/>
+</design:component>

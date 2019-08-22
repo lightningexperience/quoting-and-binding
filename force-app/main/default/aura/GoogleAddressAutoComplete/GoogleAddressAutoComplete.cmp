@@ -1,0 +1,85 @@
+<aura:component description="GoogleMapsLanguageAutoComplete" implements="forceCommunity:availableForAllPageTypes,lightning:actionOverride,lightning:availableForFlowScreens"  access="global"  controller="POC_RegionTreeController">
+    
+    <aura:attribute name="options" type="List" />
+    <aura:attribute name="selectedValue" type="String" default="en"/>       
+    <aura:attribute name="selectedOption" type="String" default="English"  />
+    <!-- After call out , suggestions stored in it -->
+    <aura:attribute name="filteredOptions" type="String[]"/>
+    <aura:attribute name="searchKey" type="String"/>
+    <aura:attribute name="placeholder" type="String" default="Enter a location"/>
+     <aura:attribute name="myselePlaceID" type="String" default=""/> 
+    <aura:attribute name="Selecteddataset" type="String" default=""/>
+    <aura:attribute name="PropId" type="String" default=""/>
+    <aura:attribute name="showDropdown" type="Boolean" default="false"/>
+    
+    <aura:attribute name="streetNumber" type="String"/>
+    <aura:attribute name="street" type="String"/>
+    <aura:attribute name="city" type="String"/>
+    <aura:attribute name="state" type="String"/>
+    <aura:attribute name="postal" type="String"/>
+    <aura:attribute name="country" type="String"/>
+    
+    <!-- To load the picklist values 
+    <aura:handler name="init" value="{!this}" action="{!c.loadOptions}" />
+    Language Pick list Start 
+    <div class="slds-align_absolute-center">
+        <lightning:select name="mySelect" label="Select a language" aura:id="mySelect" onchange="{!c.handleSelect}" value="{!v.selectedValue}">
+            <aura:iteration items="{!v.options}" var="item">
+                <option text="{!item.label}" value="{!item.value}" selected="{!item.selected}"/>
+            </aura:iteration>
+        </lightning:select>
+        
+    </div>
+    Language Pick list End   -->    
+    
+    <!-- Auto Suggestion Start -->
+    <div class=" slds-size_12-of-12 slds-m-around_x-small slds-p-left_large slds-p-right_large slds-dropdown-trigger slds-dropdown-trigger_click slds-combobox-lookup" 
+         aria-expanded="false"
+         aria-haspopup="listbox"
+         role="combobox"
+         aura:id="searchLookup">
+        <ui:inputtext updateOn="keyup"
+                      label="Address"
+                      keyup="{!c.keyPressController}"
+                      value="{!v.searchKey}"
+                      placeholder="{!v.placeholder}"
+                      aura:id="prptext3"
+                      required="true"
+                      size="60"
+                      />
+        <aura:if isTrue="{!(empty(v.selectedOption))}">
+            <aura:set attribute="else">
+                <button class="slds-button slds-button_icon slds-input__icon slds-input__icon_right"
+                        onclick="{!c.clear}">
+                    <span class="slds-assistive-text">Remove selected option</span>
+                </button>
+            </aura:set>
+        </aura:if>
+        <aura:renderIf isTrue="{!v.showDropdown}">
+            <div id="listbox-unique-id" role="listbox">
+                <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid"
+                    role="presentation" style="max-width: 850px;margin-top: -19px; width: 509px;">
+                    <aura:iteration items="{!v.filteredOptions}" var="option">
+                        <li role="presentation"
+                            class="slds-listbox__item"
+                            onclick="{!c.selectOption}"
+                            data-value="{!option.value}"
+                            data-record="{!option.label}"
+                            data-locaval="{!option.locaval}"
+                            data-addrdata="{!option.addressComponents}"
+                            data-placeid="{!option.PlaceId}">
+                            <span id="listbox-option-unique-id-01"
+                                  class="slds-media slds-listbox__option slds-listbox__option_entity slds-listbox__option_has-meta"
+                                  role="option">
+                                <span class="slds-media__body">
+                                    <span class="slds-listbox__option-text slds-listbox__option-text_entity">{!option.label}</span>
+                                </span>
+                            </span>
+                        </li>
+                    </aura:iteration>
+                </ul>
+            </div>
+    	</aura:renderIf>
+    </div>
+    <!-- Auto Suggestion End --> 
+</aura:component>
