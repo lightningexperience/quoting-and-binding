@@ -1,10 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionCalls>
+        <name>Verify_Vehicle_Information</name>
+        <label>Verify Vehicle Information</label>
+        <locationX>1373</locationX>
+        <locationY>562</locationY>
+        <actionName>VehicleInformationClass</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>Create_Vehicle_Record</targetReference>
+        </connector>
+        <inputParameters>
+            <name>Vinnumber</name>
+            <value>
+                <elementReference>varVehicleId</elementReference>
+            </value>
+        </inputParameters>
+        <outputParameters>
+            <assignToReference>AutoInfoResult</assignToReference>
+            <name>Auto</name>
+        </outputParameters>
+    </actionCalls>
+    <assignments>
+        <name>set_vehicle_id</name>
+        <label>set vehicle id</label>
+        <locationX>581</locationX>
+        <locationY>69</locationY>
+        <assignmentItems>
+            <assignToReference>varVehicleId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>1J4GK48K34W132107</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
     <decisions>
         <name>More_Driver_Decision</name>
         <label>More Driver Decision?</label>
         <locationX>885</locationX>
-        <locationY>333</locationY>
+        <locationY>663</locationY>
         <defaultConnector>
             <targetReference>Addition_Drivers_Information</targetReference>
         </defaultConnector>
@@ -28,8 +62,8 @@
     <decisions>
         <name>More_Vehicles</name>
         <label>More Vehicles?</label>
-        <locationX>1610</locationX>
-        <locationY>744</locationY>
+        <locationX>1695</locationX>
+        <locationY>1064</locationY>
         <defaultConnector>
             <targetReference>Additional_Vehicle_Details</targetReference>
         </defaultConnector>
@@ -45,7 +79,7 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Select_Appropriate_Policy_Coverage</targetReference>
+                <targetReference>Update_Quote</targetReference>
             </connector>
             <label>No More Vehicle</label>
         </rules>
@@ -117,7 +151,7 @@
         <name>Create_Addition_Driver_Records</name>
         <label>Create Addition Driver Records</label>
         <locationX>400</locationX>
-        <locationY>403</locationY>
+        <locationY>733</locationY>
         <assignRecordIdToReference>varAdditionalContactId</assignRecordIdToReference>
         <connector>
             <targetReference>Junction_Record_Creation</targetReference>
@@ -169,8 +203,8 @@
     <recordCreates>
         <name>Create_Vehicle_Record</name>
         <label>Create Vehicle Record</label>
-        <locationX>1467</locationX>
-        <locationY>243</locationY>
+        <locationX>1568</locationX>
+        <locationY>561</locationY>
         <assignRecordIdToReference>varVehicleId</assignRecordIdToReference>
         <connector>
             <targetReference>More_Vehicles</targetReference>
@@ -179,6 +213,12 @@
             <field>Annual_Distance__c</field>
             <value>
                 <elementReference>Annual_Distance</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Base_Price__c</field>
+            <value>
+                <elementReference>AutoInfoResult.basePrice</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -191,6 +231,12 @@
             <field>Make__c</field>
             <value>
                 <elementReference>Make</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Model_Year__c</field>
+            <value>
+                <elementReference>AutoInfoResult.modelYear</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -235,7 +281,7 @@
         <name>Junction_Record_Creation</name>
         <label>Junction Record Creation</label>
         <locationX>627</locationX>
-        <locationY>419</locationY>
+        <locationY>749</locationY>
         <assignRecordIdToReference>varJunctionId</assignRecordIdToReference>
         <connector>
             <targetReference>More_Driver_Decision</targetReference>
@@ -263,8 +309,11 @@
     <recordUpdates>
         <name>Update_Quote</name>
         <label>Update Quote</label>
-        <locationX>1961</locationX>
-        <locationY>234</locationY>
+        <locationX>1806</locationX>
+        <locationY>573</locationY>
+        <connector>
+            <targetReference>Select_Appropriate_Policy_Coverage</targetReference>
+        </connector>
         <filters>
             <field>Id</field>
             <operator>EqualTo</operator>
@@ -284,7 +333,7 @@
         <name>Addition_Drivers_Information</name>
         <label>Addition Drivers Information</label>
         <locationX>335</locationX>
-        <locationY>51</locationY>
+        <locationY>381</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -374,12 +423,12 @@
         <name>Additional_Vehicle_Details</name>
         <label>Additional Vehicle Details</label>
         <locationX>1189</locationX>
-        <locationY>236</locationY>
+        <locationY>566</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Create_Vehicle_Record</targetReference>
+            <targetReference>Verify_Vehicle_Information</targetReference>
         </connector>
         <fields>
             <name>Additional_Vehicle_Details_txt</name>
@@ -459,8 +508,8 @@
     <screens>
         <name>Auto_Start</name>
         <label>Auto Start</label>
-        <locationX>298</locationX>
-        <locationY>683</locationY>
+        <locationX>808</locationX>
+        <locationY>100</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -482,13 +531,13 @@
     <screens>
         <name>Select_Appropriate_Policy_Coverage</name>
         <label>Select Appropriate Policy Coverage</label>
-        <locationX>1687</locationX>
-        <locationY>235</locationY>
+        <locationX>1997</locationX>
+        <locationY>554</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Update_Quote</targetReference>
+            <targetReference>Success_Screen</targetReference>
         </connector>
         <fields>
             <name>Select_Appropriate_Policy_Coverage_txt</name>
@@ -506,8 +555,32 @@
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
+    <screens>
+        <name>Success_Screen</name>
+        <label>Success Screen</label>
+        <locationX>2161</locationX>
+        <locationY>542</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <fields>
+            <name>Success_Message</name>
+            <fieldText>&lt;p&gt;&lt;span style=&quot;color: rgb(47, 176, 66);&quot;&gt;Hurray!! Your records are saved successfully.  &lt;/span&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
     <startElementReference>Addition_Drivers_Information</startElementReference>
     <status>Draft</status>
+    <variables>
+        <name>AutoInfoResult</name>
+        <apexClass>ThirdpartyAutoinfo</apexClass>
+        <dataType>Apex</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+    </variables>
     <variables>
         <name>quoteId</name>
         <dataType>String</dataType>

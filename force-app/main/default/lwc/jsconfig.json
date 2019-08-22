@@ -2,11 +2,7 @@
     "compilerOptions": {
         "experimentalDecorators": true,
         "baseUrl": ".",
-        "paths": {
-            "c/ConfirmationFlowComponent": [
-                "ConfirmationFlowComponent/ConfirmationFlowComponent.js"
-            ]
-        }
+        "paths": {}
     },
     "include": [
         "**/*",
