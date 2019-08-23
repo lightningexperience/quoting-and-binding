@@ -1,5 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <assignments>
+        <name>Assign_Additional_Fields</name>
+        <label>Assign Additional Fields</label>
+        <locationX>269</locationX>
+        <locationY>50</locationY>
+        <assignmentItems>
+            <assignToReference>vProperty.Ownership_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Ownership_Type</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vProperty.Property_Type__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Property_Type</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vProperty.Street__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>vStreetNum &amp; &quot; &quot; &amp; {!vProperty.Street__c}</stringValue>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vProperty.Quote__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>quoteId</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vProperty.Coverage__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Choose_Coverage</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Property</targetReference>
+        </connector>
+    </assignments>
+    <dynamicChoiceSets>
+        <name>pCoverage</name>
+        <dataType>Multipicklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Coverage__c</picklistField>
+        <picklistObject>Property__c</picklistObject>
+    </dynamicChoiceSets>
     <dynamicChoiceSets>
         <name>pOwnershipType</name>
         <dataType>Picklist</dataType>
@@ -32,91 +84,22 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
-        <name>Create_Property_Record</name>
-        <label>Create Property Record</label>
-        <locationX>374</locationX>
+        <name>Create_Property</name>
+        <label>Create Property</label>
+        <locationX>384</locationX>
         <locationY>50</locationY>
-        <inputAssignments>
-            <field>City__c</field>
-            <value>
-                <elementReference>Property_City</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Country__c</field>
-            <value>
-                <elementReference>Property_Country</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Ownership_Type__c</field>
-            <value>
-                <elementReference>Ownership_Type</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Postal_Code__c</field>
-            <value>
-                <elementReference>Property_Postal_Code</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Property_Type__c</field>
-            <value>
-                <elementReference>Property_Type</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Quote__c</field>
-            <value>
-                <elementReference>quoteId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>State__c</field>
-            <value>
-                <elementReference>Property_State</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Street__c</field>
-            <value>
-                <elementReference>Property_Address</elementReference>
-            </value>
-        </inputAssignments>
-        <object>Property__c</object>
+        <inputReference>vProperty</inputReference>
     </recordCreates>
-    <recordLookups>
-        <name>Get_Quote</name>
-        <label>Get Quote</label>
-        <locationX>131</locationX>
-        <locationY>50</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Home_Starter</targetReference>
-        </connector>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>quoteId</elementReference>
-            </value>
-        </filters>
-        <object>Quote__c</object>
-        <outputReference>vQuote</outputReference>
-        <queriedFields>Id</queriedFields>
-        <queriedFields>Coverage__c</queriedFields>
-    </recordLookups>
     <screens>
         <name>Home_Starter</name>
         <label>Home Starter</label>
-        <locationX>249</locationX>
+        <locationX>159</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Create_Property_Record</targetReference>
+            <targetReference>Assign_Additional_Fields</targetReference>
         </connector>
         <fields>
             <name>Home_Title</name>
@@ -140,45 +123,48 @@
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>Property_Address</name>
-            <dataType>String</dataType>
-            <fieldText>Property Address</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
+            <name>googleAddress</name>
+            <extensionName>c:GoogleAddressAutoComplete</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>vProperty.City__c</assignToReference>
+                <name>city</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vProperty.Country__c</assignToReference>
+                <name>country</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vProperty.Postal_Code__c</assignToReference>
+                <name>postal</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vProperty.Street__c</assignToReference>
+                <name>street</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vStreetNum</assignToReference>
+                <name>streetNumber</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vProperty.State__c</assignToReference>
+                <name>state</name>
+            </outputParameters>
         </fields>
         <fields>
-            <name>Property_City</name>
+            <name>Choose_Coverage</name>
+            <choiceReferences>pCoverage</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Property City</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>Property_State</name>
-            <dataType>String</dataType>
-            <fieldText>Property State</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>Property_Country</name>
-            <dataType>String</dataType>
-            <fieldText>Property Country</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-        </fields>
-        <fields>
-            <name>Property_Postal_Code</name>
-            <dataType>String</dataType>
-            <fieldText>Property Postal Code</fieldText>
-            <fieldType>InputField</fieldType>
+            <fieldText>Choose Coverage</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>
     </screens>
-    <startElementReference>Get_Quote</startElementReference>
-    <status>Draft</status>
+    <startElementReference>Home_Starter</startElementReference>
+    <status>Active</status>
     <variables>
         <name>quoteId</name>
         <dataType>String</dataType>
@@ -187,11 +173,18 @@
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>vQuote</name>
+        <name>vProperty</name>
         <dataType>SObject</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
-        <objectType>Quote__c</objectType>
+        <objectType>Property__c</objectType>
+    </variables>
+    <variables>
+        <name>vStreetNum</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
     </variables>
 </Flow>

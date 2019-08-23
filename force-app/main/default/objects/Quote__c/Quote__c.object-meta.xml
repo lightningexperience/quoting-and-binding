@@ -159,7 +159,23 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Quotes</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Coverage_Start_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Expiration_Date__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Quote_Total__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Coverage__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Coverage_Start_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Expiration_Date__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Quote_Total__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Coverage__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Coverage_Start_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Expiration_Date__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Quote_Total__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Coverage__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

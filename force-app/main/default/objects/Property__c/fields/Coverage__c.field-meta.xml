@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Coverage__c</fullName>
+    <externalId>false</externalId>
+    <label>Coverage</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Personal Belongings</fullName>
+                <default>false</default>
+                <label>Personal Belongings</label>
+            </value>
+            <value>
+                <fullName>Extra Expenses</fullName>
+                <default>false</default>
+                <label>Extra Expenses</label>
+            </value>
+            <value>
+                <fullName>Personal Liability</fullName>
+                <default>false</default>
+                <label>Personal Liability</label>
+            </value>
+            <value>
+                <fullName>Policy Deductible</fullName>
+                <default>false</default>
+                <label>Policy Deductible</label>
+            </value>
+            <value>
+                <fullName>Sewer Backup</fullName>
+                <default>false</default>
+                <label>Sewer Backup</label>
+            </value>
+            <value>
+                <fullName>Overland Water</fullName>
+                <default>false</default>
+                <label>Overland Water</label>
+            </value>
+            <value>
+                <fullName>Full Hail</fullName>
+                <default>false</default>
+                <label>Full Hail</label>
+            </value>
+            <value>
+                <fullName>Earthquake</fullName>
+                <default>false</default>
+                <label>Earthquake</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>3</visibleLines>
+</CustomField>
