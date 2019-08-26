@@ -162,7 +162,7 @@
             <assignToReference>vBilling.Billing_Street__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>{!vStreetNum} &amp; &quot; &quot; &amp; </stringValue>
+                <stringValue>{!vStreetNum} {!vBilling.Billing_Street__c}</stringValue>
             </value>
         </assignmentItems>
         <connector>

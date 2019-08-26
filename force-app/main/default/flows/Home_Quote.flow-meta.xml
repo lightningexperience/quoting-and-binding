@@ -23,7 +23,7 @@
             <assignToReference>vProperty.Street__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>vStreetNum &amp; &quot; &quot; &amp; {!vProperty.Street__c}</stringValue>
+                <stringValue>{!vStreetNum} {!vProperty.Street__c}</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>

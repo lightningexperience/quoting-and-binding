@@ -17,6 +17,23 @@
             </value>
         </inputParameters>
     </actionCalls>
+    <actionCalls>
+        <name>send_doc</name>
+        <label>send_doc</label>
+        <locationX>806</locationX>
+        <locationY>323</locationY>
+        <actionName>SendDocusign</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>home_or_auto_or_both</targetReference>
+        </connector>
+        <inputParameters>
+            <name>contacts</name>
+            <value>
+                <elementReference>Primary_Contact.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
     <assignments>
         <name>Assign_Contact_Record</name>
         <label>Assign Contact Record</label>
@@ -68,7 +85,7 @@
             <assignToReference>Primary_Contact.MailingStreet</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>{!primStreetNum} &amp; &quot; &quot; &amp; {!primStreet}</stringValue>
+                <stringValue>{!primStreetNum} {!primStreet}</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -292,7 +309,7 @@
     <recordCreates>
         <name>Initialize_Quote</name>
         <label>Initialize Quote</label>
-        <locationX>545</locationX>
+        <locationX>544</locationX>
         <locationY>184</locationY>
         <assignRecordIdToReference>vQuote.Id</assignRecordIdToReference>
         <connector>
@@ -313,7 +330,7 @@
         <locationY>256</locationY>
         <assignRecordIdToReference>vPrimJunction.Id</assignRecordIdToReference>
         <connector>
-            <targetReference>home_or_auto_or_both</targetReference>
+            <targetReference>send_doc</targetReference>
         </connector>
         <inputAssignments>
             <field>Contact__c</field>
@@ -358,8 +375,8 @@
     <screens>
         <name>Conclusion_Screen</name>
         <label>Conclusion Screen</label>
-        <locationX>183</locationX>
-        <locationY>696</locationY>
+        <locationX>170</locationX>
+        <locationY>697</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -732,7 +749,7 @@
         <showHeader>true</showHeader>
     </screens>
     <startElementReference>starter_screen</startElementReference>
-    <status>Active</status>
+    <status>Draft</status>
     <subflows>
         <name>Auto_Quote</name>
         <label>Auto Quote</label>

@@ -1,0 +1,10 @@
+[
+    {
+        "sobject": "Rule_General__c",
+        "saveRefs": true,
+        "resolveRefs": false,
+        "files": [
+            "export-rules-Rule_General__cs.json"
+        ]
+    }
+]

@@ -1,0 +1,244 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef1"
+            },
+            "Name__c": "Combo Discount",
+            "Rule_Type__c": "Both",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": -10
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef2"
+            },
+            "Name__c": "Bodily Injury",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef3"
+            },
+            "Name__c": "Property Damage",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef4"
+            },
+            "Name__c": "Underinsured Motorist",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef5"
+            },
+            "Name__c": "Uninsured Motorist",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef6"
+            },
+            "Name__c": "Death & Disbursement",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef7"
+            },
+            "Name__c": "Income Disability",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef8"
+            },
+            "Name__c": "Medical and Hospital Benefits",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef9"
+            },
+            "Name__c": "Comprehension",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 10
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef10"
+            },
+            "Name__c": "Collision",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef11"
+            },
+            "Name__c": "Glass deductible buybacks",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef12"
+            },
+            "Name__c": "Towing and Road Service",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef13"
+            },
+            "Name__c": "Collision Plus/loss",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef14"
+            },
+            "Name__c": "Rental Reimbursement Coverage",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef15"
+            },
+            "Name__c": "Residual Debt Coverage",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef16"
+            },
+            "Name__c": "Multi-Vehicle Discount",
+            "Rule_Type__c": "Auto",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": -5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef17"
+            },
+            "Name__c": "Personal Belongings",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 50
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef18"
+            },
+            "Name__c": "Extra Expenses",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 50
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef19"
+            },
+            "Name__c": "Personal Liability",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 50
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef20"
+            },
+            "Name__c": "Policy Deductible",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": true,
+            "Adjustment_Amount__c": 50
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef21"
+            },
+            "Name__c": "Sewer Backup",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef22"
+            },
+            "Name__c": "Overland Water",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 5
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef23"
+            },
+            "Name__c": "Full Hail",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 10
+        },
+        {
+            "attributes": {
+                "type": "Rule_General__c",
+                "referenceId": "Rule_General__cRef24"
+            },
+            "Name__c": "Earthquake",
+            "Rule_Type__c": "Home",
+            "Fixed_Adjustment__c": false,
+            "Adjustment_Percent__c": 10
+        }
+    ]
+}

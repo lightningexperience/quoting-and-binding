@@ -159,7 +159,32 @@
         <type>AutoNumber</type>
     </nameField>
     <pluralLabel>Properties</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>Ownership_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Property_Type__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Street__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>City__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Quote__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Coverage__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Ownership_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Property_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Street__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>City__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Quote__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Coverage__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Ownership_Type__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Property_Type__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Street__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>City__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Quote__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Coverage__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Ownership_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Property_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Street__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>City__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Quote__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Coverage__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

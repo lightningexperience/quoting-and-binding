@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Standard</fullName>
+    <fields>Base_Price__c</fields>
+    <fields>VIN__c</fields>
+    <fields>Annual_Distance__c</fields>
+    <fields>Daily_Commute__c</fields>
+    <fields>Make__c</fields>
+    <fields>Model__c</fields>
+    <fields>Model_Year__c</fields>
+    <label>Standard</label>
+</CompactLayout>

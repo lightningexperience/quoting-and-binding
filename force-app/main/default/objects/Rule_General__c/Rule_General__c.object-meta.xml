@@ -165,6 +165,21 @@
         <customTabListAdditionalFields>Name__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Adjustment_Amount__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Adjustment_Percent__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>Fixed_Adjustment__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Rule_Type__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Name__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Adjustment_Amount__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Adjustment_Percent__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Fixed_Adjustment__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Rule_Type__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Name__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Adjustment_Amount__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Adjustment_Percent__c</lookupPhoneDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Name__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Fixed_Adjustment__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Rule_Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Adjustment_Amount__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Adjustment_Percent__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>

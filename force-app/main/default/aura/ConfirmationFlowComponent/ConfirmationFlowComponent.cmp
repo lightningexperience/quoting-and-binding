@@ -1,8 +1,30 @@
-<aura:component implements="lightning:availableForFlowScreens,flexipage:availableForAllPageTypes" controller="ConfirmationController">
+<aura:component implements="lightning:availableForFlowScreens,flexipage:availableForAllPageTypes" controller="QuoteConfirmationDetails">
     <aura:attribute name="quoteId" type="String" access="global"/>
     <aura:attribute name="quote" type="Quote__c"/>
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
     
     <!-- quick and dirty to get it up and running -->
-    <lightning:recordForm recordId="{!v.quote.Id}" objectApiName="Quote__c" layoutType="Compact" mode="readonly"/>
+    <lightning:card title="Quote">
+    	<lightning:recordForm recordId="{!v.quote.Id}" objectApiName="Quote__c" layoutType="Compact" mode="readonly"/>
+    </lightning:card>
+	<lightning:card title="Policyholders">
+        <aura:iteration items="{!v.quote.Contact_Quote_Junctions__r}" var='cntct'>
+            <lightning:recordForm recordId="{!cntct.Contact__c}" objectApiName="Contact" layoutType="Compact" mode="readonly"/>
+        </aura:iteration>
+    </lightning:card>
+    <lightning:card title="Vehicles">
+        <aura:iteration items="{!v.quote.Vehicles__r}" var='veh'>
+            <lightning:recordForm recordId="{!veh.Id}" objectApiName="Vehicle__c" layoutType="Compact" mode="readonly"/>
+        </aura:iteration>
+    </lightning:card>
+    <lightning:card title="Properties">
+        <aura:iteration items="{!v.quote.Properties__r}" var='home'>
+            <lightning:recordForm recordId="{!home.Id}" objectApiName="Property__c" layoutType="Compact" mode="readonly"/>
+        </aura:iteration>
+    </lightning:card>
+    <lightning:card title="Billing">
+        <aura:iteration items="{!v.quote.Billing__r}" var='bill'>
+            <lightning:recordForm recordId="{!bill.Id}" objectApiName="Billing__c" layoutType="Compact" mode="readonly"/>
+        </aura:iteration>
+    </lightning:card>
 </aura:component>

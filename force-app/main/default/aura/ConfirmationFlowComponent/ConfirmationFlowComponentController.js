@@ -1,6 +1,6 @@
 ({
 	doInit : function(cmp, event, helper) {
-		var action = cmp.get("c.queryAllQuoteDetails");
+		var action = cmp.get("c.getAllQuoteInfo");
         action.setParams({ quoteId : cmp.get("v.quoteId") });
         action.setCallback(this, function(response) {
             var state = response.getState();
