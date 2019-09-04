@@ -1,22 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <assignments>
-        <name>Assign_Additional_Billing_Details</name>
-        <label>Assign Additional Billing Details</label>
-        <locationX>646</locationX>
-        <locationY>471</locationY>
+        <name>Assign_Address</name>
+        <label>Assign Address</label>
+        <locationX>599</locationX>
+        <locationY>185</locationY>
         <assignmentItems>
-            <assignToReference>vBilling.Bank_Name__c</assignToReference>
+            <assignToReference>vBilling.Billing_Street__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Bank_Name</elementReference>
+                <stringValue>{!vStreetNum} {!vBilling.Billing_Street__c}</stringValue>
             </value>
         </assignmentItems>
+        <connector>
+            <targetReference>Payment_Method_Decision</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Billing</name>
+        <label>Assign Billing</label>
+        <locationX>776</locationX>
+        <locationY>484</locationY>
         <assignmentItems>
             <assignToReference>vBilling.Bank_Account_Number__c</assignToReference>
             <operator>Assign</operator>
             <value>
                 <elementReference>Bank_Account_Number</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vBilling.Bank_Name__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Bank_Name</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -34,6 +50,13 @@
             </value>
         </assignmentItems>
         <assignmentItems>
+            <assignToReference>vBilling.Credit_Card_Number__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Credit_Card_Number</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
             <assignToReference>vBilling.CC_Expiry_Year__c</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -45,13 +68,6 @@
             <operator>Assign</operator>
             <value>
                 <elementReference>Credit_Card_CCV</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vBilling.Credit_Card_Number__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Credit_Card_Number</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -76,13 +92,6 @@
             </value>
         </assignmentItems>
         <assignmentItems>
-            <assignToReference>vBilling.Quote__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>vQuote.Id</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
             <assignToReference>vBilling.Paperless_Billing__c</assignToReference>
             <operator>Assign</operator>
             <value>
@@ -101,79 +110,26 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_Billing_Record</name>
-        <label>Assign Billing Record</label>
-        <locationX>289</locationX>
-        <locationY>172</locationY>
+        <name>Assign_Stage</name>
+        <label>Assign Stage</label>
+        <locationX>159</locationX>
+        <locationY>50</locationY>
         <assignmentItems>
-            <assignToReference>vBilling.Paperless_Billing__c</assignToReference>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Paperless_Billing</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vBilling.Paperless_Policy__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Paperless_Policy</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vBilling.Pay_Plan__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Payment_Plan</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vBilling.Payment_Method__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Payment_Method</elementReference>
+                <elementReference>Billing</elementReference>
             </value>
         </assignmentItems>
         <connector>
-            <targetReference>Required_Contact_Info</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>assign_new_quote_values</name>
-        <label>assign new quote values</label>
-        <locationX>404</locationX>
-        <locationY>471</locationY>
-        <assignmentItems>
-            <assignToReference>vQuote.Coverage_Start_Date__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>First_Payment_Due_Date</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Update_Quote</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_Street</name>
-        <label>Assign Street</label>
-        <locationX>695</locationX>
-        <locationY>220</locationY>
-        <assignmentItems>
-            <assignToReference>vBilling.Billing_Street__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>{!vStreetNum} {!vBilling.Billing_Street__c}</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Payment_Method_Decision</targetReference>
+            <targetReference>First_Billing_Screen</targetReference>
         </connector>
     </assignments>
     <decisions>
         <name>Payment_Method_Decision</name>
         <label>Payment Method Decision</label>
-        <locationX>813</locationX>
-        <locationY>180</locationY>
+        <locationX>700</locationX>
+        <locationY>145</locationY>
         <defaultConnector>
             <targetReference>CC_Info_Screen</targetReference>
         </defaultConnector>
@@ -197,8 +153,8 @@
     <decisions>
         <name>Required_Contact_Info</name>
         <label>Required Contact Info</label>
-        <locationX>402</locationX>
-        <locationY>174</locationY>
+        <locationX>279</locationX>
+        <locationY>177</locationY>
         <defaultConnector>
             <targetReference>email_and_address_screen</targetReference>
         </defaultConnector>
@@ -282,54 +238,38 @@
     <recordCreates>
         <name>Create_Billing</name>
         <label>Create Billing</label>
-        <locationX>533</locationX>
-        <locationY>471</locationY>
-        <connector>
-            <targetReference>assign_new_quote_values</targetReference>
-        </connector>
+        <locationX>651</locationX>
+        <locationY>484</locationY>
         <inputReference>vBilling</inputReference>
     </recordCreates>
-    <recordLookups>
-        <name>Get_Quote</name>
-        <label>Get Quote</label>
-        <locationX>50</locationX>
-        <locationY>172</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>First_Billing_Screen</targetReference>
-        </connector>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>quoteId</elementReference>
-            </value>
-        </filters>
-        <object>Quote__c</object>
-        <outputReference>vQuote</outputReference>
-        <queriedFields>Id</queriedFields>
-    </recordLookups>
-    <recordUpdates>
-        <name>Update_Quote</name>
-        <label>Update Quote</label>
-        <locationX>278</locationX>
-        <locationY>471</locationY>
-        <connector>
-            <targetReference>Confirmation_Screen</targetReference>
-        </connector>
-        <inputReference>vQuote</inputReference>
-    </recordUpdates>
     <screens>
         <name>ACH_EFT_Screen</name>
         <label>ACH EFT Screen</label>
-        <locationX>748</locationX>
-        <locationY>360</locationY>
+        <locationX>856</locationX>
+        <locationY>348</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Additional_Billing_Details</targetReference>
+            <targetReference>Assign_Billing</targetReference>
         </connector>
+        <fields>
+            <name>EFT_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Bank Account Information&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>EFT_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
         <fields>
             <name>Bank_Name</name>
             <dataType>String</dataType>
@@ -352,36 +292,41 @@
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>address_only_screen</name>
         <label>address only screen</label>
-        <locationX>586</locationX>
-        <locationY>173</locationY>
+        <locationX>473</locationX>
+        <locationY>177</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Street</targetReference>
+            <targetReference>Assign_Address</targetReference>
         </connector>
         <fields>
-            <name>googleBillingAddress</name>
+            <name>address_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px; background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Billing Address&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>address_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>address_both_input</name>
             <extensionName>c:GoogleAddressAutoComplete</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vBilling.Billing_Street__c</assignToReference>
-                <name>street</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vBilling.Billing_State__c</assignToReference>
-                <name>state</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vBilling.Billing_Postal_Code__c</assignToReference>
-                <name>postal</name>
-            </outputParameters>
             <outputParameters>
                 <assignToReference>vBilling.Billing_City__c</assignToReference>
                 <name>city</name>
@@ -391,24 +336,53 @@
                 <name>country</name>
             </outputParameters>
             <outputParameters>
+                <assignToReference>vBilling.Billing_Postal_Code__c</assignToReference>
+                <name>postal</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vBilling.Billing_State__c</assignToReference>
+                <name>state</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vBilling.Billing_Street__c</assignToReference>
+                <name>street</name>
+            </outputParameters>
+            <outputParameters>
                 <assignToReference>vStreetNum</assignToReference>
                 <name>streetNumber</name>
             </outputParameters>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>CC_Info_Screen</name>
         <label>CC Info Screen</label>
-        <locationX>833</locationX>
-        <locationY>471</locationY>
+        <locationX>694</locationX>
+        <locationY>345</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Additional_Billing_Details</targetReference>
+            <targetReference>Assign_Billing</targetReference>
         </connector>
+        <fields>
+            <name>CC_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Credit Card Information&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>CC_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
         <fields>
             <name>Credit_Card_Number</name>
             <dataType>Number</dataType>
@@ -416,14 +390,22 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid credit card number&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Credit_Card_Number}, &quot;?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Credit_Card_CCV</name>
             <dataType>Number</dataType>
-            <fieldText>Credit Card CCV</fieldText>
+            <fieldText>Credit Card Security Code</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid security code&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Credit_Card_CCV}, &quot;[0-9]{3,4}&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Expiry_Month</name>
@@ -432,6 +414,10 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid month (1-12)&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Expiry_Month}, &quot;0?[1-9]|1[012]&quot;)</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Expiry_Year</name>
@@ -440,39 +426,44 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid expiry year&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>VALUE({!Expiry_Year}) &gt;= YEAR(TODAY())</formulaExpression>
+            </validationRule>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>Confirmation_Screen</name>
-        <label>Confirmation Screen</label>
-        <locationX>145</locationX>
-        <locationY>471</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <fields>
-            <name>billing_confirmation</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Your payment has been processed!&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Thank you for using Farmer&#39;s for your insurance needs&lt;/span&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>email_and_address_screen</name>
         <label>email and address screen</label>
-        <locationX>586</locationX>
-        <locationY>282</locationY>
+        <locationX>471</locationX>
+        <locationY>287</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Street</targetReference>
+            <targetReference>Assign_Address</targetReference>
         </connector>
         <fields>
-            <name>get_email_too</name>
+            <name>email_address_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Billing Email and Address&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>email_address_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>email_input_both</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
@@ -487,6 +478,10 @@
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
             <outputParameters>
+                <assignToReference>vStreetNum</assignToReference>
+                <name>streetNumber</name>
+            </outputParameters>
+            <outputParameters>
                 <assignToReference>vBilling.Billing_City__c</assignToReference>
                 <name>city</name>
             </outputParameters>
@@ -495,30 +490,26 @@
                 <name>country</name>
             </outputParameters>
             <outputParameters>
-                <assignToReference>vBilling.Billing_State__c</assignToReference>
-                <name>state</name>
-            </outputParameters>
-            <outputParameters>
                 <assignToReference>vBilling.Billing_Postal_Code__c</assignToReference>
                 <name>postal</name>
+            </outputParameters>
+            <outputParameters>
+                <assignToReference>vBilling.Billing_State__c</assignToReference>
+                <name>state</name>
             </outputParameters>
             <outputParameters>
                 <assignToReference>vBilling.Billing_Street__c</assignToReference>
                 <name>street</name>
             </outputParameters>
-            <outputParameters>
-                <assignToReference>vStreetNum</assignToReference>
-                <name>streetNumber</name>
-            </outputParameters>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>Email_Only_Screen</name>
         <label>Email Only Screen</label>
-        <locationX>588</locationX>
-        <locationY>70</locationY>
+        <locationX>473</locationX>
+        <locationY>60</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -526,7 +517,24 @@
             <targetReference>Payment_Method_Decision</targetReference>
         </connector>
         <fields>
-            <name>Get_Email</name>
+            <name>email_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Billing Email&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>email_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>email_input</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
@@ -536,23 +544,35 @@
             </outputParameters>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
         <name>First_Billing_Screen</name>
         <label>First Billing Screen</label>
-        <locationX>169</locationX>
-        <locationY>172</locationY>
+        <locationX>159</locationX>
+        <locationY>175</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Billing_Record</targetReference>
+            <targetReference>Required_Contact_Info</targetReference>
         </connector>
         <fields>
             <name>First_Screen_Title</name>
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Billing &amp;amp; Payment Information&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>billing_start_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Payment_Method</name>
@@ -587,16 +607,22 @@
         <fields>
             <name>First_Payment_Due_Date</name>
             <dataType>Date</dataType>
-            <fieldText>First Payment Due Date</fieldText>
+            <fieldText>Policy Start Date</fieldText>
             <fieldType>InputField</fieldType>
             <helpText>&lt;p&gt;When should we first ask for payment? &lt;/p&gt;</helpText>
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
-    <startElementReference>Get_Quote</startElementReference>
-    <status>Active</status>
+    <stages>
+        <name>Billing</name>
+        <isActive>true</isActive>
+        <label>Billing</label>
+        <stageOrder>15</stageOrder>
+    </stages>
+    <startElementReference>Assign_Stage</startElementReference>
+    <status>InvalidDraft</status>
     <variables>
         <name>quoteId</name>
         <dataType>String</dataType>
@@ -611,14 +637,6 @@
         <isInput>false</isInput>
         <isOutput>false</isOutput>
         <objectType>Billing__c</objectType>
-    </variables>
-    <variables>
-        <name>vQuote</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Quote__c</objectType>
     </variables>
     <variables>
         <name>vStreetNum</name>

@@ -66,6 +66,7 @@
                 })
                 component.set("v.showDropdown", false);
                 component.set("v.searchKey",formattedAddress);
+                component.find("map").getElement().update(component.get("v.streetNumber")+ " "+component.get("v.street"),component.get("v.city"),component.get("v.state"));
                 //var a = component.get('c.keyPressController');
         		//$A.enqueueAction(a);
                 console.log(addressComponents);

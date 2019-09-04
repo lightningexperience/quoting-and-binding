@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <assignments>
-        <name>Assign_Additional_Fields</name>
-        <label>Assign Additional Fields</label>
-        <locationX>269</locationX>
+        <name>Assign_Property</name>
+        <label>Assign Property</label>
+        <locationX>436</locationX>
         <locationY>50</locationY>
         <assignmentItems>
             <assignToReference>vProperty.Ownership_Type__c</assignToReference>
@@ -42,6 +42,22 @@
         </assignmentItems>
         <connector>
             <targetReference>Create_Property</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Assign_Stage</name>
+        <label>Assign Stage</label>
+        <locationX>182</locationX>
+        <locationY>50</locationY>
+        <assignmentItems>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Home_Vehicle</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Home_Starter</targetReference>
         </connector>
     </assignments>
     <dynamicChoiceSets>
@@ -86,25 +102,37 @@
     <recordCreates>
         <name>Create_Property</name>
         <label>Create Property</label>
-        <locationX>384</locationX>
+        <locationX>555</locationX>
         <locationY>50</locationY>
         <inputReference>vProperty</inputReference>
     </recordCreates>
     <screens>
         <name>Home_Starter</name>
         <label>Home Starter</label>
-        <locationX>159</locationX>
+        <locationX>310</locationX>
         <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Assign_Additional_Fields</targetReference>
+            <targetReference>Assign_Property</targetReference>
         </connector>
         <fields>
             <name>Home_Title</name>
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Property Details&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
+        </fields>
+        <fields>
+            <name>home_stage</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>Property_Type</name>
@@ -161,9 +189,15 @@
             <isRequired>false</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
-    <startElementReference>Home_Starter</startElementReference>
+    <stages>
+        <name>Home_Vehicle</name>
+        <isActive>false</isActive>
+        <label>Home/Vehicle</label>
+        <stageOrder>10</stageOrder>
+    </stages>
+    <startElementReference>Assign_Stage</startElementReference>
     <status>Active</status>
     <variables>
         <name>quoteId</name>

@@ -79,7 +79,10 @@
                     </aura:iteration>
                 </ul>
             </div>
-    	</aura:renderIf>
+        </aura:renderIf>
+        
     </div>
-    <!-- Auto Suggestion End --> 
+    <div style="width:100%;height:400px">
+         <c:googleMapComponent aura:id="map" street="{!v.street}" city="{!v.city}" state="{!v.state}"></c:googleMapComponent>
+    </div>
 </aura:component>

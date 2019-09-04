@@ -7,8 +7,8 @@ public class QuoteCalculations {
     public static List<Quote__c> setQuotePrice(List<String> quoteId) {
         decimal subtotal = 0.0;
         
-		List<Quote__c> quotes = [SELECT Id, Coverage_Start_Date__c, Discount__c, Expiration_Date__c, 
-                          		 Quote_Total__c, Status__c, Subtotal__c, Tax__c from Quote__c WHERE Id IN :quoteId];
+		List<Quote__c> quotes = [SELECT Id, Discount__c, Start_Date__c, Expiry_Date__c, 
+                          		 Status__c, Subtotal__c, Tax__c, Total__c from Quote__c WHERE Id IN :quoteId];
         
         List<Rule_General__c> vehicle_rules = [SELECT Id, Rule_Type__c, Fixed_Adjustment__c, Name__c, Adjustment_Percent__c, 
                                       		   Adjustment_Amount__c FROM Rule_General__c WHERE Rule_Type__c = 'Auto'];
@@ -26,46 +26,54 @@ public class QuoteCalculations {
             List<Vehicle__c> vehicles = [SELECT Id, Quote__c, Coverage__c FROM Vehicle__c WHERE Quote__c = :q.Id];
             for (Vehicle__c v : vehicles) {
                 decimal vehicleCost = vehicle_base;
-                String[] coverages = v.Coverage__c.split(';');
+                String coverageRaw = v.Coverage__c;
                 
-                for (String c : coverages) {
-                    for (Rule_General__c rule : vehicle_rules) {
-                        if (c == rule.Name__c) {
-                            if (rule.Fixed_Adjustment__c) {
-                                vehicleCost += rule.Adjustment_Amount__c;
-                            }
-                            else {
-                                vehicleCost = vehicleCost * (1 + rule.Adjustment_Percent__c / 100);
-                            }
-                            
-                            break;
-                        }
-                    }
-                }
+	            if (String.isNotBlank(coverageRaw) ) {
+                    String[] coverages = coverageRaw.split(';');
+                    
+                    for (String c : coverages) {
+                        for (Rule_General__c rule : vehicle_rules) {
+                            if (c == rule.Name__c) {
+                                if (rule.Fixed_Adjustment__c) {
+                                    vehicleCost += rule.Adjustment_Amount__c;
+                                }
+                                else {
+                                    vehicleCost = vehicleCost * (1 + rule.Adjustment_Percent__c / 100);
+                                }
                                 
+                                break;
+                            }
+                        }
+                    }                                
+                }
+                
                 subtotal += vehicleCost;
             }
             
             List<Property__c> properties = [SELECT Id, Quote__c, Coverage__c FROM Property__c WHERE Quote__c = :q.Id];
 			for (Property__c p : properties) {
                 decimal propertyCost = home_base;
-                String[] coverages = p.Coverage__c.split(';');
+                String coverageRaw = p.Coverage__c;
                 
-                for (String c : coverages) {
-                    for (Rule_General__c rule : home_rules) {
-                        if (c == rule.Name__c) {
-                            if (rule.Fixed_Adjustment__c) {
-                                propertyCost += rule.Adjustment_Amount__c;
+                if (String.isNotBlank(coverageRaw)) {
+                    String[] coverages = coverageRaw.split(';');
+                    
+                    for (String c : coverages) {
+                        for (Rule_General__c rule : home_rules) {
+                            if (c == rule.Name__c) {
+                                if (rule.Fixed_Adjustment__c) {
+                                    propertyCost += rule.Adjustment_Amount__c;
+                                }
+                                else {
+                                    propertyCost = propertyCost * (1 + rule.Adjustment_Percent__c / 100);
+                                }
+                                    
+                                break;
                             }
-                            else {
-                                propertyCost = propertyCost * (1 + rule.Adjustment_Percent__c / 100);
-                            }
-                                
-                            break;
                         }
                     }
                 }
-                
+                    
                 subtotal += propertyCost;
             }
             
@@ -75,7 +83,9 @@ public class QuoteCalculations {
             
             q.Subtotal__c = subtotal;
             q.Tax__c = subtotal * tax_percent;
-            q.Quote_Total__c = subtotal * (1+tax_percent);
+            q.Total__c = subtotal * (1+tax_percent);
+            q.Start_Date__c = date.today();
+            q.Expiry_Date__c = q.Start_Date__c.addYears(3);
         }
         
         update quotes; 

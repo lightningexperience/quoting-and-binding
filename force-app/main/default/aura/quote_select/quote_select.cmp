@@ -6,13 +6,9 @@
             <lightning:layoutItem flexibility="auto" padding="around-small">
                 <img aura:id="homeauto_start" src="{!$Resource.homeauto_button}" onmouseover="{!c.onMouseOver}" onmouseout="{!c.onMouseOut}" onclick="{!c.onSelect}" data-value="homeauto_start"/>
             </lightning:layoutItem>
-        </lightning:layout>
-        <lightning:layout verticalAlign="center" horizontalAlign="center" pullToBoundary="small">
             <lightning:layoutItem flexibility="auto" padding="around-small">
                 <img aura:id="home_start" src="{!$Resource.home_button}" onmouseover="{!c.onMouseOver}" onmouseout="{!c.onMouseOut}" onclick="{!c.onSelect}" data-value="home_start"/>
             </lightning:layoutItem>
-        </lightning:layout>
-        <lightning:layout verticalAlign="center" horizontalAlign="center" pullToBoundary="small">
             <lightning:layoutItem flexibility="auto" padding="around-small">
                 <img aura:id="auto_start" src="{!$Resource.auto_button}" onmouseover="{!c.onMouseOver}" onmouseout="{!c.onMouseOut}" onclick="{!c.onSelect}" data-value="auto_start"/>
             </lightning:layoutItem>

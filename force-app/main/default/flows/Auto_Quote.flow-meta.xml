@@ -1,96 +1,107 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-    <actionCalls>
-        <name>Get_Vehicle_Info</name>
-        <label>Get Vehicle Info</label>
-        <locationX>488</locationX>
-        <locationY>124</locationY>
-        <actionName>VehicleInformationClass</actionName>
-        <actionType>apex</actionType>
-        <connector>
-            <targetReference>Create_Vehicle_Record</targetReference>
-        </connector>
-        <inputParameters>
-            <name>Vinnumber</name>
+    <assignments>
+        <name>Assign_Stage</name>
+        <label>Assign Stage</label>
+        <locationX>58</locationX>
+        <locationY>159</locationY>
+        <assignmentItems>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
+            <operator>Assign</operator>
             <value>
-                <elementReference>VIN</elementReference>
+                <elementReference>Policyholder</elementReference>
             </value>
-        </inputParameters>
-        <outputParameters>
-            <assignToReference>vVehicleInfo</assignToReference>
-            <name>Auto</name>
-        </outputParameters>
-    </actionCalls>
-    <decisions>
-        <name>More_Driver_Decision</name>
-        <label>More Driver Decision?</label>
+        </assignmentItems>
+        <connector>
+            <targetReference>Additional_Drivers</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Vehicle_Stage</name>
+        <label>Vehicle Stage</label>
         <locationX>365</locationX>
-        <locationY>226</locationY>
-        <defaultConnector>
-            <targetReference>Addition_Drivers_Information</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>More Drivers</defaultConnectorLabel>
-        <rules>
-            <name>No_More_Drivers</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>chkMoreDrivers</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Additional_Vehicle_Details</targetReference>
-            </connector>
-            <label>No More Drivers</label>
-        </rules>
-    </decisions>
+        <locationY>50</locationY>
+        <assignmentItems>
+            <assignToReference>$Flow.CurrentStage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Home_Vehicle</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Vehicle_Screen</targetReference>
+        </connector>
+    </assignments>
     <decisions>
-        <name>More_Vehicles</name>
-        <label>More Vehicles?</label>
-        <locationX>726</locationX>
+        <name>Additional_Drivers</name>
+        <label>Additional Drivers?</label>
+        <locationX>147</locationX>
         <locationY>52</locationY>
         <defaultConnector>
-            <targetReference>Additional_Vehicle_Details</targetReference>
+            <targetReference>Vehicle_Stage</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>More Vehicles</defaultConnectorLabel>
+        <defaultConnectorLabel>No More Drivers</defaultConnectorLabel>
         <rules>
-            <name>No_More_Vehicle</name>
+            <name>More_Drivers</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
-                <leftValueReference>chkMoreVehicles</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>false</booleanValue>
-                </rightValue>
-            </conditions>
-            <label>No More Vehicle</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>Start_with_Additional_Driver</name>
-        <label>Start with Additional Driver</label>
-        <locationX>145</locationX>
-        <locationY>52</locationY>
-        <defaultConnector>
-            <targetReference>Additional_Vehicle_Details</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
-        <rules>
-            <name>Additional_Driver_Required</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>addl_driver_choice</leftValueReference>
+                <leftValueReference>vAdditionalDrivers_Auto</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Addition_Drivers_Information</targetReference>
+                <targetReference>Addl_Driver_Screen</targetReference>
             </connector>
-            <label>Additional Driver Required</label>
+            <label>More Drivers</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>Additional_Vehicles</name>
+        <label>Additional Vehicles</label>
+        <locationX>694</locationX>
+        <locationY>44</locationY>
+        <defaultConnectorLabel>No More Vehicles</defaultConnectorLabel>
+        <rules>
+            <name>More_Vehicles</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>chkMoreVehicles</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Vehicle_Screen</targetReference>
+            </connector>
+            <label>More Vehicles</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <name>KeepAdding</name>
+        <label>Keep Adding?</label>
+        <locationX>357</locationX>
+        <locationY>177</locationY>
+        <defaultConnector>
+            <targetReference>Vehicle_Stage</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>No More Drivers</defaultConnectorLabel>
+        <rules>
+            <name>Even_More_Drivers</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>chkMoreDrivers</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Addl_Driver_Screen</targetReference>
+            </connector>
+            <label>Even More Drivers</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -99,6 +110,14 @@
         <displayField xsi:nil="true"/>
         <object xsi:nil="true"/>
         <picklistField>Annual_Distance__c</picklistField>
+        <picklistObject>Vehicle__c</picklistObject>
+    </dynamicChoiceSets>
+    <dynamicChoiceSets>
+        <name>pCondition</name>
+        <dataType>Picklist</dataType>
+        <displayField xsi:nil="true"/>
+        <object xsi:nil="true"/>
+        <picklistField>Purchase_Condition__c</picklistField>
         <picklistObject>Vehicle__c</picklistObject>
     </dynamicChoiceSets>
     <dynamicChoiceSets>
@@ -133,14 +152,6 @@
         <picklistField>Marital_Status__c</picklistField>
         <picklistObject>Contact</picklistObject>
     </dynamicChoiceSets>
-    <dynamicChoiceSets>
-        <name>pPurchaseCondition</name>
-        <dataType>Picklist</dataType>
-        <displayField xsi:nil="true"/>
-        <object xsi:nil="true"/>
-        <picklistField>Purchase_Condition__c</picklistField>
-        <picklistObject>Vehicle__c</picklistObject>
-    </dynamicChoiceSets>
     <interviewLabel>Auto Quote {!$Flow.CurrentDateTime}</interviewLabel>
     <label>Auto Quote</label>
     <processMetadataValues>
@@ -157,36 +168,42 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
-        <name>Create_Addition_Driver_Records</name>
-        <label>Create Addition Driver Records</label>
-        <locationX>154</locationX>
-        <locationY>349</locationY>
-        <assignRecordIdToReference>varAdditionalContactId</assignRecordIdToReference>
+        <name>Create_Addl_Driver</name>
+        <label>Create Addl Driver</label>
+        <locationX>157</locationX>
+        <locationY>281</locationY>
+        <assignRecordIdToReference>vContactId</assignRecordIdToReference>
         <connector>
-            <targetReference>Junction_Record_Creation</targetReference>
+            <targetReference>Create_Junction</targetReference>
         </connector>
+        <inputAssignments>
+            <field>Birthdate</field>
+            <value>
+                <elementReference>Date_of_Birth</elementReference>
+            </value>
+        </inputAssignments>
         <inputAssignments>
             <field>Drivers_License_Class__c</field>
             <value>
-                <elementReference>License_Type</elementReference>
+                <elementReference>Drivers_License_Class</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Drivers_License_Number__c</field>
             <value>
-                <elementReference>Driver_s_License_Number</elementReference>
+                <elementReference>Drivers_License_Number</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Email</field>
             <value>
-                <elementReference>varEmail_txt</elementReference>
+                <elementReference>vEmail</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>FirstName</field>
             <value>
-                <elementReference>varFirstName_txt</elementReference>
+                <elementReference>vFirstName</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -198,7 +215,7 @@
         <inputAssignments>
             <field>LastName</field>
             <value>
-                <elementReference>varLastName_txt</elementReference>
+                <elementReference>vLastName</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -207,22 +224,43 @@
                 <elementReference>Marital_Status</elementReference>
             </value>
         </inputAssignments>
-        <inputAssignments>
-            <field>Phone</field>
-            <value>
-                <elementReference>varPhone_txt</elementReference>
-            </value>
-        </inputAssignments>
         <object>Contact</object>
     </recordCreates>
     <recordCreates>
-        <name>Create_Vehicle_Record</name>
-        <label>Create Vehicle Record</label>
-        <locationX>614</locationX>
-        <locationY>124</locationY>
-        <assignRecordIdToReference>varVehicleId</assignRecordIdToReference>
+        <name>Create_Junction</name>
+        <label>Create Junction</label>
+        <locationX>364</locationX>
+        <locationY>281</locationY>
         <connector>
-            <targetReference>More_Vehicles</targetReference>
+            <targetReference>KeepAdding</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>Contact__c</field>
+            <value>
+                <elementReference>vContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Quote__c</field>
+            <value>
+                <elementReference>vQuoteId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Role__c</field>
+            <value>
+                <stringValue>Secondary Policyholder</stringValue>
+            </value>
+        </inputAssignments>
+        <object>Contact_Quote_Junction__c</object>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Vehicle</name>
+        <label>Create Vehicle</label>
+        <locationX>703</locationX>
+        <locationY>160</locationY>
+        <connector>
+            <targetReference>Additional_Vehicles</targetReference>
         </connector>
         <inputAssignments>
             <field>Annual_Distance__c</field>
@@ -233,37 +271,37 @@
         <inputAssignments>
             <field>Base_Price__c</field>
             <value>
-                <elementReference>vVehicleInfo.basePrice</elementReference>
+                <elementReference>Base_Price</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Business_Use__c</field>
+            <value>
+                <elementReference>vBizUse</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Coverage__c</field>
             <value>
-                <elementReference>coverage_for_vehicle</elementReference>
+                <elementReference>Coverage</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Daily_Commute__c</field>
             <value>
-                <elementReference>Daily_Commute_N</elementReference>
+                <elementReference>Daily_Commute</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Make__c</field>
             <value>
-                <elementReference>vVehicleInfo.makeName</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Model_Year__c</field>
-            <value>
-                <elementReference>vVehicleInfo.modelYear</elementReference>
+                <elementReference>Make</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
             <field>Model__c</field>
             <value>
-                <elementReference>Vehicle_Model</elementReference>
+                <elementReference>Model</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -281,7 +319,7 @@
         <inputAssignments>
             <field>Quote__c</field>
             <value>
-                <elementReference>quoteId</elementReference>
+                <elementReference>vQuoteId</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -293,95 +331,80 @@
         <inputAssignments>
             <field>Year__c</field>
             <value>
-                <elementReference>Year_N</elementReference>
+                <elementReference>Year</elementReference>
             </value>
         </inputAssignments>
         <object>Vehicle__c</object>
     </recordCreates>
-    <recordCreates>
-        <name>Junction_Record_Creation</name>
-        <label>Junction Record Creation</label>
-        <locationX>374</locationX>
-        <locationY>349</locationY>
-        <assignRecordIdToReference>varJunctionId</assignRecordIdToReference>
-        <connector>
-            <targetReference>More_Driver_Decision</targetReference>
-        </connector>
-        <inputAssignments>
-            <field>Contact__c</field>
-            <value>
-                <elementReference>varAdditionalContactId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Quote__c</field>
-            <value>
-                <elementReference>quoteId</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <field>Role__c</field>
-            <value>
-                <stringValue>Additional Policy Holder</stringValue>
-            </value>
-        </inputAssignments>
-        <object>Contact_Quote_Junction__c</object>
-    </recordCreates>
     <screens>
-        <name>Addition_Drivers_Information</name>
-        <label>Addition Drivers Information</label>
-        <locationX>154</locationX>
-        <locationY>222</locationY>
+        <name>Addl_Driver_Screen</name>
+        <label>Addl Driver Screen</label>
+        <locationX>158</locationX>
+        <locationY>172</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Create_Addition_Driver_Records</targetReference>
-        </connector>
         <fields>
-            <name>Additional_Driver</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Additional Driver Information&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <name>driver_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Additional Drivers&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Additional_Driver_Name</name>
-            <extensionName>flowruntime:name</extensionName>
+            <name>driver_stage</name>
+            <extensionName>c:quoteStage</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <inputParameters>
-                <name>disabled</name>
+                <name>currentStage</name>
                 <value>
-                    <booleanValue>false</booleanValue>
+                    <elementReference>$Flow.CurrentStage</elementReference>
                 </value>
             </inputParameters>
             <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Addl_Driver_Name</name>
+            <extensionName>flowruntime:name</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <isRequired>true</isRequired>
             <outputParameters>
-                <assignToReference>varFirstName_txt</assignToReference>
+                <assignToReference>vFirstName</assignToReference>
                 <name>firstName</name>
             </outputParameters>
             <outputParameters>
-                <assignToReference>varLastName_txt</assignToReference>
+                <assignToReference>vLastName</assignToReference>
                 <name>lastName</name>
             </outputParameters>
         </fields>
         <fields>
-            <name>Additional_Driver_Email_Address</name>
+            <name>Addl_Driver_email</name>
             <extensionName>flowruntime:email</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
             <outputParameters>
-                <assignToReference>varEmail_txt</assignToReference>
+                <assignToReference>vEmail</assignToReference>
                 <name>value</name>
             </outputParameters>
         </fields>
         <fields>
-            <name>Additional_Driver_Phone</name>
+            <name>Addl_Driver_Phone</name>
             <extensionName>flowruntime:phone</extensionName>
             <fieldType>ComponentInstance</fieldType>
             <isRequired>true</isRequired>
             <outputParameters>
-                <assignToReference>varPhone_txt</assignToReference>
+                <assignToReference>vPhone</assignToReference>
                 <name>value</name>
             </outputParameters>
+        </fields>
+        <fields>
+            <name>Date_of_Birth</name>
+            <dataType>Date</dataType>
+            <fieldText>Date of Birth</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Driver must be over 18 years old&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>YEAR(TODAY()) - YEAR({!Date_of_Birth}) &gt; 18</formulaExpression>
+            </validationRule>
         </fields>
         <fields>
             <name>Marital_Status</name>
@@ -400,7 +423,7 @@
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>License_Type</name>
+            <name>Drivers_License_Class</name>
             <choiceReferences>pLicenseType</choiceReferences>
             <dataType>String</dataType>
             <fieldText>Driver&#39;s License Type</fieldText>
@@ -408,14 +431,14 @@
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>Driver_s_License_Number</name>
+            <name>Drivers_License_Number</name>
             <dataType>String</dataType>
             <fieldText>Driver&#39;s License Number</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <validationRule>
-                <errorMessage>&lt;p&gt;Please provide a valid driver&#39;s license format&lt;/p&gt;</errorMessage>
-                <formulaExpression>REGEX({!Driver_s_License_Number},&quot;[A-Za-z]{1}\\d{7}&quot;)</formulaExpression>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please provide a valid driver&#39;s license format&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Drivers_License_Number},&quot;[A-Za-z]{1}\\d{7}&quot;)</formulaExpression>
             </validationRule>
         </fields>
         <fields>
@@ -426,37 +449,109 @@
             <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
     <screens>
-        <name>Additional_Vehicle_Details</name>
-        <label>Vehicle Details</label>
-        <locationX>373</locationX>
-        <locationY>51</locationY>
+        <name>Vehicle_Screen</name>
+        <label>Vehicle Screen</label>
+        <locationX>527</locationX>
+        <locationY>50</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Get_Vehicle_Info</targetReference>
+            <targetReference>Create_Vehicle</targetReference>
         </connector>
         <fields>
-            <name>Additional_Vehicle_Details_txt</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Vehicle Details&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <name>vehicle_title</name>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Add Vehicle&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
-            <name>Vehicle_Model</name>
-            <dataType>String</dataType>
-            <fieldText>Vehicle Model</fieldText>
-            <fieldType>InputField</fieldType>
+            <name>vehicle_stage_show</name>
+            <extensionName>c:quoteStage</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>currentStage</name>
+                <value>
+                    <elementReference>$Flow.CurrentStage</elementReference>
+                </value>
+            </inputParameters>
             <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>Purchase_Condition</name>
+            <choiceReferences>pCondition</choiceReferences>
+            <dataType>String</dataType>
+            <fieldText>Purchase Condition</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+        </fields>
+        <fields>
+            <name>VIN</name>
+            <dataType>String</dataType>
+            <fieldText>Vehicle Information Number</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0); background-color: rgb(255, 255, 255);&quot;&gt;Please provide a valid VIN number&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!VIN}, &quot;^[A-HJ-NPR-Za-hj-npr-z\\d]{8}[\\dX][A-HJ-NPR-Za-hj-npr-z\\d]{2}\\d{6}$&quot;)</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Base_Price</name>
+            <dataType>Currency</dataType>
+            <fieldText>Base Price</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <scale>2</scale>
         </fields>
         <fields>
             <name>Make</name>
             <dataType>String</dataType>
             <fieldText>Make</fieldText>
             <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Model</name>
+            <dataType>String</dataType>
+            <fieldText>Model</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Year</name>
+            <dataType>String</dataType>
+            <fieldText>Year</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <validationRule>
+                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Provide a valid year for your vehicle&lt;/span&gt;&lt;/p&gt;</errorMessage>
+                <formulaExpression>REGEX({!Year}, &quot;(19|20)\\d{2}&quot;)</formulaExpression>
+            </validationRule>
+        </fields>
+        <fields>
+            <name>Pct_Biz_Use</name>
+            <extensionName>flowruntime:slider</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>% Business Use</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>step</name>
+                <value>
+                    <numberValue>5.0</numberValue>
+                </value>
+            </inputParameters>
             <isRequired>true</isRequired>
+            <outputParameters>
+                <assignToReference>vBizUse</assignToReference>
+                <name>value</name>
+            </outputParameters>
         </fields>
         <fields>
             <name>Annual_Distance</name>
@@ -467,36 +562,12 @@
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>Daily_Commute_N</name>
+            <name>Daily_Commute</name>
             <dataType>Number</dataType>
             <fieldText>Daily Commute (miles)</fieldText>
             <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-            <scale>0</scale>
-        </fields>
-        <fields>
-            <name>Purchase_Condition</name>
-            <choiceReferences>pPurchaseCondition</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Purchase Condition</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>Year_N</name>
-            <dataType>Number</dataType>
-            <fieldText>Year</fieldText>
-            <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
-        </fields>
-        <fields>
-            <name>coverage_for_vehicle</name>
-            <choiceReferences>pCoverage</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>coverage for vehicle</fieldText>
-            <fieldType>MultiSelectPicklist</fieldType>
-            <isRequired>false</isRequired>
         </fields>
         <fields>
             <name>Prior_Coverage</name>
@@ -506,15 +577,12 @@
             <isRequired>true</isRequired>
         </fields>
         <fields>
-            <name>VIN</name>
+            <name>Coverage</name>
+            <choiceReferences>pCoverage</choiceReferences>
             <dataType>String</dataType>
-            <fieldText>Vehicle Identification Number</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-            <validationRule>
-                <errorMessage>&lt;p&gt;Please provide a valid VIN number&lt;/p&gt;</errorMessage>
-                <formulaExpression>REGEX({!VIN}, &quot;^[A-HJ-NPR-Za-hj-npr-z\\d]{8}[\\dX][A-HJ-NPR-Za-hj-npr-z\\d]{2}\\d{6}$&quot;)</formulaExpression>
-            </validationRule>
+            <fieldText>Coverage</fieldText>
+            <fieldType>MultiSelectPicklist</fieldType>
+            <isRequired>false</isRequired>
         </fields>
         <fields>
             <name>chkMoreVehicles</name>
@@ -524,87 +592,87 @@
             <isRequired>true</isRequired>
         </fields>
         <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
+        <showHeader>false</showHeader>
     </screens>
-    <startElementReference>Start_with_Additional_Driver</startElementReference>
+    <stages>
+        <name>Home_Vehicle</name>
+        <isActive>false</isActive>
+        <label>Home/Vehicle</label>
+        <stageOrder>10</stageOrder>
+    </stages>
+    <stages>
+        <name>Policyholder</name>
+        <isActive>false</isActive>
+        <label>Policyholder</label>
+        <stageOrder>5</stageOrder>
+    </stages>
+    <startElementReference>Assign_Stage</startElementReference>
     <status>Active</status>
     <variables>
-        <name>addl_driver_choice</name>
+        <name>vAdditionalDrivers_Auto</name>
         <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>quoteId</name>
-        <dataType>String</dataType>
+        <name>vAdditionalDrivers_Home</name>
+        <dataType>Boolean</dataType>
         <isCollection>false</isCollection>
         <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>varAdditionalContactId</name>
+        <name>vBizUse</name>
+        <dataType>Number</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <scale>0</scale>
+        <value>
+            <numberValue>0.0</numberValue>
+        </value>
+    </variables>
+    <variables>
+        <name>vContactId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>varEmail_txt</name>
+        <name>vEmail</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>varFirstName_txt</name>
+        <name>vFirstName</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>varJunctionId</name>
+        <name>vLastName</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>varLastName_txt</name>
+        <name>vPhone</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
         <isInput>false</isInput>
         <isOutput>false</isOutput>
     </variables>
     <variables>
-        <name>varPhone_txt</name>
+        <name>vQuoteId</name>
         <dataType>String</dataType>
         <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>varVehicleId</name>
-        <dataType>String</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-    </variables>
-    <variables>
-        <name>VarVehicleRcd</name>
-        <dataType>SObject</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
-        <isOutput>false</isOutput>
-        <objectType>Vehicle__c</objectType>
-    </variables>
-    <variables>
-        <name>vVehicleInfo</name>
-        <apexClass>ThirdpartyAutoinfo</apexClass>
-        <dataType>Apex</dataType>
-        <isCollection>false</isCollection>
-        <isInput>false</isInput>
+        <isInput>true</isInput>
         <isOutput>false</isOutput>
     </variables>
 </Flow>
