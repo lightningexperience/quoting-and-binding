@@ -170,7 +170,7 @@
     <recordCreates>
         <name>Create_Addl_Driver</name>
         <label>Create Addl Driver</label>
-        <locationX>157</locationX>
+        <locationX>158</locationX>
         <locationY>281</locationY>
         <assignRecordIdToReference>vContactId</assignRecordIdToReference>
         <connector>
@@ -344,6 +344,9 @@
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Create_Addl_Driver</targetReference>
+        </connector>
         <fields>
             <name>driver_title</name>
             <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Additional Drivers&lt;/b&gt;&lt;/p&gt;</fieldText>

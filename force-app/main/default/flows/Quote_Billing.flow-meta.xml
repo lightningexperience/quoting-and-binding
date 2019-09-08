@@ -390,22 +390,14 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid credit card number&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>REGEX({!Credit_Card_Number}, &quot;?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11}&quot;)</formulaExpression>
-            </validationRule>
         </fields>
         <fields>
             <name>Credit_Card_CCV</name>
             <dataType>Number</dataType>
-            <fieldText>Credit Card Security Code</fieldText>
+            <fieldText>Credit Card CCV</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid security code&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>REGEX({!Credit_Card_CCV}, &quot;[0-9]{3,4}&quot;)</formulaExpression>
-            </validationRule>
         </fields>
         <fields>
             <name>Expiry_Month</name>
@@ -414,10 +406,6 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid month (1-12)&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>REGEX({!Expiry_Month}, &quot;0?[1-9]|1[012]&quot;)</formulaExpression>
-            </validationRule>
         </fields>
         <fields>
             <name>Expiry_Year</name>
@@ -426,10 +414,6 @@
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
             <scale>0</scale>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;Please provide a valid expiry year&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>VALUE({!Expiry_Year}) &gt;= YEAR(TODAY())</formulaExpression>
-            </validationRule>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>false</showHeader>
@@ -622,7 +606,7 @@
         <stageOrder>15</stageOrder>
     </stages>
     <startElementReference>Assign_Stage</startElementReference>
-    <status>InvalidDraft</status>
+    <status>Active</status>
     <variables>
         <name>quoteId</name>
         <dataType>String</dataType>
