@@ -1,6 +1,8 @@
 public class QuoteCalculations {
     static final decimal vehicle_base = 100.0;
     static final decimal home_base = 1000.0;
+    static final decimal life_pct = 100.0;
+    static final decimal annuity_pct = 100.0;
     static final decimal tax_percent = 0.1;
     
     @InvocableMethod
@@ -80,12 +82,38 @@ public class QuoteCalculations {
             if (vehicles.size() > 0 && properties.size() > 0) {
                 subtotal = subtotal * combo_discount;
             }
+
+			/*********** Life & Annuity Calculations Start ***********/
+
+            List<Annuity__c> annuities = [SELECT Id, Quote__c, Amount__c, Monthly_Income__c, Monthly_Income_10_Year__c, 
+                                          Monthly_Income_20_Year__c FROM Annuity__c WHERE Quote__c = :q.Id];
+			for (Annuity__c a : annuities) {
+                decimal annuityCost = a.Amount__c;
+                
+                a.Monthly_Income__c = a.Amount__c * 0.02 / 12;
+                a.Monthly_Income_10_Year__c = a.Amount__c / 10 / 12 * 2;
+                a.Monthly_Income_20_Year__c = a.Amount__c / 20 / 12 * 2;
+                subtotal += a.Amount__c * 0.9;
+            }
+
+            List<Life__c> lives = [SELECT Id, Quote__c, Amount__c, Height__c, Weight__c, Tobacco_Usage__c, Employed__c,
+                                   Bankruptcy__c FROM Life__c WHERE Quote__c = :q.Id];
+			for (Life__c l : lives) {
+                decimal lifeCost = l.Amount__c / 30 / 12 / 2;
+                lifeCost = (l.Tobacco_Usage__c == 'Never') ? lifeCost : lifeCost * 1.2;
+                lifeCost = l.Employed__c ? lifeCost : lifeCost * 1.1;
+                lifeCost = l.Bankruptcy__c ? lifeCost : lifeCost * 1.3;
+                
+                subtotal += lifeCost;
+            }
+            
+			/************ Life & Annuity Calculations End ************/
             
             q.Subtotal__c = subtotal;
             q.Tax__c = subtotal * tax_percent;
             q.Total__c = subtotal * (1+tax_percent);
             q.Start_Date__c = date.today();
-            q.Expiry_Date__c = q.Start_Date__c.addYears(3);
+            // q.Expiry_Date__c = q.Start_Date__c.addYears(3);
         }
         
         update quotes; 

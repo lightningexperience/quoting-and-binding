@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Tobacco_Usage__c</fullName>
+    <externalId>false</externalId>
+    <label>Tobacco Usage</label>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Never</fullName>
+                <default>false</default>
+                <label>Never</label>
+            </value>
+            <value>
+                <fullName>None in the last 5 years</fullName>
+                <default>false</default>
+                <label>None in the last 5 years</label>
+            </value>
+            <value>
+                <fullName>None in the last 4 years</fullName>
+                <default>false</default>
+                <label>None in the last 4 years</label>
+            </value>
+            <value>
+                <fullName>None in the last 3 years</fullName>
+                <default>false</default>
+                <label>None in the last 3 years</label>
+            </value>
+            <value>
+                <fullName>None in the last 2 years</fullName>
+                <default>false</default>
+                <label>None in the last 2 years</label>
+            </value>
+            <value>
+                <fullName>None in the last 1 years</fullName>
+                <default>false</default>
+                <label>None in the last 1 years</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, less than 24 per year</fullName>
+                <default>false</default>
+                <label>Last 12 months, less than 24 per year</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, more than 24 per year</fullName>
+                <default>false</default>
+                <label>Last 12 months, more than 24 per year</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, nicotine replacement (gum, patch, etc)</fullName>
+                <default>false</default>
+                <label>Last 12 months, nicotine replacement (gum, patch, etc)</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, cigar use, 12 or less per year</fullName>
+                <default>false</default>
+                <label>Last 12 months, cigar use, 12 or less per year</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, cigar use, 12 or more per year</fullName>
+                <default>false</default>
+                <label>Last 12 months, cigar use, 12 or more per year</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, chewing tobacco, pipe or snuff</fullName>
+                <default>false</default>
+                <label>Last 12 months, chewing tobacco, pipe or snuff</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, marjiuana use, 2 or less per month</fullName>
+                <default>false</default>
+                <label>Last 12 months, marjiuana use, 2 or less per month</label>
+            </value>
+            <value>
+                <fullName>Last 12 months, marjiuana use, 2 or more per month</fullName>
+                <default>false</default>
+                <label>Last 12 months, marjiuana use, 2 or more per month</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

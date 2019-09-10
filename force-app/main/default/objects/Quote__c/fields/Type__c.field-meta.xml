@@ -25,6 +25,16 @@
                 <default>false</default>
                 <label>Both</label>
             </value>
+            <value>
+                <fullName>Life</fullName>
+                <default>false</default>
+                <label>Life</label>
+            </value>
+            <value>
+                <fullName>Annuity</fullName>
+                <default>false</default>
+                <label>Annuity</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

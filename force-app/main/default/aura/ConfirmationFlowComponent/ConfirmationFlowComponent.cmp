@@ -12,14 +12,14 @@
             <lightning:recordForm recordId="{!cntct.Contact__c}" objectApiName="Contact" layoutType="Compact" mode="readonly"/>
         </aura:iteration>
     </lightning:card>
-    <lightning:card title="Vehicles">
-        <aura:iteration items="{!v.quote.Vehicles__r}" var='veh'>
-            <lightning:recordForm recordId="{!veh.Id}" objectApiName="Vehicle__c" layoutType="Compact" mode="readonly"/>
+    <lightning:card>
+        <aura:iteration items="{!v.quote.Lives__r}" var='life'>
+            <lightning:recordForm recordId="{!life.Id}" objectApiName="Life__c" layoutType="Compact" mode="readonly"/>
         </aura:iteration>
     </lightning:card>
-    <lightning:card title="Properties">
-        <aura:iteration items="{!v.quote.Properties__r}" var='home'>
-            <lightning:recordForm recordId="{!home.Id}" objectApiName="Property__c" layoutType="Compact" mode="readonly"/>
+    <lightning:card>
+        <aura:iteration items="{!v.quote.Annuities__r}" var='annuity'>
+            <lightning:recordForm recordId="{!annuity.Id}" objectApiName="Annuity__c" layoutType="Compact" mode="readonly"/>
         </aura:iteration>
     </lightning:card>
     <lightning:card title="Billing">

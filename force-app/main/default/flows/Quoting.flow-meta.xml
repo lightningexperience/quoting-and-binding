@@ -3,8 +3,8 @@
     <actionCalls>
         <name>Calculate_Price</name>
         <label>Calculate Price</label>
-        <locationX>857</locationX>
-        <locationY>696</locationY>
+        <locationX>659</locationX>
+        <locationY>541</locationY>
         <actionName>QuoteCalculations</actionName>
         <actionType>apex</actionType>
         <connector>
@@ -18,38 +18,15 @@
         </inputParameters>
     </actionCalls>
     <assignments>
-        <name>Assign_Auto</name>
-        <label>Assign Auto</label>
-        <locationX>342</locationX>
-        <locationY>274</locationY>
+        <name>Assign_Both</name>
+        <label>Assign Both</label>
+        <locationX>341</locationX>
+        <locationY>323</locationY>
         <assignmentItems>
             <assignToReference>vQuote.Type__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>Auto</stringValue>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>$Flow.CurrentStage</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Policyholder</elementReference>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>new_old_home_auto</targetReference>
-        </connector>
-    </assignments>
-    <assignments>
-        <name>Assign_Both</name>
-        <label>Assign Both</label>
-        <locationX>342</locationX>
-        <locationY>380</locationY>
-        <assignmentItems>
-            <assignToReference>quote_choice</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>homeauto_start</stringValue>
+                <stringValue>Annuity</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -66,8 +43,8 @@
     <assignments>
         <name>Assign_Confirmation_Stage</name>
         <label>Assign Confirmation Stage</label>
-        <locationX>619</locationX>
-        <locationY>696</locationY>
+        <locationX>433</locationX>
+        <locationY>541</locationY>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
@@ -80,15 +57,29 @@
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_Contact_Record</name>
-        <label>Assign Contact Record</label>
-        <locationX>849</locationX>
-        <locationY>296</locationY>
+        <name>Assign_Contact</name>
+        <label>Assign Contact</label>
+        <locationX>741</locationX>
+        <locationY>353</locationY>
         <assignmentItems>
             <assignToReference>vContact.Birthdate</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Date_of_Birth_auto</elementReference>
+                <elementReference>Date_of_Birth_home</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vContact.Marital_Status__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Marital_Status_home</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vContact.Gender__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Gender_home</elementReference>
             </value>
         </assignmentItems>
         <assignmentItems>
@@ -98,50 +89,28 @@
                 <stringValue>{!primStreetNum} {!vContact.MailingStreet}</stringValue>
             </value>
         </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.Gender__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Gender</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.Marital_Status__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Marital_Status</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.Drivers_License_Class__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Drivers_License_Type</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.Drivers_License_Number__c</assignToReference>
-            <operator>Assign</operator>
-        </assignmentItems>
         <connector>
-            <targetReference>Create_Primary_Contact</targetReference>
+            <targetReference>Create_Contact</targetReference>
         </connector>
     </assignments>
     <assignments>
-        <name>Assign_Home</name>
-        <label>Assign Home</label>
+        <name>Assign_Life</name>
+        <label>Assign Life</label>
         <locationX>341</locationX>
-        <locationY>171</locationY>
+        <locationY>211</locationY>
         <assignmentItems>
             <assignToReference>vQuote.Type__c</assignToReference>
             <operator>Assign</operator>
             <value>
-                <stringValue>Home</stringValue>
+                <stringValue>Life</stringValue>
             </value>
         </assignmentItems>
         <assignmentItems>
             <assignToReference>$Flow.CurrentStage</assignToReference>
             <operator>Assign</operator>
+            <value>
+                <elementReference>Policyholder</elementReference>
+            </value>
         </assignmentItems>
         <connector>
             <targetReference>new_old_home_auto</targetReference>
@@ -195,167 +164,54 @@
             <targetReference>starter_screen</targetReference>
         </connector>
     </assignments>
-    <assignments>
-        <name>Home_Contact</name>
-        <label>Home Contact</label>
-        <locationX>848</locationX>
-        <locationY>406</locationY>
-        <assignmentItems>
-            <assignToReference>vContact.Birthdate</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Date_of_Birth_home</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.Marital_Status__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Marital_Status_home</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.Gender__c</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <elementReference>Gender_home</elementReference>
-            </value>
-        </assignmentItems>
-        <assignmentItems>
-            <assignToReference>vContact.MailingStreet</assignToReference>
-            <operator>Assign</operator>
-            <value>
-                <stringValue>{!primStreetNum} {!vContact.MailingStreet}</stringValue>
-            </value>
-        </assignmentItems>
-        <connector>
-            <targetReference>Create_Primary_Contact</targetReference>
-        </connector>
-    </assignments>
     <decisions>
-        <name>home_also</name>
-        <label>home also</label>
-        <locationX>1074</locationX>
-        <locationY>701</locationY>
+        <name>Life_or_Annuity</name>
+        <label>Life or Annuity</label>
+        <locationX>962</locationX>
+        <locationY>477</locationY>
         <defaultConnector>
-            <targetReference>Calculate_Price</targetReference>
+            <targetReference>Annuity_Quote</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Default Outcome</defaultConnectorLabel>
+        <defaultConnectorLabel>Annuity Choice</defaultConnectorLabel>
         <rules>
-            <name>home_too</name>
+            <name>Life_Choice</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>quote_choice</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>homeauto_start</stringValue>
+                    <stringValue>life_start</stringValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Home_Quote</targetReference>
+                <targetReference>Life_Quote</targetReference>
             </connector>
-            <label>home too</label>
-        </rules>
-    </decisions>
-    <decisions>
-        <name>home_or_auto_or_both</name>
-        <label>home or auto or both</label>
-        <locationX>1085</locationX>
-        <locationY>397</locationY>
-        <defaultConnector>
-            <targetReference>Auto_Quote</targetReference>
-        </defaultConnector>
-        <defaultConnectorLabel>auto and maybe both</defaultConnectorLabel>
-        <rules>
-            <name>home_only</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>quote_choice</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>home_start</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Home_Quote</targetReference>
-            </connector>
-            <label>home only</label>
+            <label>Life Choice</label>
         </rules>
     </decisions>
     <decisions>
         <name>new_old_home_auto</name>
         <label>New/Old Home/Auto choices</label>
-        <locationX>478</locationX>
-        <locationY>276</locationY>
+        <locationX>460</locationX>
+        <locationY>299</locationY>
         <defaultConnector>
-            <targetReference>New_Cust_Auto</targetReference>
+            <targetReference>New_Cust_Home</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Old Customer Auto or Both</defaultConnectorLabel>
+        <defaultConnectorLabel>New Customer</defaultConnectorLabel>
         <rules>
-            <name>Not_New_Customer</name>
+            <name>Existing_Customer_Option</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>Existing_Customer</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
                     <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>quote_choice</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>home_start</stringValue>
                 </rightValue>
             </conditions>
             <connector>
                 <targetReference>exist_cust_home</targetReference>
             </connector>
-            <label>New Customer Home Only</label>
-        </rules>
-        <rules>
-            <name>New_Customer_Auto_or_Both</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Existing_Customer</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>quote_choice</leftValueReference>
-                <operator>NotEqualTo</operator>
-                <rightValue>
-                    <stringValue>home_start</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Exist_Cust_auto</targetReference>
-            </connector>
-            <label>New Customer Auto or Both</label>
-        </rules>
-        <rules>
-            <name>Old_Customer_Home_Only</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>Existing_Customer</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <booleanValue>true</booleanValue>
-                </rightValue>
-            </conditions>
-            <conditions>
-                <leftValueReference>quote_choice</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>home_start</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>New_Cust_Home</targetReference>
-            </connector>
-            <label>Old Customer Home Only</label>
+            <label>Existing Customer</label>
         </rules>
     </decisions>
     <decisions>
@@ -366,36 +222,21 @@
         <defaultConnector>
             <targetReference>Assign_Both</targetReference>
         </defaultConnector>
-        <defaultConnectorLabel>Select Both</defaultConnectorLabel>
+        <defaultConnectorLabel>Select Annuity</defaultConnectorLabel>
         <rules>
-            <name>Select_Home</name>
+            <name>Select_Life</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <leftValueReference>quote_choice</leftValueReference>
                 <operator>EqualTo</operator>
                 <rightValue>
-                    <stringValue>home_start</stringValue>
+                    <stringValue>life_start</stringValue>
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>Assign_Home</targetReference>
+                <targetReference>Assign_Life</targetReference>
             </connector>
-            <label>Select Home</label>
-        </rules>
-        <rules>
-            <name>Select_Auto</name>
-            <conditionLogic>and</conditionLogic>
-            <conditions>
-                <leftValueReference>quote_choice</leftValueReference>
-                <operator>EqualTo</operator>
-                <rightValue>
-                    <stringValue>auto_start</stringValue>
-                </rightValue>
-            </conditions>
-            <connector>
-                <targetReference>Assign_Auto</targetReference>
-            </connector>
-            <label>Select Auto</label>
+            <label>Select Life</label>
         </rules>
     </decisions>
     <dynamicChoiceSets>
@@ -445,12 +286,22 @@
     </processMetadataValues>
     <processType>Flow</processType>
     <recordCreates>
+        <name>Create_Contact</name>
+        <label>Create Contact</label>
+        <locationX>852</locationX>
+        <locationY>353</locationY>
+        <connector>
+            <targetReference>Initialize_Quote</targetReference>
+        </connector>
+        <inputReference>vContact</inputReference>
+    </recordCreates>
+    <recordCreates>
         <name>Create_Junction</name>
         <label>Create Junction</label>
-        <locationX>1093</locationX>
-        <locationY>251</locationY>
+        <locationX>970</locationX>
+        <locationY>227</locationY>
         <connector>
-            <targetReference>home_or_auto_or_both</targetReference>
+            <targetReference>Life_or_Annuity</targetReference>
         </connector>
         <inputAssignments>
             <field>Contact__c</field>
@@ -473,20 +324,10 @@
         <object>Contact_Quote_Junction__c</object>
     </recordCreates>
     <recordCreates>
-        <name>Create_Primary_Contact</name>
-        <label>Create Primary Contact</label>
-        <locationX>982</locationX>
-        <locationY>304</locationY>
-        <connector>
-            <targetReference>Initialize_Quote</targetReference>
-        </connector>
-        <inputReference>vContact</inputReference>
-    </recordCreates>
-    <recordCreates>
         <name>Initialize_Quote</name>
         <label>Initialize Quote</label>
-        <locationX>981</locationX>
-        <locationY>184</locationY>
+        <locationX>853</locationX>
+        <locationY>226</locationY>
         <assignRecordIdToReference>vQuote.Id</assignRecordIdToReference>
         <connector>
             <targetReference>Create_Junction</targetReference>
@@ -506,10 +347,10 @@
         <object>Quote__c</object>
     </recordCreates>
     <recordLookups>
-        <name>Get_Home_Contact</name>
-        <label>Get Home Contact</label>
-        <locationX>845</locationX>
-        <locationY>70</locationY>
+        <name>Get_Contact</name>
+        <label>Get Contact</label>
+        <locationX>748</locationX>
+        <locationY>226</locationY>
         <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
         <connector>
             <targetReference>Initialize_Quote</targetReference>
@@ -525,31 +366,11 @@
         <outputReference>vContact</outputReference>
         <queriedFields>Id</queriedFields>
     </recordLookups>
-    <recordLookups>
-        <name>Get_Primary_Contact</name>
-        <label>Get Primary Contact</label>
-        <locationX>848</locationX>
-        <locationY>184</locationY>
-        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
-        <connector>
-            <targetReference>Initialize_Quote</targetReference>
-        </connector>
-        <filters>
-            <field>Id</field>
-            <operator>EqualTo</operator>
-            <value>
-                <elementReference>Existing_Auto</elementReference>
-            </value>
-        </filters>
-        <object>Contact</object>
-        <outputReference>vContact</outputReference>
-        <queriedFields>Id</queriedFields>
-    </recordLookups>
     <screens>
         <name>conclusion_screen</name>
         <label>conclusion screen</label>
-        <locationX>350</locationX>
-        <locationY>696</locationY>
+        <locationX>157</locationX>
+        <locationY>541</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -564,8 +385,8 @@
     <screens>
         <name>Confirmation_Screen</name>
         <label>Confirmation Screen</label>
-        <locationX>484</locationX>
-        <locationY>696</locationY>
+        <locationX>297</locationX>
+        <locationY>541</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
@@ -605,49 +426,15 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
-        <name>Exist_Cust_auto</name>
-        <label>Exist Cust Auto</label>
-        <locationX>724</locationX>
-        <locationY>184</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Get_Primary_Contact</targetReference>
-        </connector>
-        <fields>
-            <name>Title_Existing_Customer</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Select Existing Customer Record&lt;/b&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Existing_Auto</name>
-            <choiceReferences>pContacts</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Select Existing Customer</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>Additional_drivers</name>
-            <dataType>Boolean</dataType>
-            <fieldText>Additional drivers?</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
         <name>exist_cust_home</name>
         <label>exist cust home</label>
-        <locationX>724</locationX>
-        <locationY>70</locationY>
+        <locationX>642</locationX>
+        <locationY>227</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Get_Home_Contact</targetReference>
+            <targetReference>Get_Contact</targetReference>
         </connector>
         <fields>
             <name>title_exist_home</name>
@@ -666,163 +453,15 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
-        <name>New_Cust_Auto</name>
-        <label>New Cust Auto</label>
-        <locationX>722</locationX>
-        <locationY>296</locationY>
-        <allowBack>true</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
-        <connector>
-            <targetReference>Assign_Contact_Record</targetReference>
-        </connector>
-        <fields>
-            <name>New_Cust_Header</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Provide primary policyholder details&lt;/b&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
-        </fields>
-        <fields>
-            <name>Primary_Name</name>
-            <extensionName>flowruntime:name</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>disabled</name>
-                <value>
-                    <booleanValue>false</booleanValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vContact.FirstName</assignToReference>
-                <name>firstName</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vContact.LastName</assignToReference>
-                <name>lastName</name>
-            </outputParameters>
-        </fields>
-        <fields>
-            <name>Email_Address</name>
-            <extensionName>flowruntime:email</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <inputParameters>
-                <name>label</name>
-                <value>
-                    <stringValue>Email Address</stringValue>
-                </value>
-            </inputParameters>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vContact.Email</assignToReference>
-                <name>value</name>
-            </outputParameters>
-        </fields>
-        <fields>
-            <name>Prim_Phone</name>
-            <extensionName>flowruntime:phone</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vContact.Phone</assignToReference>
-                <name>value</name>
-            </outputParameters>
-        </fields>
-        <fields>
-            <name>googleAddress</name>
-            <extensionName>c:GoogleAddressAutoComplete</extensionName>
-            <fieldType>ComponentInstance</fieldType>
-            <isRequired>true</isRequired>
-            <outputParameters>
-                <assignToReference>vContact.MailingCity</assignToReference>
-                <name>city</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vContact.MailingCountry</assignToReference>
-                <name>country</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vContact.MailingPostalCode</assignToReference>
-                <name>postal</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vContact.MailingState</assignToReference>
-                <name>state</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>vContact.MailingStreet</assignToReference>
-                <name>street</name>
-            </outputParameters>
-            <outputParameters>
-                <assignToReference>primStreetNum</assignToReference>
-                <name>streetNumber</name>
-            </outputParameters>
-        </fields>
-        <fields>
-            <name>Date_of_Birth_auto</name>
-            <dataType>Date</dataType>
-            <fieldText>Date of Birth</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;color: rgb(255, 0, 0);&quot;&gt;You must be over 18 years old&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>YEAR(TODAY()) - YEAR({!Date_of_Birth_auto}) &gt; 18</formulaExpression>
-            </validationRule>
-        </fields>
-        <fields>
-            <name>Gender</name>
-            <choiceReferences>pGender</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Gender</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>Marital_Status</name>
-            <choiceReferences>pMaritalStatus</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Marital Status</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>Drivers_License_Type</name>
-            <choiceReferences>pLicenseClass</choiceReferences>
-            <dataType>String</dataType>
-            <fieldText>Driver&#39;s License Type</fieldText>
-            <fieldType>DropdownBox</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <fields>
-            <name>Driver_s_License_Number</name>
-            <dataType>String</dataType>
-            <fieldText>Driver&#39;s License Number</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>false</isRequired>
-            <validationRule>
-                <errorMessage>&lt;p&gt;&lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Please provide a valid driver&#39;s license format&lt;/span&gt;&lt;/p&gt;</errorMessage>
-                <formulaExpression>REGEX({!Driver_s_License_Number},&quot;[A-Za-z]{1}\\d{7}&quot;)</formulaExpression>
-            </validationRule>
-        </fields>
-        <fields>
-            <name>Additional_Drivers_existing</name>
-            <dataType>Boolean</dataType>
-            <fieldText>Additional Drivers?</fieldText>
-            <fieldType>InputField</fieldType>
-            <isRequired>true</isRequired>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>false</showHeader>
-    </screens>
-    <screens>
         <name>New_Cust_Home</name>
         <label>New Cust Home</label>
-        <locationX>721</locationX>
-        <locationY>406</locationY>
+        <locationX>644</locationX>
+        <locationY>353</locationY>
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>true</allowPause>
         <connector>
-            <targetReference>Home_Contact</targetReference>
+            <targetReference>Assign_Contact</targetReference>
         </connector>
         <fields>
             <name>new_home_title</name>
@@ -936,7 +575,7 @@
         </connector>
         <fields>
             <name>title_starter</name>
-            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Let&#39;s Get Insured&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Bundle now or later. You&#39;ll get our best price no matter what.&lt;/span&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;</fieldText>
+            <fieldText>&lt;p style=&quot;text-align: center;&quot;&gt;&lt;b style=&quot;font-size: 36px;&quot;&gt;Let&#39;s Get Insured&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;font-size: 18px;&quot;&gt;Select the type of quote you&#39;re looking for.&lt;/span&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
         </fields>
         <fields>
@@ -992,26 +631,14 @@
     <startElementReference>Assign_Stage</startElementReference>
     <status>Active</status>
     <subflows>
-        <name>Auto_Quote</name>
-        <label>Auto Quote</label>
-        <locationX>1093</locationX>
-        <locationY>569</locationY>
+        <name>Annuity_Quote</name>
+        <label>Annuity Quote</label>
+        <locationX>770</locationX>
+        <locationY>477</locationY>
         <connector>
-            <targetReference>home_also</targetReference>
+            <targetReference>Calculate_Price</targetReference>
         </connector>
-        <flowName>Auto_Quote</flowName>
-        <inputAssignments>
-            <name>vAdditionalDrivers_Auto</name>
-            <value>
-                <elementReference>Additional_drivers</elementReference>
-            </value>
-        </inputAssignments>
-        <inputAssignments>
-            <name>vAdditionalDrivers_Home</name>
-            <value>
-                <elementReference>Additional_Drivers_existing</elementReference>
-            </value>
-        </inputAssignments>
+        <flowName>Annuity_Quote</flowName>
         <inputAssignments>
             <name>vQuoteId</name>
             <value>
@@ -1020,16 +647,16 @@
         </inputAssignments>
     </subflows>
     <subflows>
-        <name>Home_Quote</name>
-        <label>Home Quote</label>
-        <locationX>964</locationX>
-        <locationY>493</locationY>
+        <name>Life_Quote</name>
+        <label>Life Quote</label>
+        <locationX>768</locationX>
+        <locationY>595</locationY>
         <connector>
             <targetReference>Calculate_Price</targetReference>
         </connector>
-        <flowName>Home_Quote</flowName>
+        <flowName>Life_Quote</flowName>
         <inputAssignments>
-            <name>quoteId</name>
+            <name>vQuoteId</name>
             <value>
                 <elementReference>vQuote.Id</elementReference>
             </value>
@@ -1038,8 +665,8 @@
     <subflows>
         <name>Quote_Billing</name>
         <label>Quote Billing</label>
-        <locationX>734</locationX>
-        <locationY>696</locationY>
+        <locationX>549</locationX>
+        <locationY>541</locationY>
         <connector>
             <targetReference>Assign_Confirmation_Stage</targetReference>
         </connector>

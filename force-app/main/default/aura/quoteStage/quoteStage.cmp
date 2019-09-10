@@ -6,7 +6,7 @@
    <lightning:progressIndicator currentStep="{!v.currentStage}" type="path">
        <lightning:progressStep label="Quote Type" value="Quote Type"/>
        <lightning:progressStep label="Policyholder" value="Policyholder"/>
-       <lightning:progressStep label="Home/Vehicle" value="Home/Vehicle"/>
+       <lightning:progressStep label="Life/Annuity" value="Life/Annuity"/>
        <lightning:progressStep label="Billing" value="Billing"/>
        <lightning:progressStep label="Confirmation" value="Confirmation"/>
    </lightning:progressIndicator>
