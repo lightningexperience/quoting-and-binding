@@ -4,8 +4,6 @@
     <fields>Name</fields>
     <fields>MailingAddress</fields>
     <fields>Email</fields>
-    <fields>Drivers_License_Class__c</fields>
-    <fields>Drivers_License_Number__c</fields>
     <fields>Gender__c</fields>
     <fields>Marital_Status__c</fields>
     <fields>Birthdate</fields>

@@ -12,7 +12,7 @@
             <lightning:recordForm recordId="{!cntct.Contact__c}" objectApiName="Contact" layoutType="Compact" mode="readonly"/>
         </aura:iteration>
     </lightning:card>
-    <lightning:card>
+    <lightning:card title="Annuity/Life Insurance">
         <aura:iteration items="{!v.quote.Lives__r}" var='life'>
             <lightning:recordForm recordId="{!life.Id}" objectApiName="Life__c" layoutType="Compact" mode="readonly"/>
         </aura:iteration>

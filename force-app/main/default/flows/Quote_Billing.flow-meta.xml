@@ -105,6 +105,13 @@
                 <elementReference>Paperless_Policy</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>vBilling.Quote__c</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>quoteId</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Create_Billing</targetReference>
         </connector>
